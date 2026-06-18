@@ -678,7 +678,296 @@
             color: #c0392b;
         }
 
-        /* ─── FOOTER ─── */
+        /* ─── COMPLAINT BOX (Shikayat) ─── */
+        .complaint-section {
+            margin-top: 16px;
+            padding: 16px;
+            background: #1a1f2a;
+            border-radius: 24px;
+            border: 2px solid #f5a62340;
+        }
+        .complaint-section .complaint-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #f5a623;
+            text-align: center;
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+        }
+        .complaint-section .complaint-title i {
+            margin-right: 8px;
+        }
+        .complaint-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .complaint-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 18px 20px;
+            border-radius: 60px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+        }
+        .complaint-btn:active {
+            transform: scale(0.96);
+        }
+        .complaint-btn .btn-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+        }
+        .complaint-btn.red-light {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        .complaint-btn.red-light:hover {
+            background: linear-gradient(135deg, #ff5e4a, #d44637);
+            transform: scale(1.01);
+        }
+        .complaint-btn.red-light.selected {
+            outline: 4px solid #fff;
+            outline-offset: 2px;
+            box-shadow: 0 0 30px rgba(231, 76, 60, 0.6);
+        }
+        .complaint-btn.slow-internet {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+        .complaint-btn.slow-internet:hover {
+            background: linear-gradient(135deg, #f5b041, #e88a2a);
+            transform: scale(1.01);
+        }
+        .complaint-btn.slow-internet.selected {
+            outline: 4px solid #fff;
+            outline-offset: 2px;
+            box-shadow: 0 0 30px rgba(243, 156, 18, 0.6);
+        }
+        .complaint-btn.disconnecting {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+        .complaint-btn.disconnecting:hover {
+            background: linear-gradient(135deg, #5dade2, #3498db);
+            transform: scale(1.01);
+        }
+        .complaint-btn.disconnecting.selected {
+            outline: 4px solid #fff;
+            outline-offset: 2px;
+            box-shadow: 0 0 30px rgba(52, 152, 219, 0.6);
+        }
+        .complaint-submit-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
+        .complaint-submit-btn {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: 60px;
+            border: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+        }
+        .complaint-submit-btn:active {
+            transform: scale(0.96);
+        }
+        .complaint-submit-btn:hover {
+            transform: scale(1.01);
+            background: linear-gradient(135deg, #3ddc84, #2ecc71);
+        }
+        .complaint-submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .complaint-clear-btn {
+            padding: 14px 20px;
+            border-radius: 60px;
+            border: 1px solid #888;
+            background: transparent;
+            color: #888;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 80px;
+        }
+        .complaint-clear-btn:hover {
+            border-color: #fff;
+            color: #fff;
+        }
+        .complaint-status-box {
+            margin-top: 18px;
+            padding: 14px;
+            background: #0f141c;
+            border-radius: 16px;
+            border: 1px solid #2d3748;
+        }
+        .complaint-status-box .status-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #f5a623;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .complaint-item {
+            background: #1a202a;
+            border-radius: 14px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            border-left: 4px solid #f5a623;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 6px;
+        }
+        .complaint-item .ci-type {
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .complaint-item .ci-status {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 30px;
+            background: #3d2e1e;
+            color: #f5a623;
+        }
+        .complaint-item .ci-status.resolved {
+            background: #1e3d2f;
+            color: #2ecc71;
+        }
+        .complaint-item .ci-time {
+            font-size: 0.55rem;
+            color: #7e8c8f;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2px;
+        }
+        .complaint-item .ci-time .label {
+            font-size: 0.5rem;
+            color: #5a6a7a;
+        }
+        .complaint-item .ci-resolution {
+            width: 100%;
+            margin-top: 6px;
+            padding: 8px 12px;
+            background: #1e2a1e;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            color: #a0d9a0;
+            border-left: 3px solid #2ecc71;
+        }
+        .no-complaints {
+            text-align: center;
+            padding: 18px 0;
+            color: #7e8c8f;
+            font-size: 0.75rem;
+        }
+        .complaint-submit-feedback {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 8px;
+            min-height: 24px;
+            color: #2ecc71;
+        }
+        .complaint-submit-feedback.error {
+            color: #e74c3c;
+        }
+
+        /* ─── POPUP MODAL (After Complaint Submission) ─── */
+        .popup-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .popup-modal-overlay.active {
+            display: flex;
+        }
+        .popup-modal {
+            background: linear-gradient(145deg, #1e2a3a, #151b24);
+            border-radius: 40px;
+            max-width: 400px;
+            width: 100%;
+            padding: 30px 28px;
+            border: 2px solid #f5a623;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+            text-align: center;
+            color: #fff;
+            animation: popupBounce 0.5s ease;
+        }
+        @keyframes popupBounce {
+            0% { transform: scale(0.8); opacity: 0; }
+            60% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        .popup-modal .popup-icon {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .popup-modal .popup-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #f5a623;
+            margin-bottom: 12px;
+        }
+        .popup-modal .popup-message {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #e0e8f0;
+            margin-bottom: 20px;
+        }
+        .popup-modal .popup-message .highlight {
+            color: #ffd966;
+            font-weight: 700;
+        }
+        .popup-modal .popup-close-btn {
+            background: #f5a623;
+            border: none;
+            color: #000;
+            padding: 10px 30px;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .popup-modal .popup-close-btn:hover {
+            background: #d4891a;
+            transform: scale(0.96);
+        }
+
+        /* ─── FOOTER (BRANDING + DEVELOPER NAME ONLY) ─── */
         .footer {
             text-align: center;
             padding: 18px 16px;
@@ -686,59 +975,33 @@
             border-top: 1px solid #1e293b;
             background: #0f141c;
         }
-        .developer-section {
-            background: #0a0e14;
-            border-radius: 24px;
-            margin: 4px 12px 12px 12px;
-            padding: 12px;
-            border: 1px solid #f5a62330;
-        }
-        .dev-title {
-            font-size: 0.7rem;
+        .footer-branding {
             font-weight: 800;
+            font-size: 0.85rem;
             color: #f5a623;
             letter-spacing: 1px;
         }
-        .dev-name {
-            font-size: 1rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffd966, #f5a623);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
+        .footer-branding span {
+            color: #ffd966;
         }
-        .dev-compliment {
-            font-size: 0.7rem;
-            color: #a0b3d9;
-            margin: 6px 0;
-            font-style: italic;
+        .footer-branding small {
+            display: block;
+            font-size: 0.55rem;
+            color: #7e8c8f;
+            font-weight: 400;
+            margin-top: 2px;
+            letter-spacing: 0.5px;
         }
-        .dev-whatsapp {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #1f2a1e;
-            padding: 4px 12px;
-            border-radius: 40px;
+        .footer-developer {
             margin-top: 6px;
             font-size: 0.7rem;
+            color: #a0b3d9;
         }
-        .dev-whatsapp a {
-            background: #25D366;
-            color: #000;
-            padding: 2px 10px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-left: 6px;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.7rem;
+        .footer-developer .dev-name {
+            font-weight: 800;
+            color: #f5a623;
         }
 
-        /* ─── HIGHLIGHTED FOOTER TEXT ─── */
         .footer-highlight {
             background: #000000;
             color: #ffffff !important;
@@ -796,9 +1059,7 @@
             letter-spacing: 0.5px;
         }
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
         }
 
         /* ─── EASYPAISA MODAL ─── */
@@ -979,6 +1240,37 @@
             .footer-highlight .highlight-line .phone-highlight {
                 font-size: 0.75rem;
             }
+            .complaint-btn {
+                font-size: 0.95rem;
+                padding: 14px 16px;
+            }
+            .complaint-btn .btn-icon {
+                font-size: 1.5rem;
+            }
+            .complaint-submit-row {
+                flex-wrap: wrap;
+            }
+            .complaint-submit-btn {
+                min-width: 100%;
+            }
+            .complaint-clear-btn {
+                min-width: 100%;
+            }
+            .complaint-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .complaint-item .ci-time {
+                align-items: flex-start;
+                width: 100%;
+                margin-top: 4px;
+            }
+            .popup-modal {
+                padding: 24px 18px;
+            }
+            .popup-modal .popup-message {
+                font-size: 0.85rem;
+            }
         }
         @media (max-width: 400px) {
             .receipt-actions .btn-receipt {
@@ -1007,6 +1299,14 @@
             .footer-highlight .highlight-line .phone-highlight {
                 font-size: 0.65rem;
             }
+            .complaint-btn {
+                font-size: 0.85rem;
+                padding: 12px 14px;
+                gap: 10px;
+            }
+            .complaint-btn .btn-icon {
+                font-size: 1.3rem;
+            }
         }
     </style>
 </head>
@@ -1027,6 +1327,20 @@
             <button class="copy-btn" id="copyEasypaisaBtn"><i class="fas fa-copy"></i> Copy Number</button>
             <br>
             <button class="close-modal" id="closeEasypaisaBtn">Close</button>
+        </div>
+    </div>
+
+    <!-- ─── POPUP MODAL (Complaint Submitted) ─── -->
+    <div class="popup-modal-overlay" id="complaintPopup">
+        <div class="popup-modal">
+            <span class="popup-icon">✅</span>
+            <div class="popup-title">شکایت موصول</div>
+            <div class="popup-message">
+                مُعزز صارف! آپ کی شکایت <span class="highlight"></span> جمع ہو گئی ہے۔<br>
+                آپ کو <span class="highlight">7 گھنٹے</span> کے اندر مسئلہ حل کر دیا جائے گا۔<br>
+                <span style="font-size:0.85rem;color:#ffd966;">(شکریہ)</span>
+            </div>
+            <button class="popup-close-btn" onclick="closeComplaintPopup()">ٹھیک ہے</button>
         </div>
     </div>
 
@@ -1093,26 +1407,17 @@
             </div>
         </div>
 
-        <!-- ─── FOOTER ─── -->
+        <!-- ─── FOOTER ─── Developer Name Only (No Number) ─── -->
         <div class="footer">
-            <div class="developer-section">
-                <div class="dev-title">⚡ LEAD DEVELOPER</div>
-                <div class="dev-name">✨ KHALID ALI PECHUHO ✨</div>
-                <div class="dev-compliment">
-                    🔥 System Architect • Full-Stack Developer 🔥
-                </div>
-                <div class="dev-whatsapp" style="background: #25D36620; border: 2px solid #25D366; border-radius: 40px; padding: 6px 16px;">
-                    <i class="fab fa-whatsapp" style="color:#25D366; font-size: 1.1rem;"></i>
-                    <span style="font-weight: 700; color: #25D366; font-size: 0.85rem;">+92 300 3919555</span>
-                    <a href="https://wa.me/923003919555?text=Respected%20Developer%20Khalid%20Ali%20Pechuho%2C%20I%20need%20assistance%20with%20the%20portal."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style="background: #25D366; color: #000; padding: 4px 14px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem;">
-                    <i class="fab fa-whatsapp"></i> Contact Dev
-                </a>
+            <div class="footer-branding">
+                👑 <span>D3 Crown Fiber</span> — Premium Internet Services
+                <small>Connecting You to Excellence</small>
+            </div>
+            <div class="footer-developer">
+                🚀 Developed by <span class="dev-name">Khalid Ali Pechuho</span>
             </div>
         </div>
-        
+
         <!-- ─── HIGHLIGHTED FOOTER SECTION ─── -->
         <div class="footer-highlight">
             <div class="highlight-line">⚡ Powered by <span class="brand-highlight">D3 Crown Fiber</span> | Premium Support Portal</div>
@@ -1140,8 +1445,10 @@
     // Hardcoded UID
     const ADMIN_UID = "0rulvawKt1d6M3FlxfEariNOukk1";
     const CLIENTS_PATH = "d3_clients";
+    const COMPLAINTS_PATH = "d3_complaints"; // New root path for complaints
 
     let currentClientData = null;
+    let currentClientPhoneRaw = '';
     const loginSection = document.getElementById('loginSection');
     const dashboardDiv = document.getElementById('dashboard');
     const loader = document.getElementById('loader');
@@ -1157,6 +1464,18 @@
         const d = new Date(isoStr);
         if (isNaN(d.getTime())) return isoStr;
         return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+    }
+
+    function formatDateTimeWithTime(isoStr) {
+        if (!isoStr) return 'N/A';
+        const d = new Date(isoStr);
+        if (isNaN(d.getTime())) return isoStr;
+        const datePart = formatDMY(isoStr);
+        let hours = d.getHours();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+        const minutes = String(d.getMinutes()).padStart(2, '0');
+        return `${datePart} ${hours}:${minutes} ${ampm}`;
     }
 
     function getPackageExpiry(startDate) {
@@ -1185,7 +1504,6 @@
         const history = client.paymentHistory || [];
         const monthMap = new Map();
         for (const entry of history) {
-            // skip zero-value entries
             if ((entry.debit || 0) === 0 && (entry.credit || 0) === 0) continue;
             let mk = entry.monthKey;
             if (!mk && entry.date) {
@@ -1254,6 +1572,76 @@
     }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // COMPLAINT FUNCTIONS
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    function getComplaintsRef() {
+        return db.ref(`${COMPLAINTS_PATH}/${ADMIN_UID}/complaints`);
+    }
+
+    async function submitComplaint(phone, clientName, clientId, type, typeLabel) {
+        if (!phone || !clientName || !type) {
+            toastError('Missing required information');
+            return false;
+        }
+        try {
+            const ref = getComplaintsRef();
+            const snap = await ref.once('value');
+            let complaints = snap.val() || [];
+            if (!Array.isArray(complaints)) complaints = [];
+
+            const newComplaint = {
+                id: 'comp_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 6),
+                phone: phone,
+                clientName: clientName,
+                clientId: clientId || '',
+                type: type,
+                typeLabel: typeLabel,
+                status: 'pending',
+                resolution: '',
+                timestamp: new Date().toISOString(),
+                resolvedAt: '',
+                updatedAt: new Date().toISOString()
+            };
+            complaints.push(newComplaint);
+            await ref.set(complaints);
+            return true;
+        } catch (e) {
+            console.error('submitComplaint error:', e);
+            toastError('Failed to submit complaint: ' + e.message);
+            return false;
+        }
+    }
+
+    async function getComplaintsForPhone(phone) {
+        if (!phone) return [];
+        const normPhone = normalizePhone(phone);
+        try {
+            const ref = getComplaintsRef();
+            const snap = await ref.once('value');
+            const all = snap.val() || [];
+            if (!Array.isArray(all)) return [];
+            return all.filter(c => normalizePhone(c.phone) === normPhone)
+                .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        } catch (e) {
+            console.error('getComplaintsForPhone error:', e);
+            return [];
+        }
+    }
+
+    async function checkComplaintStatus(phone) {
+        return await getComplaintsForPhone(phone);
+    }
+
+    // ─── POPUP FUNCTIONS ───
+    function showComplaintPopup() {
+        document.getElementById('complaintPopup').classList.add('active');
+    }
+
+    function closeComplaintPopup() {
+        document.getElementById('complaintPopup').classList.remove('active');
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     // COPY EASYPAISA (Header)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     function copyEasypaisaFromHeader() {
@@ -1261,7 +1649,6 @@
         navigator.clipboard.writeText(num).then(() => {
             toastSuccess('✅ Easypaisa number copied to clipboard!');
         }).catch(() => {
-            // fallback
             const dummy = document.createElement('input');
             dummy.value = num;
             document.body.appendChild(dummy);
@@ -1273,14 +1660,13 @@
     }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // RECEIPT POPULATORS
+    // RECEIPT POPULATORS (unchanged)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     function populateReceipt1(client) {
         const wrap = document.getElementById('receipt1Wrap');
         const expiryDate = getPackageExpiry(client.packageStartDate);
         const daysLeft = daysRemaining(expiryDate);
         const speed = extractSpeed(client.package);
-        // filter out zero-value transactions
         const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
         const totalDue = (client.packageAmount || 0) + (client.oldBill || 0);
         const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
@@ -1365,7 +1751,6 @@
 
     function populateReceipt2(client) {
         const wrap = document.getElementById('receipt2Wrap');
-        // filter out zero-value transactions
         const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
         const transactions = [...filteredHistory];
         transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -1451,7 +1836,7 @@
     }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // CAPTURE & DOWNLOAD
+    // CAPTURE & DOWNLOAD (unchanged)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     function showOverlay() { overlay.classList.add('active'); }
 
@@ -1529,7 +1914,7 @@
     }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // TOGGLE PACKAGE SUMMARY
+    // TOGGLE PACKAGE SUMMARY (unchanged)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     function togglePackageSummary(client) {
         const existing = document.getElementById('packageSummaryToggle');
@@ -1537,12 +1922,10 @@
             existing.classList.toggle('open');
             return;
         }
-        // create and append
         const container = document.createElement('div');
         container.id = 'packageSummaryToggle';
         container.className = 'summary-toggle open';
 
-        // filter out zero-value
         const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
         const totalDebit = filteredHistory.reduce((s, e) => s + (e.debit || 0), 0);
         const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
@@ -1568,7 +1951,6 @@
         `;
         container.innerHTML = html;
 
-        // insert after the info-card that contains the buttons
         const parentCard = document.querySelector('.info-card:last-child');
         if (parentCard) {
             parentCard.parentNode.insertBefore(container, parentCard.nextSibling);
@@ -1578,7 +1960,7 @@
     }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // EASYPAISA MODAL
+    // EASYPAISA MODAL (unchanged)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     function showEasypaisaModal() {
         document.getElementById('easypaisaModal').classList.add('active');
@@ -1589,10 +1971,15 @@
     }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // DASHBOARD RENDER (with receipt buttons + new features)
+    // DASHBOARD RENDER (with Complaint Box and updated status)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    let selectedComplaintType = null;
+
     function renderDashboard(client) {
-        // filter out zero-value for calculations
+        currentClientData = client;
+        currentClientPhoneRaw = client.phone;
+
+        // Filter history
         const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
         const totalDue = (client.packageAmount || 0) + (client.oldBill || 0);
         const expiryDate = getPackageExpiry(client.packageStartDate);
@@ -1724,6 +2111,41 @@
                 </div>
             </div>
 
+            <!-- ★★★ COMPLAINT BOX (Shikayat) ★★★ -->
+            <div class="complaint-section" id="complaintSection">
+                <div class="complaint-title"><i class="fas fa-exclamation-triangle"></i> Shikayat Box — Report an Issue</div>
+
+                <!-- Complaint Buttons -->
+                <div class="complaint-buttons">
+                    <button class="complaint-btn red-light" data-type="red_light" onclick="selectComplaintType('red_light', this)">
+                        <span class="btn-icon">🔴</span> Red Light — No Internet
+                    </button>
+                    <button class="complaint-btn slow-internet" data-type="slow_internet" onclick="selectComplaintType('slow_internet', this)">
+                        <span class="btn-icon">🟡</span> Slow Internet — Buffering
+                    </button>
+                    <button class="complaint-btn disconnecting" data-type="disconnecting" onclick="selectComplaintType('disconnecting', this)">
+                        <span class="btn-icon">🔌</span> Disconnecting — Frequent Drops
+                    </button>
+                </div>
+
+                <!-- Submit Row -->
+                <div class="complaint-submit-row">
+                    <button class="complaint-submit-btn" id="submitComplaintBtn" onclick="handleSubmitComplaint()">
+                        <i class="fas fa-paper-plane"></i> Submit Complaint
+                    </button>
+                    <button class="complaint-clear-btn" onclick="clearComplaintSelection()">✕ Clear</button>
+                </div>
+                <div class="complaint-submit-feedback" id="complaintFeedback"></div>
+
+                <!-- Complaint Status -->
+                <div class="complaint-status-box" id="complaintStatusBox">
+                    <div class="status-title"><i class="fas fa-history"></i> Your Complaint Status</div>
+                    <div id="complaintListContainer">
+                        <div class="no-complaints">🔄 Loading your complaints...</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="note" style="margin-top:8px;">
                 💡 For payment or support, contact your ISP representative.
             </div>
@@ -1738,7 +2160,9 @@
             loginSection.style.display = 'block';
             dashboardDiv.innerHTML = '';
             currentClientData = null;
+            currentClientPhoneRaw = '';
             phoneInput.value = '';
+            selectedComplaintType = null;
             const existingErr = document.querySelector('.error-msg');
             if (existingErr) existingErr.remove();
         });
@@ -1779,6 +2203,153 @@
 
         // Owner Billing
         document.getElementById('ownerBillingBtn')?.addEventListener('click', showEasypaisaModal);
+
+        // ── Load complaints for this client ──
+        loadComplaintsForClient(client.phone);
+    }
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // COMPLAINT UI FUNCTIONS (updated)
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    function selectComplaintType(type, btnEl) {
+        document.querySelectorAll('.complaint-btn').forEach(b => b.classList.remove('selected'));
+        if (btnEl) btnEl.classList.add('selected');
+        selectedComplaintType = type;
+        document.getElementById('complaintFeedback').textContent = '';
+        document.getElementById('complaintFeedback').className = 'complaint-submit-feedback';
+    }
+
+    function clearComplaintSelection() {
+        document.querySelectorAll('.complaint-btn').forEach(b => b.classList.remove('selected'));
+        selectedComplaintType = null;
+        document.getElementById('complaintFeedback').textContent = '';
+        document.getElementById('complaintFeedback').className = 'complaint-submit-feedback';
+    }
+
+    function getTypeLabel(type) {
+        const map = {
+            'red_light': '🔴 Red Light — No Internet',
+            'slow_internet': '🟡 Slow Internet — Buffering',
+            'disconnecting': '🔌 Disconnecting — Frequent Drops'
+        };
+        return map[type] || type;
+    }
+
+    function getTypeIcon(type) {
+        const map = {
+            'red_light': '🔴',
+            'slow_internet': '🟡',
+            'disconnecting': '🔌'
+        };
+        return map[type] || '📌';
+    }
+
+    async function handleSubmitComplaint() {
+        const feedback = document.getElementById('complaintFeedback');
+        if (!currentClientData) {
+            feedback.textContent = '❌ Please search your account first.';
+            feedback.className = 'complaint-submit-feedback error';
+            return;
+        }
+        if (!selectedComplaintType) {
+            feedback.textContent = '⚠️ Please select a complaint type first.';
+            feedback.className = 'complaint-submit-feedback error';
+            return;
+        }
+
+        const btn = document.getElementById('submitComplaintBtn');
+        btn.disabled = true;
+        btn.textContent = '⏳ Submitting...';
+        feedback.textContent = '';
+        feedback.className = 'complaint-submit-feedback';
+
+        const client = currentClientData;
+        const typeLabel = getTypeLabel(selectedComplaintType);
+
+        try {
+            const success = await submitComplaint(
+                client.phone,
+                client.name,
+                client.id || '',
+                selectedComplaintType,
+                typeLabel
+            );
+
+            if (success) {
+                // Show cool popup
+                showComplaintPopup();
+                // Clear selection
+                clearComplaintSelection();
+                // Reload complaints
+                await loadComplaintsForClient(client.phone);
+                feedback.textContent = '';
+            } else {
+                feedback.textContent = '❌ Failed to submit complaint. Please try again.';
+                feedback.className = 'complaint-submit-feedback error';
+            }
+        } catch (e) {
+            console.error(e);
+            feedback.textContent = '❌ Error: ' + e.message;
+            feedback.className = 'complaint-submit-feedback error';
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Complaint';
+        }
+    }
+
+    async function loadComplaintsForClient(phone) {
+        const container = document.getElementById('complaintListContainer');
+        if (!container) return;
+
+        try {
+            const complaints = await getComplaintsForPhone(phone);
+            if (!complaints || complaints.length === 0) {
+                container.innerHTML = `<div class="no-complaints">📭 No complaints filed yet. Use the buttons above to report an issue.</div>`;
+                return;
+            }
+
+            let html = '';
+            complaints.forEach(c => {
+                const isResolved = c.status === 'resolved';
+                const statusText = isResolved ? '✅ Resolved' : '⏳ Pending';
+                const statusClass = isResolved ? 'resolved' : '';
+                
+                // Submission time (with date and time)
+                const submitTime = c.timestamp ? formatDateTimeWithTime(c.timestamp) : 'N/A';
+                
+                // Resolution time (actual resolvedAt)
+                let resolveTimeHtml = '';
+                if (isResolved && c.resolvedAt) {
+                    const resolvedTime = formatDateTimeWithTime(c.resolvedAt);
+                    resolveTimeHtml = `<div class="ci-time"><span class="label">🕒 Resolved:</span> ${resolvedTime}</div>`;
+                }
+
+                const resolutionHtml = isResolved && c.resolution ?
+                    `<div class="ci-resolution">💬 <strong>Resolution:</strong> ${escapeHtml(c.resolution)}</div>` :
+                    '';
+
+                html += `
+                    <div class="complaint-item">
+                        <div class="ci-type">
+                            <span>${getTypeIcon(c.type)}</span>
+                            <span>${escapeHtml(c.typeLabel || c.type)}</span>
+                        </div>
+                        <div class="ci-status ${statusClass}">${statusText}</div>
+                        <div class="ci-time">
+                            <span class="label">📅 Submitted:</span>
+                            <span>${submitTime}</span>
+                            ${resolveTimeHtml}
+                        </div>
+                        ${resolutionHtml}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        } catch (e) {
+            console.error('loadComplaintsForClient error:', e);
+            container.innerHTML =
+                `<div class="no-complaints" style="color:#e74c3c;">❌ Could not load complaints. Please try again.</div>`;
+        }
     }
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1820,6 +2391,7 @@
         const client = await fetchClientByPhone(phone);
         if (client) {
             currentClientData = client;
+            currentClientPhoneRaw = client.phone;
             loginSection.style.display = 'none';
             dashboardDiv.style.display = 'block';
             renderDashboard(client);
@@ -1858,6 +2430,10 @@
     document.getElementById('easypaisaModal')?.addEventListener('click', (e) => {
         if (e.target === e.currentTarget) hideEasypaisaModal();
     });
+
+    // ── Init ──
+    console.log('D3 Crown Fiber Client Portal updated with Shikayat Box, popup, and correct resolution times.');
+    console.log('💡 Developer: Khalid Ali Pechuho');
 </script>
 </body>
 </html>
