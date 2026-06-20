@@ -926,9 +926,17 @@
             animation: popupBounce 0.5s ease;
         }
         @keyframes popupBounce {
-            0% { transform: scale(0.8); opacity: 0; }
-            60% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
         }
         .popup-modal .popup-icon {
             font-size: 3.5rem;
@@ -1059,7 +1067,9 @@
             letter-spacing: 0.5px;
         }
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* ─── EASYPAISA MODAL ─── */
@@ -1172,6 +1182,206 @@
             color: #f39c12;
             margin-bottom: 8px;
             text-align: center;
+        }
+
+        /* ─── ★★★ COMPACT DEVELOPER SHOWCASE — Just Name + Glow + Particles ★★★ ─── */
+        .dev-showcase {
+            position: relative;
+            margin: 6px 12px 4px 12px;
+            padding: 10px 16px 12px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, #0d121c, #161e2b);
+            border: 1px solid rgba(245, 166, 35, 0.2);
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(245, 166, 35, 0.05), inset 0 0 40px rgba(245, 166, 35, 0.02);
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+        .dev-showcase:hover {
+            border-color: rgba(245, 166, 35, 0.5);
+            box-shadow: 0 0 40px rgba(245, 166, 35, 0.08), inset 0 0 50px rgba(245, 166, 35, 0.03);
+            transform: scale(1.01);
+        }
+
+        #devParticles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .dev-showcase .dev-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* Tiny crown */
+        .dev-crown-mini {
+            font-size: 1.2rem;
+            animation: crownPulse 2.2s ease-in-out infinite;
+            filter: drop-shadow(0 0 12px rgba(245, 166, 35, 0.3));
+            line-height: 1;
+        }
+        @keyframes crownPulse {
+            0%,
+            100% {
+                transform: scale(1) rotate(-2deg);
+                filter: drop-shadow(0 0 12px rgba(245, 166, 35, 0.3));
+            }
+            50% {
+                transform: scale(1.15) rotate(2deg);
+                filter: drop-shadow(0 0 28px rgba(245, 166, 35, 0.6));
+            }
+        }
+
+        /* Glowing Name — compact */
+        .dev-name-glow-compact {
+            font-size: 1.15rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f5a623, #ffd966, #f5a623, #ffd966);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 4s ease-in-out infinite;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 30px rgba(245, 166, 35, 0.1);
+            display: inline-block;
+            padding: 0 2px;
+            line-height: 1.4;
+        }
+        @keyframes gradientFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Sparkle dots (same as before but fewer) */
+        .sparkle-dot {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #f5a623;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #f5a623;
+            opacity: 0;
+            animation: sparkleFloat 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .sparkle-dot:nth-child(1) {
+            top: 15%;
+            left: 6%;
+            animation-delay: 0.2s;
+        }
+        .sparkle-dot:nth-child(2) {
+            top: 20%;
+            right: 8%;
+            animation-delay: 1.8s;
+            width: 4px;
+            height: 4px;
+        }
+        .sparkle-dot:nth-child(3) {
+            bottom: 18%;
+            left: 10%;
+            animation-delay: 3.4s;
+            width: 5px;
+            height: 5px;
+        }
+        .sparkle-dot:nth-child(4) {
+            bottom: 22%;
+            right: 6%;
+            animation-delay: 4.8s;
+        }
+        @keyframes sparkleFloat {
+            0%,
+            100% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+            20% {
+                opacity: 0.9;
+                transform: translateY(-6px) scale(1.3);
+            }
+            40% {
+                opacity: 0.2;
+                transform: translateY(3px) scale(0.6);
+            }
+            60% {
+                opacity: 1;
+                transform: translateY(-10px) scale(1.5);
+            }
+            80% {
+                opacity: 0.4;
+                transform: translateY(2px) scale(0.8);
+            }
+        }
+
+        /* Glow ring behind (subtle) */
+        .dev-showcase::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(245, 166, 35, 0.03), transparent 70%);
+            animation: glowRotate 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes glowRotate {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.05);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        /* Responsive compact */
+        @media (max-width: 540px) {
+            .dev-showcase {
+                padding: 8px 12px 10px;
+                margin: 4px 8px 2px 8px;
+            }
+            .dev-name-glow-compact {
+                font-size: 0.95rem;
+            }
+            .dev-crown-mini {
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 400px) {
+            .dev-name-glow-compact {
+                font-size: 0.8rem;
+            }
+            .dev-crown-mini {
+                font-size: 0.85rem;
+            }
+            .dev-showcase {
+                padding: 6px 10px 8px;
+            }
         }
 
         /* ─── RESPONSIVE ─── */
@@ -1393,21 +1603,28 @@
         </div>
 
         <!-- ─── RECEIPT TEMPLATES (hidden, used for html2canvas) ─── -->
-        <!-- Receipt 1: Bill & Internet Details -->
         <div id="receipt1Container" class="receipt-hidden" style="width:500px;">
-            <div class="receipt-wrap" id="receipt1Wrap">
-                <!-- populated by JS -->
-            </div>
+            <div class="receipt-wrap" id="receipt1Wrap"></div>
         </div>
-
-        <!-- Receipt 2: Ledger Statement -->
         <div id="receipt2Container" class="receipt-hidden" style="width:500px;">
-            <div class="receipt-wrap" id="receipt2Wrap">
-                <!-- populated by JS -->
+            <div class="receipt-wrap" id="receipt2Wrap"></div>
+        </div>
+
+        <!-- ─── ★★★ COMPACT DEVELOPER SHOWCASE — Just Name + Glow + Particles ★★★ ─── -->
+        <div class="dev-showcase" id="devShowcase">
+            <div class="sparkle-dot"></div>
+            <div class="sparkle-dot"></div>
+            <div class="sparkle-dot"></div>
+            <div class="sparkle-dot"></div>
+            <canvas id="devParticles"></canvas>
+            <div class="dev-content">
+                <span class="dev-crown-mini">👑</span>
+                <span class="dev-name-glow-compact">Khalid Ali Pechuho</span>
+                <span style="font-size:0.55rem;color:#5a6a7a;letter-spacing:1px;">⚡</span>
             </div>
         </div>
 
-        <!-- ─── FOOTER ─── Developer Name Only (No Number) ─── -->
+        <!-- ─── FOOTER ─── -->
         <div class="footer">
             <div class="footer-branding">
                 👑 <span>D3 Crown Fiber</span> — Premium Internet Services
@@ -1418,1022 +1635,1023 @@
             </div>
         </div>
 
-        <!-- ─── HIGHLIGHTED FOOTER SECTION ─── -->
+        <!-- ─── HIGHLIGHTED FOOTER ─── -->
         <div class="footer-highlight">
             <div class="highlight-line">⚡ Powered by <span class="brand-highlight">D3 Crown Fiber</span> | Premium Support Portal</div>
             <div class="highlight-line" style="margin-top:4px;">📞 For billing queries, contact Owner at <span class="phone-highlight">03052848369</span></div>
         </div>
     </div>
-</div>
 
-<script>
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // FIREBASE CONFIG
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    const firebaseConfig = {
-        apiKey: "AIzaSyDZHUNdkun0f3cY3JqfzrI86mpxy7zY7x0",
-        authDomain: "d3crown-805ce.firebaseapp.com",
-        databaseURL: "https://d3crown-805ce-default-rtdb.firebaseio.com",
-        projectId: "d3crown-805ce",
-        storageBucket: "d3crown-805ce.firebasestorage.app",
-        messagingSenderId: "1082016126067",
-        appId: "1:1082016126067:web:7d0006e48208555999c606"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-
-    // Hardcoded UID
-    const ADMIN_UID = "0rulvawKt1d6M3FlxfEariNOukk1";
-    const CLIENTS_PATH = "d3_clients";
-    const COMPLAINTS_PATH = "d3_complaints"; // New root path for complaints
-
-    let currentClientData = null;
-    let currentClientPhoneRaw = '';
-    const loginSection = document.getElementById('loginSection');
-    const dashboardDiv = document.getElementById('dashboard');
-    const loader = document.getElementById('loader');
-    const searchBtn = document.getElementById('searchBtn');
-    const phoneInput = document.getElementById('clientPhone');
-    const overlay = document.getElementById('receiptOverlay');
-
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // HELPERS
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    function formatDMY(isoStr) {
-        if (!isoStr) return 'N/A';
-        const d = new Date(isoStr);
-        if (isNaN(d.getTime())) return isoStr;
-        return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
-    }
-
-    function formatDateTimeWithTime(isoStr) {
-        if (!isoStr) return 'N/A';
-        const d = new Date(isoStr);
-        if (isNaN(d.getTime())) return isoStr;
-        const datePart = formatDMY(isoStr);
-        let hours = d.getHours();
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12 || 12;
-        const minutes = String(d.getMinutes()).padStart(2, '0');
-        return `${datePart} ${hours}:${minutes} ${ampm}`;
-    }
-
-    function getPackageExpiry(startDate) {
-        if (!startDate) return null;
-        const d = new Date(startDate);
-        d.setDate(d.getDate() + 30);
-        return d.toISOString().slice(0, 10);
-    }
-
-    function daysRemaining(expiryDate) {
-        if (!expiryDate) return null;
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const expiry = new Date(expiryDate);
-        const diff = Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
-        return diff;
-    }
-
-    function extractSpeed(pkgName) {
-        if (!pkgName) return '—';
-        const match = pkgName.match(/(\d+)\s*Mbps/);
-        return match ? match[1] + ' Mbps' : '—';
-    }
-
-    function getPendingMonths(client) {
-        const history = client.paymentHistory || [];
-        const monthMap = new Map();
-        for (const entry of history) {
-            if ((entry.debit || 0) === 0 && (entry.credit || 0) === 0) continue;
-            let mk = entry.monthKey;
-            if (!mk && entry.date) {
-                const d = new Date(entry.date);
-                mk = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
-            }
-            if (!mk) continue;
-            if (!monthMap.has(mk)) monthMap.set(mk, { debit: 0, credit: 0 });
-            const rec = monthMap.get(mk);
-            rec.debit += entry.debit || 0;
-            rec.credit += entry.credit || 0;
-        }
-        const pending = [];
-        for (let [mk, { debit, credit }] of monthMap.entries()) {
-            const due = debit - credit;
-            if (due > 0) pending.push({ monthKey: mk, dueAmount: due });
-        }
-        pending.sort((a, b) => a.monthKey.localeCompare(b.monthKey));
-        return pending;
-    }
-
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
-
-    function normalizePhone(p) {
-        return p.replace(/\D/g, '');
-    }
-
-    function toastError(msg) {
-        const existingError = document.querySelector('.error-msg');
-        if (existingError) existingError.remove();
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'error-msg';
-        errorDiv.innerText = msg;
-        document.querySelector('.portal-body').appendChild(errorDiv);
-        setTimeout(() => errorDiv.remove(), 4000);
-    }
-
-    function toastSuccess(msg) {
-        const existingError = document.querySelector('.error-msg');
-        if (existingError) existingError.remove();
-        const successDiv = document.createElement('div');
-        successDiv.className = 'error-msg';
-        successDiv.style.background = '#1e3d2f';
-        successDiv.style.color = '#2ecc71';
-        successDiv.innerText = msg;
-        document.querySelector('.portal-body').appendChild(successDiv);
-        setTimeout(() => successDiv.remove(), 3000);
-    }
-
-    function generateReceiptNumber() {
-        const now = new Date();
-        const d = String(now.getDate()).padStart(2, '0');
-        const m = String(now.getMonth() + 1).padStart(2, '0');
-        const y = String(now.getFullYear()).slice(2);
-        const h = String(now.getHours()).padStart(2, '0');
-        const min = String(now.getMinutes()).padStart(2, '0');
-        return `D3-${y}${m}${d}-${h}${min}${String(Math.floor(Math.random() * 100)).padStart(2, '0')}`;
-    }
-
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // COMPLAINT FUNCTIONS
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    function getComplaintsRef() {
-        return db.ref(`${COMPLAINTS_PATH}/${ADMIN_UID}/complaints`);
-    }
-
-    async function submitComplaint(phone, clientName, clientId, type, typeLabel) {
-        if (!phone || !clientName || !type) {
-            toastError('Missing required information');
-            return false;
-        }
-        try {
-            const ref = getComplaintsRef();
-            const snap = await ref.once('value');
-            let complaints = snap.val() || [];
-            if (!Array.isArray(complaints)) complaints = [];
-
-            const newComplaint = {
-                id: 'comp_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 6),
-                phone: phone,
-                clientName: clientName,
-                clientId: clientId || '',
-                type: type,
-                typeLabel: typeLabel,
-                status: 'pending',
-                resolution: '',
-                timestamp: new Date().toISOString(),
-                resolvedAt: '',
-                updatedAt: new Date().toISOString()
-            };
-            complaints.push(newComplaint);
-            await ref.set(complaints);
-            return true;
-        } catch (e) {
-            console.error('submitComplaint error:', e);
-            toastError('Failed to submit complaint: ' + e.message);
-            return false;
-        }
-    }
-
-    async function getComplaintsForPhone(phone) {
-        if (!phone) return [];
-        const normPhone = normalizePhone(phone);
-        try {
-            const ref = getComplaintsRef();
-            const snap = await ref.once('value');
-            const all = snap.val() || [];
-            if (!Array.isArray(all)) return [];
-            return all.filter(c => normalizePhone(c.phone) === normPhone)
-                .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-        } catch (e) {
-            console.error('getComplaintsForPhone error:', e);
-            return [];
-        }
-    }
-
-    async function checkComplaintStatus(phone) {
-        return await getComplaintsForPhone(phone);
-    }
-
-    // ─── POPUP FUNCTIONS ───
-    function showComplaintPopup() {
-        document.getElementById('complaintPopup').classList.add('active');
-    }
-
-    function closeComplaintPopup() {
-        document.getElementById('complaintPopup').classList.remove('active');
-    }
-
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // COPY EASYPAISA (Header)
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    function copyEasypaisaFromHeader() {
-        const num = '03403157119';
-        navigator.clipboard.writeText(num).then(() => {
-            toastSuccess('✅ Easypaisa number copied to clipboard!');
-        }).catch(() => {
-            const dummy = document.createElement('input');
-            dummy.value = num;
-            document.body.appendChild(dummy);
-            dummy.select();
-            document.execCommand('copy');
-            document.body.removeChild(dummy);
-            toastSuccess('✅ Easypaisa number copied!');
-        });
-    }
-
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // RECEIPT POPULATORS (unchanged)
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    function populateReceipt1(client) {
-        const wrap = document.getElementById('receipt1Wrap');
-        const expiryDate = getPackageExpiry(client.packageStartDate);
-        const daysLeft = daysRemaining(expiryDate);
-        const speed = extractSpeed(client.package);
-        const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
-        const totalDue = (client.packageAmount || 0) + (client.oldBill || 0);
-        const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
-        const pendingMonths = getPendingMonths(client);
-
-        let statusLabel = 'Active';
-        let statusClass = '';
-        if (client.status === 'active') { statusLabel = '✅ Active';
-            statusClass = ''; } else if (client.status === 'overdue') { statusLabel = '⚠️ Overdue';
-            statusClass = 'overdue'; } else { statusLabel = '⛔ Inactive';
-            statusClass = 'inactive'; }
-
-        let daysDisplay = '—';
-        if (daysLeft !== null) {
-            if (daysLeft > 0) daysDisplay = daysLeft + ' days';
-            else if (daysLeft === 0) daysDisplay = 'Expires today';
-            else daysDisplay = 'Expired ' + Math.abs(daysLeft) + ' days ago';
-        }
-
-        let pendingHtml = '';
-        if (pendingMonths.length > 0) {
-            pendingHtml = '<div class="r-section-title" style="margin-top:8px;">📌 Unpaid Months</div>';
-            pendingMonths.forEach(pm => {
-                pendingHtml +=
-                    `<div class="r-pending-item"><span class="r-pm-month">📆 ${pm.monthKey}</span><span class="r-pm-amt">Rs. ${pm.dueAmount.toLocaleString()}</span></div>`;
-            });
-        } else {
-            pendingHtml =
-                `<div style="font-size:0.7rem; color:#1e8e3e; margin:6px 0;">✅ All clear — no pending installments.</div>`;
-        }
-
-        const receiptNo = generateReceiptNumber();
-        const now = new Date();
-        const genDate = formatDMY(now.toISOString()) + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now
-        .getMinutes()).padStart(2, '0');
-
-        wrap.innerHTML = `
-            <div class="r-header">
-                <h2>👑 D3 CROWN FIBER</h2>
-                <div class="r-sub">⭐ PREMIUM INTERNET SERVICES ⭐</div>
-                <div class="r-owner">Owner: SHAHID Ali Abro  |  📞 0305-2848369</div>
-                <div style="font-size:0.55rem; color:#888; margin-top:2px;">📄 BILL & INTERNET DETAILS</div>
-            </div>
-
-            <div class="r-row"><span class="r-label">Receipt #</span><span class="r-value">${receiptNo}</span></div>
-            <div class="r-row"><span class="r-label">Generated</span><span class="r-value">${genDate}</span></div>
-            <div class="r-divider"></div>
-
-            <div class="r-row"><span class="r-label">👤 Customer</span><span class="r-value">${escapeHtml(client.name)}</span></div>
-            <div class="r-row"><span class="r-label">📱 Phone</span><span class="r-value">${escapeHtml(client.phone)}</span></div>
-            <div class="r-row"><span class="r-label">📍 Address</span><span class="r-value">${escapeHtml(client.address || '—')}</span></div>
-            <div class="r-divider"></div>
-
-            <div class="r-section-title">📦 Package & Billing</div>
-            <div class="r-row"><span class="r-label">Package</span><span class="r-value">${escapeHtml(client.package)}</span></div>
-            <div class="r-row"><span class="r-label">Speed</span><span class="r-value">${speed}</span></div>
-            <div class="r-row"><span class="r-label">Monthly Fee</span><span class="r-value gold">Rs. ${(client.packageAmount || 0).toLocaleString()}</span></div>
-            <div class="r-row"><span class="r-label">Old Balance</span><span class="r-value red">Rs. ${(client.oldBill || 0).toLocaleString()}</span></div>
-            <div class="r-row"><span class="r-label">Total Due</span><span class="r-value gold" style="font-size:0.9rem;">Rs. ${totalDue.toLocaleString()}</span></div>
-            <div class="r-row"><span class="r-label">Total Paid</span><span class="r-value green">Rs. ${totalCredit.toLocaleString()}</span></div>
-
-            <div class="r-divider"></div>
-            <div class="r-section-title">📅 Validity</div>
-            <div class="r-row"><span class="r-label">Start Date</span><span class="r-value">${formatDMY(client.packageStartDate)}</span></div>
-            <div class="r-row"><span class="r-label">Expiry Date</span><span class="r-value">${expiryDate ? formatDMY(expiryDate) : 'N/A'}</span></div>
-            <div class="r-row"><span class="r-label">Days Left</span><span class="r-value">${daysDisplay}</span></div>
-            <div class="r-row" style="margin-top:4px;"><span class="r-label">Status</span><span class="r-value"><span class="r-badge ${statusClass}">${statusLabel}</span></span></div>
-
-            ${pendingHtml}
-
-            <div class="r-total-box" style="margin-top:10px;">
-                <div class="r-row"><span class="r-label" style="font-weight:800;">💰 GRAND TOTAL DUE</span><span class="r-value gold" style="font-size:1.1rem;">Rs. ${totalDue.toLocaleString()}</span></div>
-            </div>
-
-            <div class="r-footer">
-                📞 0305-2848369 &nbsp;|&nbsp; 📧 aliabro104@gmail.com<br>
-                <span class="r-phone">⚡ D3 Crown Fiber — Connecting You to Excellence ⚡</span>
-                <div class="r-stamp">🔹 Thank you for choosing D3 Crown Fiber 🔹</div>
-            </div>
-        `;
-    }
-
-    function populateReceipt2(client) {
-        const wrap = document.getElementById('receipt2Wrap');
-        const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
-        const transactions = [...filteredHistory];
-        transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
-        const pendingMonths = getPendingMonths(client);
-        const totalDebit = transactions.reduce((s, e) => s + (e.debit || 0), 0);
-        const totalCredit = transactions.reduce((s, e) => s + (e.credit || 0), 0);
-        const balance = totalDebit - totalCredit;
-        const receiptNo = generateReceiptNumber();
-        const now = new Date();
-        const genDate = formatDMY(now.toISOString()) + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now
-        .getMinutes()).padStart(2, '0');
-
-        let txRows = '';
-        if (transactions.length === 0) {
-            txRows = '<tr><td colspan="4" style="text-align:center; color:#888; padding:8px 0;">No transactions found</td></tr>';
-        } else {
-            transactions.slice(0, 20).forEach(t => {
-                const isCredit = t.credit > 0;
-                txRows += `<tr>
-                                <td>${formatDMY(t.date)}</td>
-                                <td>${escapeHtml(t.description || '-')}</td>
-                                <td class="amt-credit">${isCredit ? 'Rs. '+t.credit.toLocaleString() : '-'}</td>
-                                <td class="amt-debit">${!isCredit && t.debit > 0 ? 'Rs. '+t.debit.toLocaleString() : '-'}</td>
-                            </tr>`;
-            });
-        }
-
-        let pendingHtml = '';
-        if (pendingMonths.length > 0) {
-            pendingHtml = '<div class="r-section-title" style="margin-top:8px;">📌 Pending Months</div>';
-            pendingMonths.forEach(pm => {
-                pendingHtml +=
-                    `<div class="r-pending-item"><span class="r-pm-month">📆 ${pm.monthKey}</span><span class="r-pm-amt">Rs. ${pm.dueAmount.toLocaleString()}</span></div>`;
-            });
-        } else {
-            pendingHtml =
-                `<div style="font-size:0.7rem; color:#1e8e3e; margin:6px 0;">✅ No pending months — account is clear.</div>`;
-        }
-
-        wrap.innerHTML = `
-            <div class="r-header">
-                <h2>👑 D3 CROWN FIBER</h2>
-                <div class="r-sub">⭐ LEDGER STATEMENT ⭐</div>
-                <div class="r-owner">Owner: SHAHID Ali Abro  |  📞 0305-2848369</div>
-                <div style="font-size:0.55rem; color:#888; margin-top:2px;">📊 COMPLETE TRANSACTION HISTORY</div>
-            </div>
-
-            <div class="r-row"><span class="r-label">Receipt #</span><span class="r-value">${receiptNo}</span></div>
-            <div class="r-row"><span class="r-label">Generated</span><span class="r-value">${genDate}</span></div>
-            <div class="r-divider"></div>
-
-            <div class="r-row"><span class="r-label">👤 Customer</span><span class="r-value">${escapeHtml(client.name)}</span></div>
-            <div class="r-row"><span class="r-label">📱 Phone</span><span class="r-value">${escapeHtml(client.phone)}</span></div>
-            <div class="r-divider"></div>
-
-            <div class="r-section-title">📜 Transaction History</div>
-            <table class="r-table">
-                <thead><tr><th>Date</th><th>Description</th><th style="text-align:right;">Credit</th><th style="text-align:right;">Debit</th></tr></thead>
-                <tbody>${txRows}</tbody>
-            </table>
-
-            ${pendingHtml}
-
-            <div class="r-divider"></div>
-            <div class="r-total-box">
-                <div class="r-row"><span class="r-label">💰 Total Debit (Billed)</span><span class="r-value red">Rs. ${totalDebit.toLocaleString()}</span></div>
-                <div class="r-row"><span class="r-label">✅ Total Credit (Paid)</span><span class="r-value green">Rs. ${totalCredit.toLocaleString()}</span></div>
-                <div class="r-row" style="border-top:2px solid #d4891a; padding-top:6px; margin-top:4px;">
-                    <span class="r-label" style="font-weight:800;">📊 NET BALANCE</span>
-                    <span class="r-value gold" style="font-size:1.1rem;">Rs. ${balance.toLocaleString()}</span>
-                </div>
-                <div style="font-size:0.6rem; color:#888; margin-top:4px; text-align:center;">
-                    ${balance > 0 ? '⚠️ Outstanding balance — please clear pending dues.' : balance < 0 ? '✅ Overpaid — credit balance available.' : '✅ Account balanced.'}
-                </div>
-            </div>
-
-            <div class="r-footer">
-                📞 0305-2848369 &nbsp;|&nbsp; 📧 aliabro104@gmail.com<br>
-                <span class="r-phone">⚡ D3 Crown Fiber — Transparent & Reliable ⚡</span>
-                <div class="r-stamp">🔹 This is a system-generated ledger statement 🔹</div>
-            </div>
-        `;
-    }
-
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // CAPTURE & DOWNLOAD (unchanged)
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    function showOverlay() { overlay.classList.add('active'); }
-
-    function hideOverlay() { overlay.classList.remove('active'); }
-
-    async function downloadReceipt(elementId, fileNamePrefix, format = 'png') {
-        const container = document.getElementById(elementId);
-        const wrap = container.querySelector('.receipt-wrap');
-        if (!wrap) return;
-
-        showOverlay();
-        await new Promise(r => setTimeout(r, 300));
-
-        try {
-            container.style.position = 'fixed';
-            container.style.left = '0';
-            container.style.top = '0';
-            container.style.width = '500px';
-            container.style.zIndex = '99999';
-            container.style.opacity = '1';
-            container.style.pointerEvents = 'none';
-            container.style.transform = 'none';
-            container.style.maxHeight = 'none';
-            container.style.overflow = 'visible';
-            container.style.borderRadius = '0';
-
-            const canvas = await html2canvas(wrap, {
-                scale: 2.5,
-                useCORS: true,
-                allowTaint: false,
-                backgroundColor: '#ffffff',
-                logging: false,
-                width: 500,
-                height: wrap.scrollHeight,
-            });
-
-            container.style.position = 'absolute';
-            container.style.left = '-9999px';
-            container.style.top = '0';
-            container.style.width = '500px';
-            container.style.zIndex = '-1';
-            container.style.opacity = '0';
-            container.style.pointerEvents = 'none';
-            container.style.transform = 'none';
-            container.style.maxHeight = 'none';
-            container.style.overflow = 'visible';
-            container.style.borderRadius = '0';
-
-            const link = document.createElement('a');
-            if (format === 'png') {
-                link.download = `${fileNamePrefix}.png`;
-                link.href = canvas.toDataURL('image/png');
-            } else {
-                link.download = `${fileNamePrefix}.jpg`;
-                link.href = canvas.toDataURL('image/jpeg', 0.95);
-            }
-            link.click();
-        } catch (err) {
-            console.error('Receipt capture error:', err);
-            toastError('Failed to generate receipt. Please try again.');
-            container.style.position = 'absolute';
-            container.style.left = '-9999px';
-            container.style.top = '0';
-            container.style.width = '500px';
-            container.style.zIndex = '-1';
-            container.style.opacity = '0';
-            container.style.pointerEvents = 'none';
-            container.style.transform = 'none';
-            container.style.maxHeight = 'none';
-            container.style.overflow = 'visible';
-            container.style.borderRadius = '0';
-        } finally {
-            hideOverlay();
-        }
-    }
-
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // TOGGLE PACKAGE SUMMARY (unchanged)
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    function togglePackageSummary(client) {
-        const existing = document.getElementById('packageSummaryToggle');
-        if (existing) {
-            existing.classList.toggle('open');
-            return;
-        }
-        const container = document.createElement('div');
-        container.id = 'packageSummaryToggle';
-        container.className = 'summary-toggle open';
-
-        const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
-        const totalDebit = filteredHistory.reduce((s, e) => s + (e.debit || 0), 0);
-        const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
-        const pending = getPendingMonths(client);
-        const pendingTotal = pending.reduce((s, p) => s + p.dueAmount, 0);
-
-        let html = `
-            <div class="summary-title">📋 LIFETIME PACKAGE SUMMARY</div>
-            <div class="summary-item"><span class="label">Package</span><span class="value">${escapeHtml(client.package)}</span></div>
-            <div class="summary-item"><span class="label">Monthly Fee</span><span class="value">Rs. ${(client.packageAmount || 0).toLocaleString()}</span></div>
-            <div class="summary-item"><span class="label">Old Balance</span><span class="value red">Rs. ${(client.oldBill || 0).toLocaleString()}</span></div>
-            <div class="summary-item"><span class="label">Total Billed (all time)</span><span class="value red">Rs. ${totalDebit.toLocaleString()}</span></div>
-            <div class="summary-item"><span class="label">Total Paid (all time)</span><span class="value green">Rs. ${totalCredit.toLocaleString()}</span></div>
-            <div class="summary-item"><span class="label">Pending Months</span><span class="value">${pending.length}</span></div>
-            <div class="summary-item"><span class="label">Pending Amount</span><span class="value red">Rs. ${pendingTotal.toLocaleString()}</span></div>
-            <div class="summary-item" style="border-bottom:2px solid #f39c12; padding-bottom:8px; margin-top:4px;">
-                <span class="label" style="font-weight:800;">NET BALANCE</span>
-                <span class="value gold" style="font-size:1rem;">Rs. ${(totalDebit - totalCredit).toLocaleString()}</span>
-            </div>
-            <div style="font-size:0.6rem; color:#7e8c8f; text-align:center; margin-top:8px;">
-                * Based on all recorded transactions (excluding zero-value entries)
-            </div>
-        `;
-        container.innerHTML = html;
-
-        const parentCard = document.querySelector('.info-card:last-child');
-        if (parentCard) {
-            parentCard.parentNode.insertBefore(container, parentCard.nextSibling);
-        } else {
-            dashboardDiv.appendChild(container);
-        }
-    }
-
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // EASYPAISA MODAL (unchanged)
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    function showEasypaisaModal() {
-        document.getElementById('easypaisaModal').classList.add('active');
-    }
-
-    function hideEasypaisaModal() {
-        document.getElementById('easypaisaModal').classList.remove('active');
-    }
-
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // DASHBOARD RENDER (with Complaint Box and updated status)
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    let selectedComplaintType = null;
-
-    function renderDashboard(client) {
-        currentClientData = client;
-        currentClientPhoneRaw = client.phone;
-
-        // Filter history
-        const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
-        const totalDue = (client.packageAmount || 0) + (client.oldBill || 0);
-        const expiryDate = getPackageExpiry(client.packageStartDate);
-        const daysLeft = daysRemaining(expiryDate);
-        const speed = extractSpeed(client.package);
-        const pendingMonths = getPendingMonths(client);
-        const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
-
-        let statusClass = 'status-badge';
-        if (client.status === 'active') statusClass += '';
-        else if (client.status === 'overdue') statusClass += ' overdue';
-        else statusClass += ' inactive';
-        let statusText = client.status === 'active' ? '✅ Active' : (client.status === 'overdue' ? '⚠️ Overdue' :
-            '⛔ Inactive');
-
-        let expiryWarning = '';
-        if (daysLeft !== null && daysLeft <= 3 && daysLeft >= 0) {
-            expiryWarning =
-                `<div style="background:#3d2e1e; border-radius:12px; padding:10px; margin-top:8px; text-align:center; color:#f5a623; font-size:0.7rem;">⏰ Package expires in ${daysLeft} days! Please renew.</div>`;
-        } else if (daysLeft !== null && daysLeft < 0) {
-            expiryWarning =
-                `<div style="background:#3d1e1e; border-radius:12px; padding:10px; margin-top:8px; text-align:center; color:#e74c3c; font-size:0.7rem;">❌ Package expired ${Math.abs(daysLeft)} days ago. Contact ISP for renewal.</div>`;
-        } else if (daysLeft !== null && daysLeft <= 7) {
-            expiryWarning =
-                `<div style="background:#2a2a1a; border-radius:12px; padding:8px; margin-top:6px; text-align:center; color:#ffb347; font-size:0.65rem;">📅 Expires in ${daysLeft} days</div>`;
-        }
-
-        let pendingHtml = '';
-        if (pendingMonths.length > 0) {
-            pendingHtml = `<div class="info-card"><div class="info-title">📌 Unpaid Months</div>`;
-            pendingMonths.forEach(pm => {
-                pendingHtml += `<div class="pending-month">
-                                    <span class="month">📆 ${pm.monthKey}</span>
-                                    <span class="amount">Rs. ${pm.dueAmount.toLocaleString()}</span>
-                                </div>`;
-            });
-            pendingHtml += `</div>`;
-        } else {
-            pendingHtml =
-                `<div class="info-card"><div class="info-title">✨ All Clear</div><div style="font-size:0.7rem; color:#2ecc71;">No pending installments. Well done!</div></div>`;
-        }
-
-        let transactions = [...filteredHistory];
-        transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
-        const recentTx = transactions.slice(0, 10);
-        let txHtml = `<div class="info-card"><div class="info-title">📜 Recent Transactions</div>
-                          <div style="overflow-x:auto;"><table class="ledger-table">
-                          <thead><tr><th>Date</th><th>Description</th><th>Credit</th><th>Debit</th></tr></thead><tbody>`;
-        if (recentTx.length === 0) {
-            txHtml += '<tr><td colspan="4" style="text-align:center;">No transactions found</td></tr>';
-        } else {
-            recentTx.forEach(t => {
-                txHtml += `<tr>
-                                    <td>${formatDMY(t.date)}</td>
-                                    <td>${escapeHtml(t.description || '-')}</td>
-                                    <td class="credit-text">${t.credit > 0 ? 'Rs. '+t.credit.toLocaleString() : '-'}</td>
-                                    <td class="debit-text">${t.debit > 0 ? 'Rs. '+t.debit.toLocaleString() : '-'}</td>
-                                </tr>`;
-            });
-        }
-        txHtml += `</tbody></table></div></div>`;
-
-        // ── Build Dashboard HTML ──
-        const html = `
-            <div class="flex-between" style="margin-bottom:12px;">
-                <span class="${statusClass}">${statusText}</span>
-                <button class="logout-btn" id="logoutPortalBtn">🔒 Exit</button>
-            </div>
-
-            <div class="info-card">
-                <div class="info-title">👤 Customer Information</div>
-                <div class="info-grid">
-                    <div class="info-item"><div class="label">Full Name</div><div class="value">${escapeHtml(client.name)}</div></div>
-                    <div class="info-item"><div class="label">Phone</div><div class="value">${escapeHtml(client.phone)}</div></div>
-                    <div class="info-item"><div class="label">Address</div><div class="value">${escapeHtml(client.address || '—')}</div></div>
-                </div>
-            </div>
-
-            <div class="info-card">
-                <div class="info-title">📦 Package & Billing</div>
-                <div class="info-grid">
-                    <div class="info-item"><div class="label">Package</div><div class="value">${escapeHtml(client.package)}</div></div>
-                    <div class="info-item"><div class="label">Speed</div><div class="value">${speed}</div></div>
-                    <div class="info-item"><div class="label">Monthly Fee</div><div class="value">Rs. ${(client.packageAmount || 0).toLocaleString()}</div></div>
-                    <div class="info-item"><div class="label">Old Balance</div><div class="value" style="color:#e74c3c;">Rs. ${(client.oldBill || 0).toLocaleString()}</div></div>
-                    <div class="info-item"><div class="label">Total Due</div><div class="value" style="color:#f5a623;">Rs. ${totalDue.toLocaleString()}</div></div>
-                    <div class="info-item"><div class="label">Total Paid</div><div class="value" style="color:#2ecc71;">Rs. ${totalCredit.toLocaleString()}</div></div>
-                </div>
-            </div>
-
-            <div class="info-card">
-                <div class="info-title">📅 Package Validity</div>
-                <div class="info-grid">
-                    <div class="info-item"><div class="label">Start Date</div><div class="value">${formatDMY(client.packageStartDate)}</div></div>
-                    <div class="info-item"><div class="label">Expiry Date</div><div class="value">${expiryDate ? formatDMY(expiryDate) : 'N/A'}</div></div>
-                    <div class="info-item"><div class="label">Days Left</div><div class="value">${daysLeft !== null ? (daysLeft > 0 ? daysLeft + ' days' : (daysLeft === 0 ? 'Expires today' : 'Expired')) : '—'}</div></div>
-                </div>
-                ${expiryWarning}
-            </div>
-
-            ${pendingHtml}
-            ${txHtml}
-
-            <!-- NEW FEATURE BUTTONS: Lifetime Summary & Owner Billing -->
-            <div class="info-card" style="border-color:#f39c1240;">
-                <div class="info-title">⚡ Additional Features</div>
-                <div class="receipt-actions">
-                    <button class="btn-receipt btn-summary" id="summaryToggleBtn"><i class="fas fa-chart-pie"></i> Lifetime Package Summary</button>
-                    <button class="btn-receipt btn-owner" id="ownerBillingBtn"><i class="fas fa-credit-card"></i> Owner Billing Accounts</button>
-                </div>
-                <div style="font-size:0.55rem; color:#7e8c8f; margin-top:6px; text-align:center;">
-                    📋 Click to view complete package history &amp; Easypaisa payment details.
-                </div>
-            </div>
-
-            <!-- RECEIPT DOWNLOAD BUTTONS -->
-            <div class="info-card" style="border-color:#f5a62340;">
-                <div class="info-title">📄 Download Receipts</div>
-                <div class="receipt-actions">
-                    <button class="btn-receipt primary" id="receipt1Btn"><i class="fas fa-file-invoice"></i> Bill & Internet</button>
-                    <button class="btn-receipt purple" id="receipt2Btn"><i class="fas fa-book"></i> Ledger</button>
-                </div>
-                <div class="receipt-actions" style="margin-top:6px;">
-                    <button class="btn-receipt green" id="receipt1JpgBtn"><i class="fas fa-image"></i> Bill as JPG</button>
-                    <button class="btn-receipt" id="receipt2JpgBtn" style="border-color:#9b59b6; color:#9b59b6;"><i class="fas fa-image"></i> Ledger as JPG</button>
-                </div>
-                <div style="font-size:0.55rem; color:#7e8c8f; margin-top:6px; text-align:center;">
-                    ⬇️ Click to download as PNG (or JPG) — receipts include all billing details & transaction history.
-                </div>
-            </div>
-
-            <!-- ★★★ COMPLAINT BOX (Shikayat) ★★★ -->
-            <div class="complaint-section" id="complaintSection">
-                <div class="complaint-title"><i class="fas fa-exclamation-triangle"></i> Shikayat Box — Report an Issue</div>
-
-                <!-- Complaint Buttons -->
-                <div class="complaint-buttons">
-                    <button class="complaint-btn red-light" data-type="red_light" onclick="selectComplaintType('red_light', this)">
-                        <span class="btn-icon">🔴</span> Red Light — No Internet
-                    </button>
-                    <button class="complaint-btn slow-internet" data-type="slow_internet" onclick="selectComplaintType('slow_internet', this)">
-                        <span class="btn-icon">🟡</span> Slow Internet — Buffering
-                    </button>
-                    <button class="complaint-btn disconnecting" data-type="disconnecting" onclick="selectComplaintType('disconnecting', this)">
-                        <span class="btn-icon">🔌</span> Disconnecting — Frequent Drops
-                    </button>
-                </div>
-
-                <!-- Submit Row -->
-                <div class="complaint-submit-row">
-                    <button class="complaint-submit-btn" id="submitComplaintBtn" onclick="handleSubmitComplaint()">
-                        <i class="fas fa-paper-plane"></i> Submit Complaint
-                    </button>
-                    <button class="complaint-clear-btn" onclick="clearComplaintSelection()">✕ Clear</button>
-                </div>
-                <div class="complaint-submit-feedback" id="complaintFeedback"></div>
-
-                <!-- Complaint Status -->
-                <div class="complaint-status-box" id="complaintStatusBox">
-                    <div class="status-title"><i class="fas fa-history"></i> Your Complaint Status</div>
-                    <div id="complaintListContainer">
-                        <div class="no-complaints">🔄 Loading your complaints...</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="note" style="margin-top:8px;">
-                💡 For payment or support, contact your ISP representative.
-            </div>
-        `;
-
-        dashboardDiv.innerHTML = html;
-
-        // ── Attach events ──
-        // Logout
-        document.getElementById('logoutPortalBtn')?.addEventListener('click', () => {
-            dashboardDiv.style.display = 'none';
-            loginSection.style.display = 'block';
-            dashboardDiv.innerHTML = '';
-            currentClientData = null;
-            currentClientPhoneRaw = '';
-            phoneInput.value = '';
-            selectedComplaintType = null;
-            const existingErr = document.querySelector('.error-msg');
-            if (existingErr) existingErr.remove();
-        });
-
-        // Receipt 1 (PNG)
-        document.getElementById('receipt1Btn')?.addEventListener('click', () => {
-            populateReceipt1(client);
-            downloadReceipt('receipt1Container', `D3_Bill_${client.phone || 'client'}`, 'png');
-        });
-
-        // Receipt 2 (PNG)
-        document.getElementById('receipt2Btn')?.addEventListener('click', () => {
-            populateReceipt2(client);
-            downloadReceipt('receipt2Container', `D3_Ledger_${client.phone || 'client'}`, 'png');
-        });
-
-        // Receipt 1 (JPG)
-        document.getElementById('receipt1JpgBtn')?.addEventListener('click', () => {
-            populateReceipt1(client);
-            downloadReceipt('receipt1Container', `D3_Bill_${client.phone || 'client'}`, 'jpg');
-        });
-
-        // Receipt 2 (JPG)
-        document.getElementById('receipt2JpgBtn')?.addEventListener('click', () => {
-            populateReceipt2(client);
-            downloadReceipt('receipt2Container', `D3_Ledger_${client.phone || 'client'}`, 'jpg');
-        });
-
-        // Summary Toggle
-        document.getElementById('summaryToggleBtn')?.addEventListener('click', () => {
-            const existing = document.getElementById('packageSummaryToggle');
-            if (existing) {
-                existing.classList.toggle('open');
-            } else {
-                togglePackageSummary(client);
-            }
-        });
-
-        // Owner Billing
-        document.getElementById('ownerBillingBtn')?.addEventListener('click', showEasypaisaModal);
-
-        // ── Load complaints for this client ──
-        loadComplaintsForClient(client.phone);
-    }
-
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // COMPLAINT UI FUNCTIONS (updated)
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    function selectComplaintType(type, btnEl) {
-        document.querySelectorAll('.complaint-btn').forEach(b => b.classList.remove('selected'));
-        if (btnEl) btnEl.classList.add('selected');
-        selectedComplaintType = type;
-        document.getElementById('complaintFeedback').textContent = '';
-        document.getElementById('complaintFeedback').className = 'complaint-submit-feedback';
-    }
-
-    function clearComplaintSelection() {
-        document.querySelectorAll('.complaint-btn').forEach(b => b.classList.remove('selected'));
-        selectedComplaintType = null;
-        document.getElementById('complaintFeedback').textContent = '';
-        document.getElementById('complaintFeedback').className = 'complaint-submit-feedback';
-    }
-
-    function getTypeLabel(type) {
-        const map = {
-            'red_light': '🔴 Red Light — No Internet',
-            'slow_internet': '🟡 Slow Internet — Buffering',
-            'disconnecting': '🔌 Disconnecting — Frequent Drops'
+    <script>
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // FIREBASE CONFIG
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        const firebaseConfig = {
+            apiKey: "AIzaSyDZHUNdkun0f3cY3JqfzrI86mpxy7zY7x0",
+            authDomain: "d3crown-805ce.firebaseapp.com",
+            databaseURL: "https://d3crown-805ce-default-rtdb.firebaseio.com",
+            projectId: "d3crown-805ce",
+            storageBucket: "d3crown-805ce.firebasestorage.app",
+            messagingSenderId: "1082016126067",
+            appId: "1:1082016126067:web:7d0006e48208555999c606"
         };
-        return map[type] || type;
-    }
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
 
-    function getTypeIcon(type) {
-        const map = {
-            'red_light': '🔴',
-            'slow_internet': '🟡',
-            'disconnecting': '🔌'
-        };
-        return map[type] || '📌';
-    }
+        const ADMIN_UID = "0rulvawKt1d6M3FlxfEariNOukk1";
+        const CLIENTS_PATH = "d3_clients";
+        const COMPLAINTS_PATH = "d3_complaints";
 
-    async function handleSubmitComplaint() {
-        const feedback = document.getElementById('complaintFeedback');
-        if (!currentClientData) {
-            feedback.textContent = '❌ Please search your account first.';
-            feedback.className = 'complaint-submit-feedback error';
-            return;
-        }
-        if (!selectedComplaintType) {
-            feedback.textContent = '⚠️ Please select a complaint type first.';
-            feedback.className = 'complaint-submit-feedback error';
-            return;
-        }
+        let currentClientData = null;
+        let currentClientPhoneRaw = '';
+        const loginSection = document.getElementById('loginSection');
+        const dashboardDiv = document.getElementById('dashboard');
+        const loader = document.getElementById('loader');
+        const searchBtn = document.getElementById('searchBtn');
+        const phoneInput = document.getElementById('clientPhone');
+        const overlay = document.getElementById('receiptOverlay');
 
-        const btn = document.getElementById('submitComplaintBtn');
-        btn.disabled = true;
-        btn.textContent = '⏳ Submitting...';
-        feedback.textContent = '';
-        feedback.className = 'complaint-submit-feedback';
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // ★★★ COMPACT PARTICLES ★★★
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        (function initParticles() {
+            const canvas = document.getElementById('devParticles');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            const NUM = 35;
 
-        const client = currentClientData;
-        const typeLabel = getTypeLabel(selectedComplaintType);
-
-        try {
-            const success = await submitComplaint(
-                client.phone,
-                client.name,
-                client.id || '',
-                selectedComplaintType,
-                typeLabel
-            );
-
-            if (success) {
-                // Show cool popup
-                showComplaintPopup();
-                // Clear selection
-                clearComplaintSelection();
-                // Reload complaints
-                await loadComplaintsForClient(client.phone);
-                feedback.textContent = '';
-            } else {
-                feedback.textContent = '❌ Failed to submit complaint. Please try again.';
-                feedback.className = 'complaint-submit-feedback error';
-            }
-        } catch (e) {
-            console.error(e);
-            feedback.textContent = '❌ Error: ' + e.message;
-            feedback.className = 'complaint-submit-feedback error';
-        } finally {
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Complaint';
-        }
-    }
-
-    async function loadComplaintsForClient(phone) {
-        const container = document.getElementById('complaintListContainer');
-        if (!container) return;
-
-        try {
-            const complaints = await getComplaintsForPhone(phone);
-            if (!complaints || complaints.length === 0) {
-                container.innerHTML = `<div class="no-complaints">📭 No complaints filed yet. Use the buttons above to report an issue.</div>`;
-                return;
+            function resize() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                canvas.width = rect.width;
+                canvas.height = rect.height;
+                width = canvas.width;
+                height = canvas.height;
             }
 
-            let html = '';
-            complaints.forEach(c => {
-                const isResolved = c.status === 'resolved';
-                const statusText = isResolved ? '✅ Resolved' : '⏳ Pending';
-                const statusClass = isResolved ? 'resolved' : '';
-                
-                // Submission time (with date and time)
-                const submitTime = c.timestamp ? formatDateTimeWithTime(c.timestamp) : 'N/A';
-                
-                // Resolution time (actual resolvedAt)
-                let resolveTimeHtml = '';
-                if (isResolved && c.resolvedAt) {
-                    const resolvedTime = formatDateTimeWithTime(c.resolvedAt);
-                    resolveTimeHtml = `<div class="ci-time"><span class="label">🕒 Resolved:</span> ${resolvedTime}</div>`;
+            class Particle {
+                constructor() { this.reset(); }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.size = Math.random() * 2 + 1;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    this.opacity = Math.random() * 0.4 + 0.1;
+                    this.hue = 38 + Math.random() * 20;
                 }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x < 0 || this.x > width) { this.speedX *= -1;
+                        this.x = Math.min(Math.max(this.x, 0), width); }
+                    if (this.y < 0 || this.y > height) { this.speedY *= -1;
+                        this.y = Math.min(Math.max(this.y, 0), height); }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `hsla(${this.hue}, 85%, 65%, ${this.opacity})`;
+                    ctx.fill();
+                    if (this.size > 1.5) {
+                        ctx.shadowColor = `hsla(${this.hue}, 90%, 70%, 0.15)`;
+                        ctx.shadowBlur = 6;
+                        ctx.fill();
+                        ctx.shadowBlur = 0;
+                    }
+                }
+            }
 
-                const resolutionHtml = isResolved && c.resolution ?
-                    `<div class="ci-resolution">💬 <strong>Resolution:</strong> ${escapeHtml(c.resolution)}</div>` :
-                    '';
+            function init() {
+                resize();
+                particles = [];
+                for (let i = 0; i < NUM; i++) particles.push(new Particle());
+            }
 
-                html += `
-                    <div class="complaint-item">
-                        <div class="ci-type">
-                            <span>${getTypeIcon(c.type)}</span>
-                            <span>${escapeHtml(c.typeLabel || c.type)}</span>
-                        </div>
-                        <div class="ci-status ${statusClass}">${statusText}</div>
-                        <div class="ci-time">
-                            <span class="label">📅 Submitted:</span>
-                            <span>${submitTime}</span>
-                            ${resolveTimeHtml}
-                        </div>
-                        ${resolutionHtml}
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => { p.update();
+                    p.draw(); });
+                // faint lines
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 60) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(245, 166, 35, ${0.04 * (1 - dist/60)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', () => {
+                resize();
+                particles.forEach(p => { p.x = Math.min(p.x, width);
+                    p.y = Math.min(p.y, height); });
+            });
+            if (window.ResizeObserver) {
+                const ro = new ResizeObserver(() => { resize(); });
+                ro.observe(canvas.parentElement);
+            }
+            init();
+            animate();
+        })();
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // HELPERS
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function formatDMY(isoStr) {
+            if (!isoStr) return 'N/A';
+            const d = new Date(isoStr);
+            if (isNaN(d.getTime())) return isoStr;
+            return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+        }
+
+        function formatDateTimeWithTime(isoStr) {
+            if (!isoStr) return 'N/A';
+            const d = new Date(isoStr);
+            if (isNaN(d.getTime())) return isoStr;
+            const datePart = formatDMY(isoStr);
+            let hours = d.getHours();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            const minutes = String(d.getMinutes()).padStart(2, '0');
+            return `${datePart} ${hours}:${minutes} ${ampm}`;
+        }
+
+        function getPackageExpiry(startDate) {
+            if (!startDate) return null;
+            const d = new Date(startDate);
+            d.setDate(d.getDate() + 30);
+            return d.toISOString().slice(0, 10);
+        }
+
+        function daysRemaining(expiryDate) {
+            if (!expiryDate) return null;
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const expiry = new Date(expiryDate);
+            const diff = Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
+            return diff;
+        }
+
+        function extractSpeed(pkgName) {
+            if (!pkgName) return '—';
+            const match = pkgName.match(/(\d+)\s*Mbps/);
+            return match ? match[1] + ' Mbps' : '—';
+        }
+
+        function getPendingMonths(client) {
+            const history = client.paymentHistory || [];
+            const monthMap = new Map();
+            for (const entry of history) {
+                if ((entry.debit || 0) === 0 && (entry.credit || 0) === 0) continue;
+                let mk = entry.monthKey;
+                if (!mk && entry.date) {
+                    const d = new Date(entry.date);
+                    mk = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+                }
+                if (!mk) continue;
+                if (!monthMap.has(mk)) monthMap.set(mk, { debit: 0, credit: 0 });
+                const rec = monthMap.get(mk);
+                rec.debit += entry.debit || 0;
+                rec.credit += entry.credit || 0;
+            }
+            const pending = [];
+            for (let [mk, { debit, credit }] of monthMap.entries()) {
+                const due = debit - credit;
+                if (due > 0) pending.push({ monthKey: mk, dueAmount: due });
+            }
+            pending.sort((a, b) => a.monthKey.localeCompare(b.monthKey));
+            return pending;
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+
+        function normalizePhone(p) {
+            return p.replace(/\D/g, '');
+        }
+
+        function toastError(msg) {
+            const existingError = document.querySelector('.error-msg');
+            if (existingError) existingError.remove();
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-msg';
+            errorDiv.innerText = msg;
+            document.querySelector('.portal-body').appendChild(errorDiv);
+            setTimeout(() => errorDiv.remove(), 4000);
+        }
+
+        function toastSuccess(msg) {
+            const existingError = document.querySelector('.error-msg');
+            if (existingError) existingError.remove();
+            const successDiv = document.createElement('div');
+            successDiv.className = 'error-msg';
+            successDiv.style.background = '#1e3d2f';
+            successDiv.style.color = '#2ecc71';
+            successDiv.innerText = msg;
+            document.querySelector('.portal-body').appendChild(successDiv);
+            setTimeout(() => successDiv.remove(), 3000);
+        }
+
+        function generateReceiptNumber() {
+            const now = new Date();
+            const d = String(now.getDate()).padStart(2, '0');
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const y = String(now.getFullYear()).slice(2);
+            const h = String(now.getHours()).padStart(2, '0');
+            const min = String(now.getMinutes()).padStart(2, '0');
+            return `D3-${y}${m}${d}-${h}${min}${String(Math.floor(Math.random() * 100)).padStart(2, '0')}`;
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // COMPLAINT FUNCTIONS
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function getComplaintsRef() {
+            return db.ref(`${COMPLAINTS_PATH}/${ADMIN_UID}/complaints`);
+        }
+
+        async function submitComplaint(phone, clientName, clientId, type, typeLabel) {
+            if (!phone || !clientName || !type) {
+                toastError('Missing required information');
+                return false;
+            }
+            try {
+                const ref = getComplaintsRef();
+                const snap = await ref.once('value');
+                let complaints = snap.val() || [];
+                if (!Array.isArray(complaints)) complaints = [];
+
+                const newComplaint = {
+                    id: 'comp_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 6),
+                    phone: phone,
+                    clientName: clientName,
+                    clientId: clientId || '',
+                    type: type,
+                    typeLabel: typeLabel,
+                    status: 'pending',
+                    resolution: '',
+                    timestamp: new Date().toISOString(),
+                    resolvedAt: '',
+                    updatedAt: new Date().toISOString()
+                };
+                complaints.push(newComplaint);
+                await ref.set(complaints);
+                return true;
+            } catch (e) {
+                console.error('submitComplaint error:', e);
+                toastError('Failed to submit complaint: ' + e.message);
+                return false;
+            }
+        }
+
+        async function getComplaintsForPhone(phone) {
+            if (!phone) return [];
+            const normPhone = normalizePhone(phone);
+            try {
+                const ref = getComplaintsRef();
+                const snap = await ref.once('value');
+                const all = snap.val() || [];
+                if (!Array.isArray(all)) return [];
+                return all.filter(c => normalizePhone(c.phone) === normPhone)
+                    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            } catch (e) {
+                console.error('getComplaintsForPhone error:', e);
+                return [];
+            }
+        }
+
+        function showComplaintPopup() {
+            document.getElementById('complaintPopup').classList.add('active');
+        }
+
+        function closeComplaintPopup() {
+            document.getElementById('complaintPopup').classList.remove('active');
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // COPY EASYPAISA
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function copyEasypaisaFromHeader() {
+            const num = '03403157119';
+            navigator.clipboard.writeText(num).then(() => {
+                toastSuccess('✅ Easypaisa number copied to clipboard!');
+            }).catch(() => {
+                const dummy = document.createElement('input');
+                dummy.value = num;
+                document.body.appendChild(dummy);
+                dummy.select();
+                document.execCommand('copy');
+                document.body.removeChild(dummy);
+                toastSuccess('✅ Easypaisa number copied!');
+            });
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // RECEIPT POPULATORS
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function populateReceipt1(client) {
+            const wrap = document.getElementById('receipt1Wrap');
+            const expiryDate = getPackageExpiry(client.packageStartDate);
+            const daysLeft = daysRemaining(expiryDate);
+            const speed = extractSpeed(client.package);
+            const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
+            const totalDue = (client.packageAmount || 0) + (client.oldBill || 0);
+            const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
+            const pendingMonths = getPendingMonths(client);
+
+            let statusLabel = 'Active',
+                statusClass = '';
+            if (client.status === 'active') { statusLabel = '✅ Active';
+                statusClass = ''; } else if (client.status === 'overdue') { statusLabel = '⚠️ Overdue';
+                statusClass = 'overdue'; } else { statusLabel = '⛔ Inactive';
+                statusClass = 'inactive'; }
+
+            let daysDisplay = '—';
+            if (daysLeft !== null) {
+                if (daysLeft > 0) daysDisplay = daysLeft + ' days';
+                else if (daysLeft === 0) daysDisplay = 'Expires today';
+                else daysDisplay = 'Expired ' + Math.abs(daysLeft) + ' days ago';
+            }
+
+            let pendingHtml = '';
+            if (pendingMonths.length > 0) {
+                pendingHtml = '<div class="r-section-title" style="margin-top:8px;">📌 Unpaid Months</div>';
+                pendingMonths.forEach(pm => {
+                    pendingHtml +=
+                        `<div class="r-pending-item"><span class="r-pm-month">📆 ${pm.monthKey}</span><span class="r-pm-amt">Rs. ${pm.dueAmount.toLocaleString()}</span></div>`;
+                });
+            } else {
+                pendingHtml =
+                    `<div style="font-size:0.7rem; color:#1e8e3e; margin:6px 0;">✅ All clear — no pending installments.</div>`;
+            }
+
+            const receiptNo = generateReceiptNumber();
+            const now = new Date();
+            const genDate = formatDMY(now.toISOString()) + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now
+                .getMinutes()).padStart(2, '0');
+
+            wrap.innerHTML = `
+                    <div class="r-header">
+                        <h2>👑 D3 CROWN FIBER</h2>
+                        <div class="r-sub">⭐ PREMIUM INTERNET SERVICES ⭐</div>
+                        <div class="r-owner">Owner: SHAHID Ali Abro  |  📞 0305-2848369</div>
+                        <div style="font-size:0.55rem; color:#888; margin-top:2px;">📄 BILL & INTERNET DETAILS</div>
+                    </div>
+                    <div class="r-row"><span class="r-label">Receipt #</span><span class="r-value">${receiptNo}</span></div>
+                    <div class="r-row"><span class="r-label">Generated</span><span class="r-value">${genDate}</span></div>
+                    <div class="r-divider"></div>
+                    <div class="r-row"><span class="r-label">👤 Customer</span><span class="r-value">${escapeHtml(client.name)}</span></div>
+                    <div class="r-row"><span class="r-label">📱 Phone</span><span class="r-value">${escapeHtml(client.phone)}</span></div>
+                    <div class="r-row"><span class="r-label">📍 Address</span><span class="r-value">${escapeHtml(client.address || '—')}</span></div>
+                    <div class="r-divider"></div>
+                    <div class="r-section-title">📦 Package & Billing</div>
+                    <div class="r-row"><span class="r-label">Package</span><span class="r-value">${escapeHtml(client.package)}</span></div>
+                    <div class="r-row"><span class="r-label">Speed</span><span class="r-value">${speed}</span></div>
+                    <div class="r-row"><span class="r-label">Monthly Fee</span><span class="r-value gold">Rs. ${(client.packageAmount || 0).toLocaleString()}</span></div>
+                    <div class="r-row"><span class="r-label">Old Balance</span><span class="r-value red">Rs. ${(client.oldBill || 0).toLocaleString()}</span></div>
+                    <div class="r-row"><span class="r-label">Total Due</span><span class="r-value gold" style="font-size:0.9rem;">Rs. ${totalDue.toLocaleString()}</span></div>
+                    <div class="r-row"><span class="r-label">Total Paid</span><span class="r-value green">Rs. ${totalCredit.toLocaleString()}</span></div>
+                    <div class="r-divider"></div>
+                    <div class="r-section-title">📅 Validity</div>
+                    <div class="r-row"><span class="r-label">Start Date</span><span class="r-value">${formatDMY(client.packageStartDate)}</span></div>
+                    <div class="r-row"><span class="r-label">Expiry Date</span><span class="r-value">${expiryDate ? formatDMY(expiryDate) : 'N/A'}</span></div>
+                    <div class="r-row"><span class="r-label">Days Left</span><span class="r-value">${daysDisplay}</span></div>
+                    <div class="r-row" style="margin-top:4px;"><span class="r-label">Status</span><span class="r-value"><span class="r-badge ${statusClass}">${statusLabel}</span></span></div>
+                    ${pendingHtml}
+                    <div class="r-total-box" style="margin-top:10px;">
+                        <div class="r-row"><span class="r-label" style="font-weight:800;">💰 GRAND TOTAL DUE</span><span class="r-value gold" style="font-size:1.1rem;">Rs. ${totalDue.toLocaleString()}</span></div>
+                    </div>
+                    <div class="r-footer">
+                        📞 0305-2848369 &nbsp;|&nbsp; 📧 aliabro104@gmail.com<br>
+                        <span class="r-phone">⚡ D3 Crown Fiber — Connecting You to Excellence ⚡</span>
+                        <div class="r-stamp">🔹 Thank you for choosing D3 Crown Fiber 🔹</div>
                     </div>
                 `;
-            });
+        }
+
+        function populateReceipt2(client) {
+            const wrap = document.getElementById('receipt2Wrap');
+            const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
+            const transactions = [...filteredHistory];
+            transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+            const pendingMonths = getPendingMonths(client);
+            const totalDebit = transactions.reduce((s, e) => s + (e.debit || 0), 0);
+            const totalCredit = transactions.reduce((s, e) => s + (e.credit || 0), 0);
+            const balance = totalDebit - totalCredit;
+            const receiptNo = generateReceiptNumber();
+            const now = new Date();
+            const genDate = formatDMY(now.toISOString()) + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now
+                .getMinutes()).padStart(2, '0');
+
+            let txRows = '';
+            if (transactions.length === 0) {
+                txRows = '<tr><td colspan="4" style="text-align:center; color:#888; padding:8px 0;">No transactions found</td></tr>';
+            } else {
+                transactions.slice(0, 20).forEach(t => {
+                    const isCredit = t.credit > 0;
+                    txRows += `<tr>
+                                    <td>${formatDMY(t.date)}</td>
+                                    <td>${escapeHtml(t.description || '-')}</td>
+                                    <td class="amt-credit">${isCredit ? 'Rs. '+t.credit.toLocaleString() : '-'}</td>
+                                    <td class="amt-debit">${!isCredit && t.debit > 0 ? 'Rs. '+t.debit.toLocaleString() : '-'}</td>
+                                </tr>`;
+                });
+            }
+
+            let pendingHtml = '';
+            if (pendingMonths.length > 0) {
+                pendingHtml = '<div class="r-section-title" style="margin-top:8px;">📌 Pending Months</div>';
+                pendingMonths.forEach(pm => {
+                    pendingHtml +=
+                        `<div class="r-pending-item"><span class="r-pm-month">📆 ${pm.monthKey}</span><span class="r-pm-amt">Rs. ${pm.dueAmount.toLocaleString()}</span></div>`;
+                });
+            } else {
+                pendingHtml =
+                    `<div style="font-size:0.7rem; color:#1e8e3e; margin:6px 0;">✅ No pending months — account is clear.</div>`;
+            }
+
+            wrap.innerHTML = `
+                    <div class="r-header">
+                        <h2>👑 D3 CROWN FIBER</h2>
+                        <div class="r-sub">⭐ LEDGER STATEMENT ⭐</div>
+                        <div class="r-owner">Owner: SHAHID Ali Abro  |  📞 0305-2848369</div>
+                        <div style="font-size:0.55rem; color:#888; margin-top:2px;">📊 COMPLETE TRANSACTION HISTORY</div>
+                    </div>
+                    <div class="r-row"><span class="r-label">Receipt #</span><span class="r-value">${receiptNo}</span></div>
+                    <div class="r-row"><span class="r-label">Generated</span><span class="r-value">${genDate}</span></div>
+                    <div class="r-divider"></div>
+                    <div class="r-row"><span class="r-label">👤 Customer</span><span class="r-value">${escapeHtml(client.name)}</span></div>
+                    <div class="r-row"><span class="r-label">📱 Phone</span><span class="r-value">${escapeHtml(client.phone)}</span></div>
+                    <div class="r-divider"></div>
+                    <div class="r-section-title">📜 Transaction History</div>
+                    <table class="r-table">
+                        <thead><tr><th>Date</th><th>Description</th><th style="text-align:right;">Credit</th><th style="text-align:right;">Debit</th></tr></thead>
+                        <tbody>${txRows}</tbody>
+                    </table>
+                    ${pendingHtml}
+                    <div class="r-divider"></div>
+                    <div class="r-total-box">
+                        <div class="r-row"><span class="r-label">💰 Total Debit (Billed)</span><span class="r-value red">Rs. ${totalDebit.toLocaleString()}</span></div>
+                        <div class="r-row"><span class="r-label">✅ Total Credit (Paid)</span><span class="r-value green">Rs. ${totalCredit.toLocaleString()}</span></div>
+                        <div class="r-row" style="border-top:2px solid #d4891a; padding-top:6px; margin-top:4px;">
+                            <span class="r-label" style="font-weight:800;">📊 NET BALANCE</span>
+                            <span class="r-value gold" style="font-size:1.1rem;">Rs. ${balance.toLocaleString()}</span>
+                        </div>
+                        <div style="font-size:0.6rem; color:#888; margin-top:4px; text-align:center;">
+                            ${balance > 0 ? '⚠️ Outstanding balance — please clear pending dues.' : balance < 0 ? '✅ Overpaid — credit balance available.' : '✅ Account balanced.'}
+                        </div>
+                    </div>
+                    <div class="r-footer">
+                        📞 0305-2848369 &nbsp;|&nbsp; 📧 aliabro104@gmail.com<br>
+                        <span class="r-phone">⚡ D3 Crown Fiber — Transparent & Reliable ⚡</span>
+                        <div class="r-stamp">🔹 This is a system-generated ledger statement 🔹</div>
+                    </div>
+                `;
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // CAPTURE & DOWNLOAD
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function showOverlay() { overlay.classList.add('active'); }
+
+        function hideOverlay() { overlay.classList.remove('active'); }
+
+        async function downloadReceipt(elementId, fileNamePrefix, format = 'png') {
+            const container = document.getElementById(elementId);
+            const wrap = container.querySelector('.receipt-wrap');
+            if (!wrap) return;
+            showOverlay();
+            await new Promise(r => setTimeout(r, 300));
+            try {
+                container.style.position = 'fixed';
+                container.style.left = '0';
+                container.style.top = '0';
+                container.style.width = '500px';
+                container.style.zIndex = '99999';
+                container.style.opacity = '1';
+                container.style.pointerEvents = 'none';
+                container.style.transform = 'none';
+                container.style.maxHeight = 'none';
+                container.style.overflow = 'visible';
+                container.style.borderRadius = '0';
+
+                const canvas = await html2canvas(wrap, {
+                    scale: 2.5,
+                    useCORS: true,
+                    allowTaint: false,
+                    backgroundColor: '#ffffff',
+                    logging: false,
+                    width: 500,
+                    height: wrap.scrollHeight,
+                });
+
+                container.style.position = 'absolute';
+                container.style.left = '-9999px';
+                container.style.top = '0';
+                container.style.width = '500px';
+                container.style.zIndex = '-1';
+                container.style.opacity = '0';
+                container.style.pointerEvents = 'none';
+                container.style.transform = 'none';
+                container.style.maxHeight = 'none';
+                container.style.overflow = 'visible';
+                container.style.borderRadius = '0';
+
+                const link = document.createElement('a');
+                if (format === 'png') {
+                    link.download = `${fileNamePrefix}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                } else {
+                    link.download = `${fileNamePrefix}.jpg`;
+                    link.href = canvas.toDataURL('image/jpeg', 0.95);
+                }
+                link.click();
+            } catch (err) {
+                console.error('Receipt capture error:', err);
+                toastError('Failed to generate receipt. Please try again.');
+                container.style.position = 'absolute';
+                container.style.left = '-9999px';
+                container.style.top = '0';
+                container.style.width = '500px';
+                container.style.zIndex = '-1';
+                container.style.opacity = '0';
+                container.style.pointerEvents = 'none';
+                container.style.transform = 'none';
+                container.style.maxHeight = 'none';
+                container.style.overflow = 'visible';
+                container.style.borderRadius = '0';
+            } finally {
+                hideOverlay();
+            }
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // TOGGLE PACKAGE SUMMARY
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function togglePackageSummary(client) {
+            const existing = document.getElementById('packageSummaryToggle');
+            if (existing) { existing.classList.toggle('open'); return; }
+            const container = document.createElement('div');
+            container.id = 'packageSummaryToggle';
+            container.className = 'summary-toggle open';
+
+            const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
+            const totalDebit = filteredHistory.reduce((s, e) => s + (e.debit || 0), 0);
+            const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
+            const pending = getPendingMonths(client);
+            const pendingTotal = pending.reduce((s, p) => s + p.dueAmount, 0);
+
+            let html = `
+                    <div class="summary-title">📋 LIFETIME PACKAGE SUMMARY</div>
+                    <div class="summary-item"><span class="label">Package</span><span class="value">${escapeHtml(client.package)}</span></div>
+                    <div class="summary-item"><span class="label">Monthly Fee</span><span class="value">Rs. ${(client.packageAmount || 0).toLocaleString()}</span></div>
+                    <div class="summary-item"><span class="label">Old Balance</span><span class="value red">Rs. ${(client.oldBill || 0).toLocaleString()}</span></div>
+                    <div class="summary-item"><span class="label">Total Billed (all time)</span><span class="value red">Rs. ${totalDebit.toLocaleString()}</span></div>
+                    <div class="summary-item"><span class="label">Total Paid (all time)</span><span class="value green">Rs. ${totalCredit.toLocaleString()}</span></div>
+                    <div class="summary-item"><span class="label">Pending Months</span><span class="value">${pending.length}</span></div>
+                    <div class="summary-item"><span class="label">Pending Amount</span><span class="value red">Rs. ${pendingTotal.toLocaleString()}</span></div>
+                    <div class="summary-item" style="border-bottom:2px solid #f39c12; padding-bottom:8px; margin-top:4px;">
+                        <span class="label" style="font-weight:800;">NET BALANCE</span>
+                        <span class="value gold" style="font-size:1rem;">Rs. ${(totalDebit - totalCredit).toLocaleString()}</span>
+                    </div>
+                    <div style="font-size:0.6rem; color:#7e8c8f; text-align:center; margin-top:8px;">
+                        * Based on all recorded transactions (excluding zero-value entries)
+                    </div>
+                `;
             container.innerHTML = html;
-        } catch (e) {
-            console.error('loadComplaintsForClient error:', e);
-            container.innerHTML =
-                `<div class="no-complaints" style="color:#e74c3c;">❌ Could not load complaints. Please try again.</div>`;
+            const parentCard = document.querySelector('.info-card:last-child');
+            if (parentCard) { parentCard.parentNode.insertBefore(container, parentCard.nextSibling); } else { dashboardDiv
+                    .appendChild(container); }
         }
-    }
 
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // FETCH CLIENT
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    async function fetchClientByPhone(phoneRaw) {
-        const phoneNorm = normalizePhone(phoneRaw);
-        if (!phoneNorm || phoneNorm.length < 10) {
-            toastError('Please enter a valid phone number (at least 10 digits)');
-            return null;
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // EASYPAISA MODAL
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function showEasypaisaModal() {
+            document.getElementById('easypaisaModal').classList.add('active');
         }
-        loader.style.display = 'block';
-        try {
-            const snapshot = await db.ref(`${CLIENTS_PATH}/${ADMIN_UID}/clients`).once('value');
-            const allClients = snapshot.val();
-            if (!allClients) throw new Error('No client data found. Please contact your ISP.');
-            const clientsArray = Object.values(allClients);
-            const matched = clientsArray.find(c => normalizePhone(c.phone) === phoneNorm);
-            if (!matched) throw new Error('No client found with this phone number. Please check and try again.');
-            return matched;
-        } catch (err) {
-            console.error(err);
-            toastError(err.message || 'Something went wrong. Please try again later.');
-            return null;
-        } finally {
-            loader.style.display = 'none';
-        }
-    }
 
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // SEARCH EVENT
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    searchBtn.addEventListener('click', async () => {
-        const phone = phoneInput.value.trim();
-        if (!phone) {
-            toastError('Please enter your registered phone number');
-            return;
+        function hideEasypaisaModal() {
+            document.getElementById('easypaisaModal').classList.remove('active');
         }
-        const client = await fetchClientByPhone(phone);
-        if (client) {
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // DASHBOARD RENDER
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        let selectedComplaintType = null;
+
+        function renderDashboard(client) {
             currentClientData = client;
             currentClientPhoneRaw = client.phone;
-            loginSection.style.display = 'none';
-            dashboardDiv.style.display = 'block';
-            renderDashboard(client);
+
+            const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
+            const totalDue = (client.packageAmount || 0) + (client.oldBill || 0);
+            const expiryDate = getPackageExpiry(client.packageStartDate);
+            const daysLeft = daysRemaining(expiryDate);
+            const speed = extractSpeed(client.package);
+            const pendingMonths = getPendingMonths(client);
+            const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
+
+            let statusClass = 'status-badge';
+            if (client.status === 'active') statusClass += '';
+            else if (client.status === 'overdue') statusClass += ' overdue';
+            else statusClass += ' inactive';
+            let statusText = client.status === 'active' ? '✅ Active' : (client.status === 'overdue' ? '⚠️ Overdue' :
+                '⛔ Inactive');
+
+            let expiryWarning = '';
+            if (daysLeft !== null && daysLeft <= 3 && daysLeft >= 0) {
+                expiryWarning =
+                    `<div style="background:#3d2e1e; border-radius:12px; padding:10px; margin-top:8px; text-align:center; color:#f5a623; font-size:0.7rem;">⏰ Package expires in ${daysLeft} days! Please renew.</div>`;
+            } else if (daysLeft !== null && daysLeft < 0) {
+                expiryWarning =
+                    `<div style="background:#3d1e1e; border-radius:12px; padding:10px; margin-top:8px; text-align:center; color:#e74c3c; font-size:0.7rem;">❌ Package expired ${Math.abs(daysLeft)} days ago. Contact ISP for renewal.</div>`;
+            } else if (daysLeft !== null && daysLeft <= 7) {
+                expiryWarning =
+                    `<div style="background:#2a2a1a; border-radius:12px; padding:8px; margin-top:6px; text-align:center; color:#ffb347; font-size:0.65rem;">📅 Expires in ${daysLeft} days</div>`;
+            }
+
+            let pendingHtml = '';
+            if (pendingMonths.length > 0) {
+                pendingHtml = `<div class="info-card"><div class="info-title">📌 Unpaid Months</div>`;
+                pendingMonths.forEach(pm => {
+                    pendingHtml += `<div class="pending-month">
+                                        <span class="month">📆 ${pm.monthKey}</span>
+                                        <span class="amount">Rs. ${pm.dueAmount.toLocaleString()}</span>
+                                    </div>`;
+                });
+                pendingHtml += `</div>`;
+            } else {
+                pendingHtml =
+                    `<div class="info-card"><div class="info-title">✨ All Clear</div><div style="font-size:0.7rem; color:#2ecc71;">No pending installments. Well done!</div></div>`;
+            }
+
+            let transactions = [...filteredHistory];
+            transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+            const recentTx = transactions.slice(0, 10);
+            let txHtml = `<div class="info-card"><div class="info-title">📜 Recent Transactions</div>
+                              <div style="overflow-x:auto;"><table class="ledger-table">
+                              <thead><tr><th>Date</th><th>Description</th><th>Credit</th><th>Debit</th></tr></thead><tbody>`;
+            if (recentTx.length === 0) {
+                txHtml += '<tr><td colspan="4" style="text-align:center;">No transactions found</td></tr>';
+            } else {
+                recentTx.forEach(t => {
+                    txHtml += `<tr>
+                                        <td>${formatDMY(t.date)}</td>
+                                        <td>${escapeHtml(t.description || '-')}</td>
+                                        <td class="credit-text">${t.credit > 0 ? 'Rs. '+t.credit.toLocaleString() : '-'}</td>
+                                        <td class="debit-text">${t.debit > 0 ? 'Rs. '+t.debit.toLocaleString() : '-'}</td>
+                                    </tr>`;
+                });
+            }
+            txHtml += `</tbody></table></div></div>`;
+
+            const html = `
+                    <div class="flex-between" style="margin-bottom:12px;">
+                        <span class="${statusClass}">${statusText}</span>
+                        <button class="logout-btn" id="logoutPortalBtn">🔒 Exit</button>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-title">👤 Customer Information</div>
+                        <div class="info-grid">
+                            <div class="info-item"><div class="label">Full Name</div><div class="value">${escapeHtml(client.name)}</div></div>
+                            <div class="info-item"><div class="label">Phone</div><div class="value">${escapeHtml(client.phone)}</div></div>
+                            <div class="info-item"><div class="label">Address</div><div class="value">${escapeHtml(client.address || '—')}</div></div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-title">📦 Package & Billing</div>
+                        <div class="info-grid">
+                            <div class="info-item"><div class="label">Package</div><div class="value">${escapeHtml(client.package)}</div></div>
+                            <div class="info-item"><div class="label">Speed</div><div class="value">${speed}</div></div>
+                            <div class="info-item"><div class="label">Monthly Fee</div><div class="value">Rs. ${(client.packageAmount || 0).toLocaleString()}</div></div>
+                            <div class="info-item"><div class="label">Old Balance</div><div class="value" style="color:#e74c3c;">Rs. ${(client.oldBill || 0).toLocaleString()}</div></div>
+                            <div class="info-item"><div class="label">Total Due</div><div class="value" style="color:#f5a623;">Rs. ${totalDue.toLocaleString()}</div></div>
+                            <div class="info-item"><div class="label">Total Paid</div><div class="value" style="color:#2ecc71;">Rs. ${totalCredit.toLocaleString()}</div></div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-title">📅 Package Validity</div>
+                        <div class="info-grid">
+                            <div class="info-item"><div class="label">Start Date</div><div class="value">${formatDMY(client.packageStartDate)}</div></div>
+                            <div class="info-item"><div class="label">Expiry Date</div><div class="value">${expiryDate ? formatDMY(expiryDate) : 'N/A'}</div></div>
+                            <div class="info-item"><div class="label">Days Left</div><div class="value">${daysLeft !== null ? (daysLeft > 0 ? daysLeft + ' days' : (daysLeft === 0 ? 'Expires today' : 'Expired')) : '—'}</div></div>
+                        </div>
+                        ${expiryWarning}
+                    </div>
+                    ${pendingHtml}
+                    ${txHtml}
+                    <div class="info-card" style="border-color:#f39c1240;">
+                        <div class="info-title">⚡ Additional Features</div>
+                        <div class="receipt-actions">
+                            <button class="btn-receipt btn-summary" id="summaryToggleBtn"><i class="fas fa-chart-pie"></i> Lifetime Package Summary</button>
+                            <button class="btn-receipt btn-owner" id="ownerBillingBtn"><i class="fas fa-credit-card"></i> Owner Billing Accounts</button>
+                        </div>
+                        <div style="font-size:0.55rem; color:#7e8c8f; margin-top:6px; text-align:center;">
+                            📋 Click to view complete package history &amp; Easypaisa payment details.
+                        </div>
+                    </div>
+                    <div class="info-card" style="border-color:#f5a62340;">
+                        <div class="info-title">📄 Download Receipts</div>
+                        <div class="receipt-actions">
+                            <button class="btn-receipt primary" id="receipt1Btn"><i class="fas fa-file-invoice"></i> Bill & Internet</button>
+                            <button class="btn-receipt purple" id="receipt2Btn"><i class="fas fa-book"></i> Ledger</button>
+                        </div>
+                        <div class="receipt-actions" style="margin-top:6px;">
+                            <button class="btn-receipt green" id="receipt1JpgBtn"><i class="fas fa-image"></i> Bill as JPG</button>
+                            <button class="btn-receipt" id="receipt2JpgBtn" style="border-color:#9b59b6; color:#9b59b6;"><i class="fas fa-image"></i> Ledger as JPG</button>
+                        </div>
+                        <div style="font-size:0.55rem; color:#7e8c8f; margin-top:6px; text-align:center;">
+                            ⬇️ Click to download as PNG (or JPG) — receipts include all billing details & transaction history.
+                        </div>
+                    </div>
+                    <div class="complaint-section" id="complaintSection">
+                        <div class="complaint-title"><i class="fas fa-exclamation-triangle"></i> Shikayat Box — Report an Issue</div>
+                        <div class="complaint-buttons">
+                            <button class="complaint-btn red-light" data-type="red_light" onclick="selectComplaintType('red_light', this)">
+                                <span class="btn-icon">🔴</span> Red Light — No Internet
+                            </button>
+                            <button class="complaint-btn slow-internet" data-type="slow_internet" onclick="selectComplaintType('slow_internet', this)">
+                                <span class="btn-icon">🟡</span> Slow Internet — Buffering
+                            </button>
+                            <button class="complaint-btn disconnecting" data-type="disconnecting" onclick="selectComplaintType('disconnecting', this)">
+                                <span class="btn-icon">🔌</span> Disconnecting — Frequent Drops
+                            </button>
+                        </div>
+                        <div class="complaint-submit-row">
+                            <button class="complaint-submit-btn" id="submitComplaintBtn" onclick="handleSubmitComplaint()">
+                                <i class="fas fa-paper-plane"></i> Submit Complaint
+                            </button>
+                            <button class="complaint-clear-btn" onclick="clearComplaintSelection()">✕ Clear</button>
+                        </div>
+                        <div class="complaint-submit-feedback" id="complaintFeedback"></div>
+                        <div class="complaint-status-box" id="complaintStatusBox">
+                            <div class="status-title"><i class="fas fa-history"></i> Your Complaint Status</div>
+                            <div id="complaintListContainer">
+                                <div class="no-complaints">🔄 Loading your complaints...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note" style="margin-top:8px;">
+                        💡 For payment or support, contact your ISP representative.
+                    </div>
+                `;
+
+            dashboardDiv.innerHTML = html;
+
+            // Events
+            document.getElementById('logoutPortalBtn')?.addEventListener('click', () => {
+                dashboardDiv.style.display = 'none';
+                loginSection.style.display = 'block';
+                dashboardDiv.innerHTML = '';
+                currentClientData = null;
+                currentClientPhoneRaw = '';
+                phoneInput.value = '';
+                selectedComplaintType = null;
+                const existingErr = document.querySelector('.error-msg');
+                if (existingErr) existingErr.remove();
+            });
+
+            document.getElementById('receipt1Btn')?.addEventListener('click', () => {
+                populateReceipt1(client);
+                downloadReceipt('receipt1Container', `D3_Bill_${client.phone || 'client'}`, 'png');
+            });
+            document.getElementById('receipt2Btn')?.addEventListener('click', () => {
+                populateReceipt2(client);
+                downloadReceipt('receipt2Container', `D3_Ledger_${client.phone || 'client'}`, 'png');
+            });
+            document.getElementById('receipt1JpgBtn')?.addEventListener('click', () => {
+                populateReceipt1(client);
+                downloadReceipt('receipt1Container', `D3_Bill_${client.phone || 'client'}`, 'jpg');
+            });
+            document.getElementById('receipt2JpgBtn')?.addEventListener('click', () => {
+                populateReceipt2(client);
+                downloadReceipt('receipt2Container', `D3_Ledger_${client.phone || 'client'}`, 'jpg');
+            });
+
+            document.getElementById('summaryToggleBtn')?.addEventListener('click', () => {
+                const existing = document.getElementById('packageSummaryToggle');
+                if (existing) { existing.classList.toggle('open'); } else { togglePackageSummary(client); }
+            });
+
+            document.getElementById('ownerBillingBtn')?.addEventListener('click', showEasypaisaModal);
+
+            loadComplaintsForClient(client.phone);
         }
-    });
 
-    phoneInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') searchBtn.click();
-    });
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // COMPLAINT UI
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function selectComplaintType(type, btnEl) {
+            document.querySelectorAll('.complaint-btn').forEach(b => b.classList.remove('selected'));
+            if (btnEl) btnEl.classList.add('selected');
+            selectedComplaintType = type;
+            document.getElementById('complaintFeedback').textContent = '';
+            document.getElementById('complaintFeedback').className = 'complaint-submit-feedback';
+        }
 
-    phoneInput.addEventListener('focus', () => {
-        const errBox = document.querySelector('.error-msg');
-        if (errBox) errBox.remove();
-    });
+        function clearComplaintSelection() {
+            document.querySelectorAll('.complaint-btn').forEach(b => b.classList.remove('selected'));
+            selectedComplaintType = null;
+            document.getElementById('complaintFeedback').textContent = '';
+            document.getElementById('complaintFeedback').className = 'complaint-submit-feedback';
+        }
 
-    // ── Header Copy Easypaisa ──
-    document.getElementById('copyEpHeaderBtn')?.addEventListener('click', copyEasypaisaFromHeader);
+        function getTypeLabel(type) {
+            const map = {
+                'red_light': '🔴 Red Light — No Internet',
+                'slow_internet': '🟡 Slow Internet — Buffering',
+                'disconnecting': '🔌 Disconnecting — Frequent Drops'
+            };
+            return map[type] || type;
+        }
 
-    // ── Modal events ──
-    document.getElementById('copyEasypaisaBtn')?.addEventListener('click', () => {
-        const num = '03403157119';
-        navigator.clipboard.writeText(num).then(() => {
-            toastSuccess('✅ Number copied to clipboard!');
-        }).catch(() => {
-            const dummy = document.createElement('input');
-            dummy.value = num;
-            document.body.appendChild(dummy);
-            dummy.select();
-            document.execCommand('copy');
-            document.body.removeChild(dummy);
-            toastSuccess('✅ Number copied!');
+        function getTypeIcon(type) {
+            const map = { 'red_light': '🔴', 'slow_internet': '🟡', 'disconnecting': '🔌' };
+            return map[type] || '📌';
+        }
+
+        async function handleSubmitComplaint() {
+            const feedback = document.getElementById('complaintFeedback');
+            if (!currentClientData) {
+                feedback.textContent = '❌ Please search your account first.';
+                feedback.className = 'complaint-submit-feedback error';
+                return;
+            }
+            if (!selectedComplaintType) {
+                feedback.textContent = '⚠️ Please select a complaint type first.';
+                feedback.className = 'complaint-submit-feedback error';
+                return;
+            }
+            const btn = document.getElementById('submitComplaintBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Submitting...';
+            feedback.textContent = '';
+            feedback.className = 'complaint-submit-feedback';
+
+            const client = currentClientData;
+            const typeLabel = getTypeLabel(selectedComplaintType);
+
+            try {
+                const success = await submitComplaint(
+                    client.phone,
+                    client.name,
+                    client.id || '',
+                    selectedComplaintType,
+                    typeLabel
+                );
+                if (success) {
+                    showComplaintPopup();
+                    clearComplaintSelection();
+                    await loadComplaintsForClient(client.phone);
+                    feedback.textContent = '';
+                } else {
+                    feedback.textContent = '❌ Failed to submit complaint. Please try again.';
+                    feedback.className = 'complaint-submit-feedback error';
+                }
+            } catch (e) {
+                console.error(e);
+                feedback.textContent = '❌ Error: ' + e.message;
+                feedback.className = 'complaint-submit-feedback error';
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Complaint';
+            }
+        }
+
+        async function loadComplaintsForClient(phone) {
+            const container = document.getElementById('complaintListContainer');
+            if (!container) return;
+            try {
+                const complaints = await getComplaintsForPhone(phone);
+                if (!complaints || complaints.length === 0) {
+                    container.innerHTML =
+                        `<div class="no-complaints">📭 No complaints filed yet. Use the buttons above to report an issue.</div>`;
+                    return;
+                }
+                let html = '';
+                complaints.forEach(c => {
+                    const isResolved = c.status === 'resolved';
+                    const statusText = isResolved ? '✅ Resolved' : '⏳ Pending';
+                    const statusClass = isResolved ? 'resolved' : '';
+                    const submitTime = c.timestamp ? formatDateTimeWithTime(c.timestamp) : 'N/A';
+                    let resolveTimeHtml = '';
+                    if (isResolved && c.resolvedAt) {
+                        const resolvedTime = formatDateTimeWithTime(c.resolvedAt);
+                        resolveTimeHtml =
+                            `<div class="ci-time"><span class="label">🕒 Resolved:</span> ${resolvedTime}</div>`;
+                    }
+                    const resolutionHtml = isResolved && c.resolution ?
+                        `<div class="ci-resolution">💬 <strong>Resolution:</strong> ${escapeHtml(c.resolution)}</div>` :
+                        '';
+                    html += `
+                            <div class="complaint-item">
+                                <div class="ci-type"><span>${getTypeIcon(c.type)}</span><span>${escapeHtml(c.typeLabel || c.type)}</span></div>
+                                <div class="ci-status ${statusClass}">${statusText}</div>
+                                <div class="ci-time"><span class="label">📅 Submitted:</span><span>${submitTime}</span>${resolveTimeHtml}</div>
+                                ${resolutionHtml}
+                            </div>
+                        `;
+                });
+                container.innerHTML = html;
+            } catch (e) {
+                console.error('loadComplaintsForClient error:', e);
+                container.innerHTML =
+                    `<div class="no-complaints" style="color:#e74c3c;">❌ Could not load complaints. Please try again.</div>`;
+            }
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // FETCH CLIENT
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        async function fetchClientByPhone(phoneRaw) {
+            const phoneNorm = normalizePhone(phoneRaw);
+            if (!phoneNorm || phoneNorm.length < 10) {
+                toastError('Please enter a valid phone number (at least 10 digits)');
+                return null;
+            }
+            loader.style.display = 'block';
+            try {
+                const snapshot = await db.ref(`${CLIENTS_PATH}/${ADMIN_UID}/clients`).once('value');
+                const allClients = snapshot.val();
+                if (!allClients) throw new Error('No client data found. Please contact your ISP.');
+                const clientsArray = Object.values(allClients);
+                const matched = clientsArray.find(c => normalizePhone(c.phone) === phoneNorm);
+                if (!matched) throw new Error('No client found with this phone number. Please check and try again.');
+                return matched;
+            } catch (err) {
+                console.error(err);
+                toastError(err.message || 'Something went wrong. Please try again later.');
+                return null;
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // SEARCH
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        searchBtn.addEventListener('click', async () => {
+            const phone = phoneInput.value.trim();
+            if (!phone) { toastError('Please enter your registered phone number'); return; }
+            const client = await fetchClientByPhone(phone);
+            if (client) {
+                currentClientData = client;
+                currentClientPhoneRaw = client.phone;
+                loginSection.style.display = 'none';
+                dashboardDiv.style.display = 'block';
+                renderDashboard(client);
+            }
         });
-    });
 
-    document.getElementById('closeEasypaisaBtn')?.addEventListener('click', hideEasypaisaModal);
-    document.getElementById('easypaisaModal')?.addEventListener('click', (e) => {
-        if (e.target === e.currentTarget) hideEasypaisaModal();
-    });
+        phoneInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') searchBtn.click(); });
+        phoneInput.addEventListener('focus', () => {
+            const errBox = document.querySelector('.error-msg');
+            if (errBox) errBox.remove();
+        });
 
-    // ── Init ──
-    console.log('D3 Crown Fiber Client Portal updated with Shikayat Box, popup, and correct resolution times.');
-    console.log('💡 Developer: Khalid Ali Pechuho');
-</script>
+        document.getElementById('copyEpHeaderBtn')?.addEventListener('click', copyEasypaisaFromHeader);
+
+        document.getElementById('copyEasypaisaBtn')?.addEventListener('click', () => {
+            const num = '03403157119';
+            navigator.clipboard.writeText(num).then(() => {
+                toastSuccess('✅ Number copied to clipboard!');
+            }).catch(() => {
+                const dummy = document.createElement('input');
+                dummy.value = num;
+                document.body.appendChild(dummy);
+                dummy.select();
+                document.execCommand('copy');
+                document.body.removeChild(dummy);
+                toastSuccess('✅ Number copied!');
+            });
+        });
+
+        document.getElementById('closeEasypaisaBtn')?.addEventListener('click', hideEasypaisaModal);
+        document.getElementById('easypaisaModal')?.addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) hideEasypaisaModal();
+        });
+
+        console.log('👑 D3 Crown Fiber Client Portal');
+        console.log('🚀 Developed by Khalid Ali Pechuho');
+        console.log('✨ Compact showcase — no suggested features card.');
+    </script>
 </body>
 </html>
