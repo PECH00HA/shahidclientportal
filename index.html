@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>D3 Crown Fiber - Client Portal | Check Your Bill & Package</title>
-    <!-- Font Awesome 6 (Free) for WhatsApp Logo -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>D3 Crown Fiber — Client Portal</title>
+    <!-- Font Awesome 6 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js">
     </script>
@@ -21,6 +21,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             background: linear-gradient(145deg, #0b0f15 0%, #10161e 100%);
             font-family: 'Segoe UI', 'Noto Nastaliq Urdu', Arial, sans-serif;
@@ -30,6 +31,7 @@
             justify-content: center;
             align-items: center;
         }
+
         .portal-card {
             max-width: 500px;
             width: 100%;
@@ -40,46 +42,140 @@
             border: 1px solid rgba(245, 166, 35, 0.4);
             box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5);
             overflow: hidden;
+            position: relative;
+        }
+
+        /* ─── SCROLLING TICKER ─── */
+        .ticker-wrapper {
+            background: #0a0e14;
+            border-bottom: 2px solid #f5a62340;
+            overflow: hidden;
+            padding: 6px 0;
+            position: relative;
+            min-height: 34px;
+            display: flex;
+            align-items: center;
+        }
+        .ticker-wrapper .ticker-icon {
+            flex-shrink: 0;
+            padding: 0 10px;
+            color: #f5a623;
+            font-size: 0.9rem;
+            font-weight: 700;
+            background: #0a0e14;
+            z-index: 2;
+        }
+        .ticker-track {
+            display: flex;
+            white-space: nowrap;
+            animation: tickerScroll 25s linear infinite;
+            gap: 40px;
+        }
+        .ticker-track .ticker-item {
+            display: inline-block;
+            font-size: 0.7rem;
+            color: #e0e8f0;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        .ticker-track .ticker-item .tick-cat {
+            display: inline-block;
+            padding: 0 8px;
+            border-radius: 30px;
+            font-size: 0.55rem;
+            font-weight: 700;
+            margin-right: 6px;
+            background: #1e293b;
+            color: #a0b3d9;
+        }
+        .ticker-track .ticker-item .tick-cat.urgent {
+            background: #3d1e1e;
+            color: #e74c3c;
+            animation: urgentPulse 1.2s ease-in-out infinite;
+        }
+        .ticker-track .ticker-item .tick-cat.maintenance {
+            background: #2a3a2a;
+            color: #2ecc71;
+        }
+        .ticker-track .ticker-item .tick-cat.new_packages {
+            background: #1e2a4a;
+            color: #5dade2;
+        }
+        .ticker-track .ticker-item .tick-cat.offers_discounts {
+            background: #3d2e1e;
+            color: #f5a623;
+        }
+        .ticker-track .ticker-item .tick-cat.outage_alert {
+            background: #3d1e1e;
+            color: #e74c3c;
+        }
+        .ticker-track .ticker-item .tick-cat.general_news {
+            background: #1e293b;
+            color: #a0b3d9;
+        }
+        @keyframes tickerScroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        @keyframes urgentPulse {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+        .ticker-wrapper .ticker-empty {
+            color: #7e8c8f;
+            font-size: 0.7rem;
+            padding: 0 14px;
+            width: 100%;
+            text-align: center;
         }
 
         /* ─── HEADER ─── */
         .portal-header {
             background: linear-gradient(135deg, #f5a623, #d4891a);
-            padding: 24px 20px;
+            padding: 16px 20px 18px;
             text-align: center;
         }
         .portal-header h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
             color: #000;
             letter-spacing: 2px;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
         .brand-sub {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: #2c1a00;
             background: rgba(0, 0, 0, 0.1);
             display: inline-block;
-            padding: 4px 16px;
+            padding: 3px 14px;
             border-radius: 40px;
-            margin-top: 4px;
-            margin-bottom: 12px;
+            margin-top: 2px;
+            margin-bottom: 8px;
         }
         .owner-details {
             background: rgba(0, 0, 0, 0.25);
             border-radius: 28px;
-            padding: 12px 16px;
-            margin-top: 10px;
+            padding: 10px 14px;
+            margin-top: 8px;
             backdrop-filter: blur(2px);
         }
         .owner-line {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: #1f2a0e;
             display: flex;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
         }
         .owner-line span {
@@ -92,75 +188,68 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            margin-top: 8px;
-            font-size: 0.85rem;
+            gap: 10px;
+            margin-top: 6px;
+            font-size: 0.8rem;
             font-weight: 700;
             color: #1e2a0c;
             background: #00000020;
             border-radius: 60px;
-            padding: 6px 15px;
+            padding: 4px 14px;
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
         }
         .phone-whatsapp i {
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
         .whatsapp-link {
             background: #25D366;
             color: #000;
-            padding: 4px 14px;
+            padding: 3px 12px;
             border-radius: 40px;
             text-decoration: none;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 800;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             transition: all 0.2s;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         }
         .whatsapp-link:hover {
             background: #20b859;
             transform: scale(0.97);
-            color: white;
-        }
-        .portal-header p {
-            font-size: 0.7rem;
-            color: #2c1a00;
-            margin-top: 8px;
-            font-weight: 600;
+            color: #fff;
         }
 
-        /* ─── EASYPAISA HEADER DISPLAY ─── */
         .easypaisa-header {
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 6px 12px;
-            margin-top: 10px;
+            gap: 4px 10px;
+            margin-top: 8px;
             background: #0a0e14cc;
             border-radius: 60px;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border: 1px solid #2ecc71;
             backdrop-filter: blur(4px);
         }
         .easypaisa-header .ep-label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
             color: #2ecc71;
             letter-spacing: 0.5px;
         }
         .easypaisa-header .ep-number {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 800;
             color: #ffd966;
             letter-spacing: 1px;
         }
         .easypaisa-header .ep-owner {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 600;
             color: #a0b3d9;
         }
@@ -168,42 +257,48 @@
             background: #2ecc71;
             border: none;
             color: #000;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 40px;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 700;
             cursor: pointer;
             transition: 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            height: 26px;
+            height: 24px;
         }
         .easypaisa-header .copy-ep-header:hover {
             background: #27ae60;
             transform: scale(0.95);
         }
         .easypaisa-header .copy-ep-header i {
+            font-size: 0.6rem;
+        }
+        .portal-header p {
             font-size: 0.65rem;
+            color: #2c1a00;
+            margin-top: 6px;
+            font-weight: 600;
         }
 
         /* ─── BODY ─── */
         .portal-body {
-            padding: 24px 20px;
+            padding: 20px 16px;
         }
 
         /* ─── SEARCH ─── */
         .search-wrapper {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         .search-input-field {
             width: 100%;
             background: #1c2330;
             border: 1px solid #2a3a55;
             border-radius: 60px;
-            padding: 14px 20px;
-            font-size: 1rem;
-            color: white;
+            padding: 12px 18px;
+            font-size: 0.95rem;
+            color: #fff;
             outline: none;
             font-weight: 500;
             transition: all 0.2s;
@@ -213,16 +308,16 @@
             box-shadow: 0 0 0 2px rgba(245, 166, 35, 0.3);
         }
         .search-btn-container {
-            margin-top: 14px;
+            margin-top: 12px;
         }
         .search-btn {
             width: 100%;
             background: linear-gradient(95deg, #f5a623, #d4891a);
             border: none;
             border-radius: 60px;
-            padding: 12px 20px;
+            padding: 10px 18px;
             font-weight: 800;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #000;
             cursor: pointer;
             transition: transform 0.1s, background 0.2s;
@@ -234,65 +329,65 @@
         .loader {
             display: none;
             text-align: center;
-            margin: 20px 0;
+            margin: 16px 0;
             color: #f5a623;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         /* ─── DASHBOARD ─── */
         .client-dashboard {
             display: none;
-            margin-top: 20px;
+            margin-top: 16px;
         }
         .info-card {
             background: #151b24;
-            border-radius: 24px;
-            padding: 16px;
-            margin-bottom: 16px;
+            border-radius: 20px;
+            padding: 14px;
+            margin-bottom: 14px;
             border: 1px solid #2d3748;
         }
         .info-title {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: #f5a623;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         .info-grid {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
         .info-item {
             flex: 1;
-            min-width: 120px;
+            min-width: 100px;
             background: #0f141c;
-            border-radius: 16px;
-            padding: 12px;
+            border-radius: 14px;
+            padding: 10px;
             text-align: center;
         }
         .info-item .label {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             color: #a0a8b4;
             text-transform: uppercase;
         }
         .info-item .value {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 800;
             color: #ffd966;
-            margin-top: 6px;
+            margin-top: 4px;
             word-break: break-word;
         }
         .status-badge {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 3px 10px;
             border-radius: 40px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
             background: #1e3d2f;
             color: #2ecc71;
@@ -308,17 +403,17 @@
         .ledger-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.7rem;
-            margin-top: 8px;
+            font-size: 0.65rem;
+            margin-top: 6px;
         }
         .ledger-table th {
             text-align: left;
-            padding: 8px 4px;
+            padding: 6px 4px;
             color: #f5a623;
             border-bottom: 1px solid #2d3748;
         }
         .ledger-table td {
-            padding: 8px 4px;
+            padding: 6px 4px;
             border-bottom: 1px solid #1e293b;
             color: #cbd5e1;
         }
@@ -333,46 +428,45 @@
         .pending-month {
             background: #2a1f0e;
             border-left: 3px solid #f5a623;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 12px;
+            padding: 8px 12px;
+            margin: 6px 0;
+            border-radius: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
         .pending-month .month {
-            font-weight: bold;
+            font-weight: 700;
             color: #ffd966;
         }
         .pending-month .amount {
-            font-weight: bold;
+            font-weight: 700;
             color: #f5a623;
         }
 
-        /* ─── RECEIPT BUTTONS ─── */
         .receipt-actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin: 16px 0 8px;
+            gap: 8px;
+            margin: 12px 0 6px;
         }
         .receipt-actions .btn-receipt {
             flex: 1;
-            min-width: 140px;
+            min-width: 120px;
             background: #1c2330;
             border: 1px solid #f5a623;
             border-radius: 40px;
-            padding: 10px 12px;
+            padding: 8px 10px;
             color: #f5a623;
             font-weight: 700;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             letter-spacing: 0.5px;
         }
         .receipt-actions .btn-receipt:hover {
@@ -381,7 +475,7 @@
             transform: scale(0.97);
         }
         .receipt-actions .btn-receipt i {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
         .receipt-actions .btn-receipt.primary {
             background: #f5a623;
@@ -426,21 +520,20 @@
             background: #f39c12;
             color: #000;
         }
-
         .flex-between {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
         .logout-btn {
             background: none;
             border: 1px solid #f5a623;
             color: #f5a623;
-            padding: 6px 14px;
+            padding: 4px 12px;
             border-radius: 40px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             cursor: pointer;
             transition: 0.2s;
         }
@@ -449,19 +542,19 @@
             color: #000;
         }
         .note {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             text-align: center;
-            margin-top: 14px;
+            margin-top: 12px;
             color: #7e8c8f;
         }
         .error-msg {
             background: #3d1e1e;
-            border-radius: 16px;
-            padding: 14px;
+            border-radius: 14px;
+            padding: 12px;
             text-align: center;
             color: #e74c3c;
-            font-size: 0.8rem;
-            margin-top: 16px;
+            font-size: 0.75rem;
+            margin-top: 14px;
         }
         @keyframes fadeIn {
             from {
@@ -477,7 +570,7 @@
             animation: fadeIn 0.4s ease;
         }
 
-        /* ─── RECEIPT TEMPLATES (hidden, used for capture) ─── */
+        /* ─── RECEIPT ─── */
         .receipt-hidden {
             position: absolute;
             left: -9999px;
@@ -505,14 +598,12 @@
             max-height: 90vh;
             overflow-y: auto;
         }
-
-        /* ─── RECEIPT STYLES (printed look) ─── */
         .receipt-wrap {
             width: 500px;
             max-width: 100%;
             background: #ffffff;
             font-family: 'Courier New', 'Segoe UI', monospace;
-            padding: 24px 28px 20px;
+            padding: 20px 24px 18px;
             border-radius: 12px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
             color: #1e1e1e;
@@ -521,37 +612,37 @@
         .receipt-wrap .r-header {
             text-align: center;
             border-bottom: 2px dashed #d4891a;
-            padding-bottom: 14px;
-            margin-bottom: 14px;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
         }
         .receipt-wrap .r-header h2 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 900;
             color: #d4891a;
             letter-spacing: 1px;
             margin: 0;
         }
         .receipt-wrap .r-header .r-sub {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #555;
             letter-spacing: 2px;
             font-weight: 600;
         }
         .receipt-wrap .r-header .r-owner {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: #333;
-            margin-top: 4px;
+            margin-top: 3px;
             font-weight: 600;
         }
         .receipt-wrap .r-divider {
             border-top: 1px dashed #ccc;
-            margin: 10px 0;
+            margin: 8px 0;
         }
         .receipt-wrap .r-row {
             display: flex;
             justify-content: space-between;
-            padding: 4px 0;
-            font-size: 0.75rem;
+            padding: 3px 0;
+            font-size: 0.7rem;
         }
         .receipt-wrap .r-row .r-label {
             color: #555;
@@ -574,35 +665,35 @@
             color: #c0392b;
         }
         .receipt-wrap .r-section-title {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #d4891a;
             border-bottom: 1px solid #eee;
-            padding-bottom: 4px;
-            margin: 12px 0 6px;
+            padding-bottom: 3px;
+            margin: 10px 0 5px;
         }
         .receipt-wrap .r-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.65rem;
-            margin: 6px 0;
+            font-size: 0.6rem;
+            margin: 5px 0;
         }
         .receipt-wrap .r-table th {
             text-align: left;
-            padding: 4px 2px;
+            padding: 3px 2px;
             border-bottom: 1px solid #ddd;
             color: #555;
             font-weight: 700;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             text-transform: uppercase;
         }
         .receipt-wrap .r-table td {
-            padding: 4px 2px;
+            padding: 3px 2px;
             border-bottom: 1px solid #f0f0f0;
             color: #1e1e1e;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
         }
         .receipt-wrap .r-table .amt-credit {
             color: #1e8e3e;
@@ -615,36 +706,36 @@
         .receipt-wrap .r-total-box {
             background: #f8f4ed;
             border-radius: 8px;
-            padding: 10px 14px;
-            margin: 10px 0 6px;
+            padding: 8px 12px;
+            margin: 8px 0 5px;
             border-left: 4px solid #d4891a;
         }
         .receipt-wrap .r-total-box .r-row {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             padding: 2px 0;
         }
         .receipt-wrap .r-total-box .r-row .r-value {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
         .receipt-wrap .r-footer {
             text-align: center;
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: #888;
             border-top: 2px dashed #d4891a;
-            padding-top: 12px;
-            margin-top: 14px;
+            padding-top: 10px;
+            margin-top: 12px;
             letter-spacing: 0.5px;
         }
         .receipt-wrap .r-footer .r-phone {
             font-weight: 700;
             color: #333;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
         }
         .receipt-wrap .r-badge {
             display: inline-block;
-            padding: 2px 12px;
+            padding: 2px 10px;
             border-radius: 30px;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 800;
             background: #1e8e3e;
             color: #fff;
@@ -656,17 +747,17 @@
             background: #888;
         }
         .receipt-wrap .r-stamp {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: #aaa;
             text-align: right;
-            margin-top: 4px;
+            margin-top: 3px;
             font-style: italic;
         }
         .receipt-wrap .r-pending-item {
             display: flex;
             justify-content: space-between;
-            padding: 3px 0;
-            font-size: 0.7rem;
+            padding: 2px 0;
+            font-size: 0.65rem;
             border-bottom: 1px dotted #eee;
         }
         .receipt-wrap .r-pending-item .r-pm-month {
@@ -678,40 +769,40 @@
             color: #c0392b;
         }
 
-        /* ─── COMPLAINT BOX (Shikayat) ─── */
+        /* ─── COMPLAINT BOX ─── */
         .complaint-section {
-            margin-top: 16px;
-            padding: 16px;
+            margin-top: 14px;
+            padding: 14px;
             background: #1a1f2a;
-            border-radius: 24px;
+            border-radius: 20px;
             border: 2px solid #f5a62340;
         }
         .complaint-section .complaint-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 800;
             color: #f5a623;
             text-align: center;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             letter-spacing: 1px;
         }
         .complaint-section .complaint-title i {
-            margin-right: 8px;
+            margin-right: 6px;
         }
         .complaint-buttons {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 16px;
+            gap: 10px;
+            margin-bottom: 14px;
         }
         .complaint-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
-            padding: 18px 20px;
+            gap: 12px;
+            padding: 14px 16px;
             border-radius: 60px;
             border: none;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 800;
             color: #fff;
             cursor: pointer;
@@ -724,7 +815,7 @@
             transform: scale(0.96);
         }
         .complaint-btn .btn-icon {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             line-height: 1;
         }
         .complaint-btn.red-light {
@@ -777,16 +868,16 @@
         }
         .complaint-submit-row {
             display: flex;
-            gap: 12px;
-            margin-top: 4px;
+            gap: 10px;
+            margin-top: 2px;
         }
         .complaint-submit-btn {
             flex: 1;
-            padding: 14px 20px;
+            padding: 12px 18px;
             border-radius: 60px;
             border: none;
             font-weight: 800;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             background: linear-gradient(135deg, #2ecc71, #27ae60);
             color: #fff;
             cursor: pointer;
@@ -806,62 +897,62 @@
             transform: none !important;
         }
         .complaint-clear-btn {
-            padding: 14px 20px;
+            padding: 12px 18px;
             border-radius: 60px;
             border: 1px solid #888;
             background: transparent;
             color: #888;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
             transition: all 0.2s;
-            min-width: 80px;
+            min-width: 70px;
         }
         .complaint-clear-btn:hover {
             border-color: #fff;
             color: #fff;
         }
         .complaint-status-box {
-            margin-top: 18px;
-            padding: 14px;
+            margin-top: 14px;
+            padding: 12px;
             background: #0f141c;
-            border-radius: 16px;
+            border-radius: 14px;
             border: 1px solid #2d3748;
         }
         .complaint-status-box .status-title {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
             color: #f5a623;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         .complaint-item {
             background: #1a202a;
-            border-radius: 14px;
-            padding: 12px 14px;
-            margin-bottom: 10px;
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
             border-left: 4px solid #f5a623;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
         .complaint-item .ci-type {
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         .complaint-item .ci-status {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
-            padding: 4px 14px;
+            padding: 3px 12px;
             border-radius: 30px;
             background: #3d2e1e;
             color: #f5a623;
@@ -871,46 +962,46 @@
             color: #2ecc71;
         }
         .complaint-item .ci-time {
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: #7e8c8f;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 2px;
+            gap: 1px;
         }
         .complaint-item .ci-time .label {
-            font-size: 0.5rem;
+            font-size: 0.45rem;
             color: #5a6a7a;
         }
         .complaint-item .ci-resolution {
             width: 100%;
-            margin-top: 6px;
-            padding: 8px 12px;
+            margin-top: 4px;
+            padding: 6px 10px;
             background: #1e2a1e;
-            border-radius: 10px;
-            font-size: 0.7rem;
+            border-radius: 8px;
+            font-size: 0.65rem;
             color: #a0d9a0;
             border-left: 3px solid #2ecc71;
         }
         .no-complaints {
             text-align: center;
-            padding: 18px 0;
+            padding: 14px 0;
             color: #7e8c8f;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
         .complaint-submit-feedback {
             text-align: center;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
-            margin-top: 8px;
-            min-height: 24px;
+            margin-top: 6px;
+            min-height: 20px;
             color: #2ecc71;
         }
         .complaint-submit-feedback.error {
             color: #e74c3c;
         }
 
-        /* ─── POPUP MODAL (After Complaint Submission) ─── */
+        /* ─── POPUP MODAL ─── */
         .popup-modal-overlay {
             display: none;
             position: fixed;
@@ -927,10 +1018,10 @@
         }
         .popup-modal {
             background: linear-gradient(145deg, #1e2a3a, #151b24);
-            border-radius: 40px;
-            max-width: 400px;
+            border-radius: 36px;
+            max-width: 380px;
             width: 100%;
-            padding: 30px 28px;
+            padding: 26px 24px;
             border: 2px solid #f5a623;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
             text-align: center;
@@ -951,21 +1042,21 @@
             }
         }
         .popup-modal .popup-icon {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
+            font-size: 3rem;
+            margin-bottom: 8px;
             display: block;
         }
         .popup-modal .popup-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 800;
             color: #f5a623;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .popup-modal .popup-message {
-            font-size: 0.95rem;
-            line-height: 1.8;
+            font-size: 0.85rem;
+            line-height: 1.7;
             color: #e0e8f0;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         .popup-modal .popup-message .highlight {
             color: #ffd966;
@@ -975,10 +1066,10 @@
             background: #f5a623;
             border: none;
             color: #000;
-            padding: 10px 30px;
+            padding: 8px 24px;
             border-radius: 60px;
             font-weight: 800;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: 0.2s;
         }
@@ -987,17 +1078,372 @@
             transform: scale(0.96);
         }
 
-        /* ─── FOOTER (BRANDING + DEVELOPER NAME ONLY) ─── */
+        /* ─── ANNOUNCEMENTS SECTION ─── */
+        .announcements-section {
+            margin-top: 16px;
+            padding: 14px 14px 10px;
+            background: #151b24;
+            border-radius: 20px;
+            border: 1px solid #2d3748;
+        }
+        .announcements-section .ann-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #f5a623;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .announcements-section .ann-title i {
+            font-size: 0.9rem;
+        }
+        .ann-category-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 12px;
+        }
+        .ann-category-tabs .tab-btn {
+            padding: 4px 12px;
+            border-radius: 30px;
+            border: 1px solid #2d3748;
+            background: transparent;
+            color: #a0a8b4;
+            font-size: 0.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.3px;
+        }
+        .ann-category-tabs .tab-btn:hover {
+            border-color: #f5a623;
+            color: #f5a623;
+        }
+        .ann-category-tabs .tab-btn.active {
+            background: #f5a623;
+            color: #000;
+            border-color: #f5a623;
+        }
+        .ann-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .ann-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .ann-list::-webkit-scrollbar-track {
+            background: #0f141c;
+            border-radius: 10px;
+        }
+        .ann-list::-webkit-scrollbar-thumb {
+            background: #f5a623;
+            border-radius: 10px;
+        }
+        .ann-item {
+            background: #0f141c;
+            border-radius: 14px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            border-left: 4px solid #2d3748;
+            transition: 0.2s;
+        }
+        .ann-item:hover {
+            border-left-color: #f5a623;
+        }
+        .ann-item .ann-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px 8px;
+        }
+        .ann-item .ann-header .ann-cat-badge {
+            font-size: 0.5rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: #1e293b;
+            color: #a0b3d9;
+        }
+        .ann-item .ann-header .ann-cat-badge.urgent {
+            background: #3d1e1e;
+            color: #e74c3c;
+            animation: urgentPulse 1.2s ease-in-out infinite;
+        }
+        .ann-item .ann-header .ann-cat-badge.maintenance {
+            background: #2a3a2a;
+            color: #2ecc71;
+        }
+        .ann-item .ann-header .ann-cat-badge.new_packages {
+            background: #1e2a4a;
+            color: #5dade2;
+        }
+        .ann-item .ann-header .ann-cat-badge.offers_discounts {
+            background: #3d2e1e;
+            color: #f5a623;
+        }
+        .ann-item .ann-header .ann-cat-badge.outage_alert {
+            background: #3d1e1e;
+            color: #e74c3c;
+        }
+        .ann-item .ann-header .ann-cat-badge.general_news {
+            background: #1e293b;
+            color: #a0b3d9;
+        }
+        .ann-item .ann-header .ann-time {
+            font-size: 0.5rem;
+            color: #7e8c8f;
+        }
+        .ann-item .ann-title-text {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #ffd966;
+            margin: 4px 0 2px;
+        }
+        .ann-item .ann-body {
+            font-size: 0.7rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+            margin-top: 2px;
+        }
+        .ann-item .ann-urgent-badge {
+            display: inline-block;
+            font-size: 0.5rem;
+            font-weight: 800;
+            color: #e74c3c;
+            background: #3d1e1e;
+            padding: 0 8px;
+            border-radius: 30px;
+            margin-left: 6px;
+            animation: urgentPulse 1.2s ease-in-out infinite;
+        }
+        .ann-empty {
+            text-align: center;
+            padding: 20px 0;
+            color: #7e8c8f;
+            font-size: 0.7rem;
+        }
+
+        /* ─── ADMIN PANEL ─── */
+        .admin-toggle-btn {
+            background: none;
+            border: none;
+            color: #5a6a7a;
+            font-size: 0.55rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            transition: 0.2s;
+            letter-spacing: 0.5px;
+        }
+        .admin-toggle-btn:hover {
+            color: #f5a623;
+        }
+        .admin-panel {
+            display: none;
+            background: #0f141c;
+            border-radius: 20px;
+            padding: 16px;
+            margin-top: 16px;
+            border: 2px solid #f5a62340;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .admin-panel.open {
+            display: block;
+        }
+        .admin-panel .admin-title {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #f5a623;
+            text-align: center;
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+        }
+        .admin-panel .admin-title i {
+            margin-right: 6px;
+        }
+        .admin-panel .form-group {
+            margin-bottom: 10px;
+        }
+        .admin-panel .form-group label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: #a0a8b4;
+            display: block;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .admin-panel .form-group input,
+        .admin-panel .form-group select,
+        .admin-panel .form-group textarea {
+            width: 100%;
+            background: #1c2330;
+            border: 1px solid #2d3748;
+            border-radius: 12px;
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            color: #fff;
+            outline: none;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+        .admin-panel .form-group input:focus,
+        .admin-panel .form-group select:focus,
+        .admin-panel .form-group textarea:focus {
+            border-color: #f5a623;
+            box-shadow: 0 0 0 2px rgba(245, 166, 35, 0.2);
+        }
+        .admin-panel .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        .admin-panel .form-group .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #cbd5e1;
+            font-size: 0.75rem;
+        }
+        .admin-panel .form-group .checkbox-group input {
+            width: auto;
+            accent-color: #f5a623;
+        }
+        .admin-panel .admin-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+        .admin-panel .admin-actions button {
+            flex: 1;
+            min-width: 80px;
+            padding: 8px 14px;
+            border-radius: 40px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .admin-panel .admin-actions .btn-add {
+            background: #2ecc71;
+            color: #000;
+        }
+        .admin-panel .admin-actions .btn-add:hover {
+            background: #27ae60;
+            transform: scale(0.97);
+        }
+        .admin-panel .admin-actions .btn-cancel {
+            background: #3d1e1e;
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+        .admin-panel .admin-actions .btn-cancel:hover {
+            background: #e74c3c;
+            color: #000;
+        }
+        .admin-panel .admin-list {
+            margin-top: 14px;
+            border-top: 1px solid #2d3748;
+            padding-top: 12px;
+        }
+        .admin-panel .admin-list .admin-list-title {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #a0a8b4;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .admin-panel .admin-list .admin-item {
+            background: #1a202a;
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px 8px;
+            border-left: 4px solid #2d3748;
+        }
+        .admin-panel .admin-list .admin-item .ai-info {
+            flex: 1;
+            min-width: 120px;
+        }
+        .admin-panel .admin-list .admin-item .ai-info .ai-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #ffd966;
+        }
+        .admin-panel .admin-list .admin-item .ai-info .ai-desc {
+            font-size: 0.6rem;
+            color: #cbd5e1;
+        }
+        .admin-panel .admin-list .admin-item .ai-actions {
+            display: flex;
+            gap: 4px;
+        }
+        .admin-panel .admin-list .admin-item .ai-actions button {
+            background: none;
+            border: 1px solid #2d3748;
+            border-radius: 30px;
+            padding: 2px 10px;
+            font-size: 0.55rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #a0a8b4;
+        }
+        .admin-panel .admin-list .admin-item .ai-actions .edit-btn:hover {
+            border-color: #f5a623;
+            color: #f5a623;
+        }
+        .admin-panel .admin-list .admin-item .ai-actions .delete-btn:hover {
+            border-color: #e74c3c;
+            color: #e74c3c;
+        }
+        .admin-panel .admin-list .admin-item .ai-status {
+            font-size: 0.5rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 30px;
+            background: #1e3d2f;
+            color: #2ecc71;
+        }
+        .admin-panel .admin-list .admin-item .ai-status.inactive {
+            background: #2a2a2a;
+            color: #888;
+        }
+        .admin-panel .admin-msg {
+            text-align: center;
+            font-size: 0.7rem;
+            margin-top: 6px;
+            min-height: 20px;
+            color: #2ecc71;
+        }
+        .admin-panel .admin-msg.error {
+            color: #e74c3c;
+        }
+
+        /* ─── FOOTER ─── */
         .footer {
             text-align: center;
-            padding: 18px 16px;
-            font-size: 0.65rem;
+            padding: 14px 16px;
+            font-size: 0.6rem;
             border-top: 1px solid #1e293b;
             background: #0f141c;
         }
         .footer-branding {
             font-weight: 800;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #f5a623;
             letter-spacing: 1px;
         }
@@ -1006,32 +1452,39 @@
         }
         .footer-branding small {
             display: block;
-            font-size: 0.55rem;
+            font-size: 0.5rem;
             color: #7e8c8f;
             font-weight: 400;
             margin-top: 2px;
             letter-spacing: 0.5px;
         }
         .footer-developer {
-            margin-top: 6px;
-            font-size: 0.7rem;
+            margin-top: 4px;
+            font-size: 0.65rem;
             color: #a0b3d9;
         }
         .footer-developer .dev-name {
             font-weight: 800;
             color: #f5a623;
         }
-
+        .footer-bottom-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
         .footer-highlight {
             background: #000000;
             color: #ffffff !important;
-            padding: 12px 16px;
-            border-radius: 16px;
-            margin: 8px 12px 4px 12px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            margin: 6px 12px 4px 12px;
             border: 2px solid #f5a623;
             font-weight: 800;
             text-align: center;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             letter-spacing: 0.5px;
         }
         .footer-highlight .highlight-line {
@@ -1041,47 +1494,11 @@
         .footer-highlight .highlight-line .phone-highlight {
             color: #ffd966;
             font-weight: 900;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
         .footer-highlight .highlight-line .brand-highlight {
             color: #f5a623;
             font-weight: 900;
-        }
-
-        /* ─── RECEIPT OVERLAY SPINNER ─── */
-        .receipt-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 99998;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 16px;
-            backdrop-filter: blur(4px);
-        }
-        .receipt-overlay.active {
-            display: flex;
-        }
-        .receipt-overlay .spinner {
-            width: 48px;
-            height: 48px;
-            border: 4px solid #f5a623;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        .receipt-overlay p {
-            color: #fff;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
         }
 
         /* ─── EASYPAISA MODAL ─── */
@@ -1101,67 +1518,103 @@
         .easypaisa-modal .modal-box {
             background: #1c2330;
             border: 2px solid #2ecc71;
-            border-radius: 32px;
-            padding: 28px 24px;
-            max-width: 380px;
+            border-radius: 28px;
+            padding: 24px 20px;
+            max-width: 360px;
             width: 90%;
             text-align: center;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
         }
         .easypaisa-modal .modal-box h3 {
             color: #2ecc71;
-            font-size: 1.2rem;
-            margin-bottom: 8px;
+            font-size: 1.1rem;
+            margin-bottom: 6px;
         }
         .easypaisa-modal .modal-box .number {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
             color: #ffd966;
             letter-spacing: 2px;
-            margin: 12px 0;
+            margin: 10px 0;
         }
         .easypaisa-modal .modal-box .owner-name {
             color: #a0b3d9;
-            font-size: 0.9rem;
-            margin-bottom: 16px;
+            font-size: 0.8rem;
+            margin-bottom: 14px;
         }
         .easypaisa-modal .modal-box .copy-btn {
             background: #2ecc71;
             color: #000;
             border: none;
-            padding: 10px 24px;
+            padding: 8px 20px;
             border-radius: 40px;
             font-weight: 700;
             cursor: pointer;
             transition: 0.2s;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .easypaisa-modal .modal-box .copy-btn:hover {
             background: #27ae60;
             transform: scale(0.97);
         }
         .easypaisa-modal .modal-box .close-modal {
-            margin-top: 16px;
+            margin-top: 14px;
             background: none;
             border: 1px solid #888;
             color: #888;
-            padding: 6px 16px;
+            padding: 5px 14px;
             border-radius: 40px;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
         }
         .easypaisa-modal .modal-box .close-modal:hover {
             border-color: #fff;
             color: #fff;
         }
 
-        /* ─── PACKAGE SUMMARY TOGGLE ─── */
+        /* ─── OVERLAY SPINNER ─── */
+        .receipt-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 99998;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 14px;
+            backdrop-filter: blur(4px);
+        }
+        .receipt-overlay.active {
+            display: flex;
+        }
+        .receipt-overlay .spinner {
+            width: 42px;
+            height: 42px;
+            border: 4px solid #f5a623;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .receipt-overlay p {
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ─── SUMMARY TOGGLE ─── */
         .summary-toggle {
             display: none;
-            margin-top: 10px;
+            margin-top: 8px;
             background: #0f141c;
-            border-radius: 16px;
-            padding: 14px;
+            border-radius: 14px;
+            padding: 12px;
             border: 1px solid #f39c1240;
         }
         .summary-toggle.open {
@@ -1170,8 +1623,8 @@
         .summary-toggle .summary-item {
             display: flex;
             justify-content: space-between;
-            padding: 4px 0;
-            font-size: 0.75rem;
+            padding: 3px 0;
+            font-size: 0.7rem;
             color: #cbd5e1;
             border-bottom: 1px solid #1e293b;
         }
@@ -1189,19 +1642,19 @@
             color: #e74c3c;
         }
         .summary-toggle .summary-title {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: #f39c12;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-align: center;
         }
 
-        /* ─── ★★★ COMPACT DEVELOPER SHOWCASE — Just Name + Glow + Particles ★★★ ─── */
+        /* ─── DEV SHOWCASE ─── */
         .dev-showcase {
             position: relative;
-            margin: 6px 12px 4px 12px;
-            padding: 10px 16px 12px;
-            border-radius: 20px;
+            margin: 4px 12px 2px 12px;
+            padding: 8px 14px 10px;
+            border-radius: 18px;
             background: linear-gradient(145deg, #0d121c, #161e2b);
             border: 1px solid rgba(245, 166, 35, 0.2);
             overflow: hidden;
@@ -1215,7 +1668,6 @@
             box-shadow: 0 0 40px rgba(245, 166, 35, 0.08), inset 0 0 50px rgba(245, 166, 35, 0.03);
             transform: scale(1.01);
         }
-
         #devParticles {
             position: absolute;
             top: 0;
@@ -1224,23 +1676,20 @@
             height: 100%;
             pointer-events: none;
             z-index: 0;
-            border-radius: 20px;
+            border-radius: 18px;
             overflow: hidden;
         }
-
         .dev-showcase .dev-content {
             position: relative;
             z-index: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
         }
-
-        /* Tiny crown */
         .dev-crown-mini {
-            font-size: 1.2rem;
+            font-size: 1rem;
             animation: crownPulse 2.2s ease-in-out infinite;
             filter: drop-shadow(0 0 12px rgba(245, 166, 35, 0.3));
             line-height: 1;
@@ -1252,14 +1701,12 @@
                 filter: drop-shadow(0 0 12px rgba(245, 166, 35, 0.3));
             }
             50% {
-                transform: scale(1.15) rotate(2deg);
+                transform: scale(1.12) rotate(2deg);
                 filter: drop-shadow(0 0 28px rgba(245, 166, 35, 0.6));
             }
         }
-
-        /* Glowing Name — compact */
         .dev-name-glow-compact {
-            font-size: 1.15rem;
+            font-size: 1rem;
             font-weight: 900;
             background: linear-gradient(135deg, #f5a623, #ffd966, #f5a623, #ffd966);
             background-size: 300% 300%;
@@ -1271,7 +1718,7 @@
             text-shadow: 0 0 30px rgba(245, 166, 35, 0.1);
             display: inline-block;
             padding: 0 2px;
-            line-height: 1.4;
+            line-height: 1.3;
         }
         @keyframes gradientFlow {
             0% {
@@ -1284,8 +1731,6 @@
                 background-position: 0% 50%;
             }
         }
-
-        /* Sparkle dots (same as before but fewer) */
         .sparkle-dot {
             position: absolute;
             width: 3px;
@@ -1345,8 +1790,6 @@
                 transform: translateY(2px) scale(0.8);
             }
         }
-
-        /* Glow ring behind (subtle) */
         .dev-showcase::before {
             content: '';
             position: absolute;
@@ -1371,66 +1814,41 @@
             }
         }
 
-        /* Responsive compact */
-        @media (max-width: 540px) {
-            .dev-showcase {
-                padding: 8px 12px 10px;
-                margin: 4px 8px 2px 8px;
-            }
-            .dev-name-glow-compact {
-                font-size: 0.95rem;
-            }
-            .dev-crown-mini {
-                font-size: 1rem;
-            }
-        }
-        @media (max-width: 400px) {
-            .dev-name-glow-compact {
-                font-size: 0.8rem;
-            }
-            .dev-crown-mini {
-                font-size: 0.85rem;
-            }
-            .dev-showcase {
-                padding: 6px 10px 8px;
-            }
-        }
-
         /* ─── RESPONSIVE ─── */
         @media (max-width: 540px) {
             .receipt-wrap {
                 width: 100%;
-                padding: 16px 14px;
-                border-radius: 8px;
+                padding: 14px 12px;
+                border-radius: 6px;
             }
             .receipt-wrap .r-header h2 {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
             .receipt-wrap .r-row {
-                font-size: 0.7rem;
+                font-size: 0.65rem;
             }
             .receipt-wrap .r-table {
-                font-size: 0.6rem;
+                font-size: 0.55rem;
             }
             .receipt-wrap .r-table td,
             .receipt-wrap .r-table th {
-                padding: 3px 1px;
-                font-size: 0.6rem;
+                padding: 2px 1px;
+                font-size: 0.55rem;
             }
             .receipt-actions .btn-receipt {
-                min-width: 100px;
-                font-size: 0.65rem;
-                padding: 8px 10px;
+                min-width: 90px;
+                font-size: 0.6rem;
+                padding: 6px 8px;
             }
             .portal-body {
-                padding: 16px 12px;
+                padding: 14px 10px;
             }
             .info-item {
-                min-width: 80px;
-                padding: 8px;
+                min-width: 70px;
+                padding: 6px;
             }
             .info-item .value {
-                font-size: 1rem;
+                font-size: 0.85rem;
             }
             .receipt-hidden.active {
                 width: 95%;
@@ -1438,36 +1856,36 @@
                 transform: translate(-50%, -50%);
             }
             .easypaisa-modal .modal-box {
-                padding: 20px 16px;
+                padding: 18px 14px;
             }
             .easypaisa-modal .modal-box .number {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
             }
             .easypaisa-header {
-                padding: 6px 12px;
-                gap: 4px 8px;
+                padding: 4px 10px;
+                gap: 3px 6px;
             }
             .easypaisa-header .ep-number {
-                font-size: 0.85rem;
-            }
-            .easypaisa-header .copy-ep-header {
-                font-size: 0.55rem;
-                padding: 2px 10px;
-                height: 22px;
-            }
-            .footer-highlight {
-                font-size: 0.65rem;
-                padding: 10px 12px;
-            }
-            .footer-highlight .highlight-line .phone-highlight {
                 font-size: 0.75rem;
             }
+            .easypaisa-header .copy-ep-header {
+                font-size: 0.5rem;
+                padding: 2px 8px;
+                height: 20px;
+            }
+            .footer-highlight {
+                font-size: 0.6rem;
+                padding: 8px 10px;
+            }
+            .footer-highlight .highlight-line .phone-highlight {
+                font-size: 0.7rem;
+            }
             .complaint-btn {
-                font-size: 0.95rem;
-                padding: 14px 16px;
+                font-size: 0.85rem;
+                padding: 12px 14px;
             }
             .complaint-btn .btn-icon {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
             .complaint-submit-row {
                 flex-wrap: wrap;
@@ -1485,23 +1903,55 @@
             .complaint-item .ci-time {
                 align-items: flex-start;
                 width: 100%;
-                margin-top: 4px;
+                margin-top: 3px;
             }
             .popup-modal {
-                padding: 24px 18px;
+                padding: 20px 16px;
             }
             .popup-modal .popup-message {
+                font-size: 0.8rem;
+            }
+            .ann-item .ann-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .ann-item .ann-header .ann-time {
+                align-self: flex-start;
+            }
+            .admin-panel .admin-list .admin-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .admin-panel .admin-list .admin-item .ai-actions {
+                align-self: flex-start;
+                margin-top: 4px;
+            }
+            .ticker-wrapper .ticker-icon {
+                font-size: 0.7rem;
+                padding: 0 6px;
+            }
+            .ticker-track .ticker-item {
+                font-size: 0.6rem;
+            }
+            .dev-showcase {
+                padding: 6px 10px 8px;
+                margin: 2px 8px 0 8px;
+            }
+            .dev-name-glow-compact {
+                font-size: 0.85rem;
+            }
+            .dev-crown-mini {
                 font-size: 0.85rem;
             }
         }
         @media (max-width: 400px) {
             .receipt-actions .btn-receipt {
-                min-width: 80px;
-                font-size: 0.6rem;
-                padding: 6px 8px;
+                min-width: 70px;
+                font-size: 0.55rem;
+                padding: 5px 6px;
             }
             .receipt-wrap .r-row {
-                font-size: 0.6rem;
+                font-size: 0.55rem;
                 flex-wrap: wrap;
             }
             .receipt-wrap .r-row .r-value {
@@ -1509,25 +1959,43 @@
                 text-align: left;
             }
             .easypaisa-header .ep-label {
-                font-size: 0.6rem;
+                font-size: 0.55rem;
             }
             .easypaisa-header .ep-number {
-                font-size: 0.75rem;
+                font-size: 0.7rem;
             }
             .footer-highlight {
-                font-size: 0.55rem;
-                padding: 8px 10px;
+                font-size: 0.5rem;
+                padding: 6px 8px;
             }
             .footer-highlight .highlight-line .phone-highlight {
-                font-size: 0.65rem;
+                font-size: 0.6rem;
             }
             .complaint-btn {
-                font-size: 0.85rem;
-                padding: 12px 14px;
-                gap: 10px;
+                font-size: 0.75rem;
+                padding: 10px 12px;
+                gap: 8px;
             }
             .complaint-btn .btn-icon {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
+            }
+            .ann-item .ann-title-text {
+                font-size: 0.7rem;
+            }
+            .ann-item .ann-body {
+                font-size: 0.6rem;
+            }
+            .admin-panel .form-group input,
+            .admin-panel .form-group select,
+            .admin-panel .form-group textarea {
+                font-size: 0.7rem;
+                padding: 6px 10px;
+            }
+            .dev-name-glow-compact {
+                font-size: 0.75rem;
+            }
+            .dev-crown-mini {
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -1552,21 +2020,41 @@
         </div>
     </div>
 
-    <!-- ─── POPUP MODAL (Complaint Submitted) ─── -->
+    <!-- ─── POPUP MODAL (Complaint) ─── -->
     <div class="popup-modal-overlay" id="complaintPopup">
         <div class="popup-modal">
             <span class="popup-icon">✅</span>
             <div class="popup-title">شکایت موصول</div>
-            <div class="popup-message">
-                مُعزز صارف! آپ کی شکایت <span class="highlight"></span> جمع ہو گئی ہے۔<br>
-                آپ کو <span class="highlight">7 گھنٹے</span> کے اندر مسئلہ حل کر دیا جائے گا۔<br>
-                <span style="font-size:0.85rem;color:#ffd966;">(شکریہ)</span>
+            <div class="popup-message" id="popupMessage">
+                مُعزز صارف! آپ کی درخواست <span class="highlight" id="popupTypeLabel"></span> جمع ہو گئی ہے۔<br>
+                <span id="popupSubText">آپ کو <span class="highlight">7 گھنٹے</span> کے اندر مسئلہ حل کر دیا جائے گا۔</span><br>
+                <span style="font-size:0.8rem;color:#ffd966;">(شکریہ)</span>
             </div>
             <button class="popup-close-btn" onclick="closeComplaintPopup()">ٹھیک ہے</button>
         </div>
     </div>
 
+    <!-- ─── POPUP MODAL (Urgent Announcement) ─── -->
+    <div class="popup-modal-overlay" id="urgentPopup">
+        <div class="popup-modal" style="border-color:#e74c3c;">
+            <span class="popup-icon">🚨</span>
+            <div class="popup-title" style="color:#e74c3c;">⚠️ Urgent Announcement</div>
+            <div class="popup-message" id="urgentPopupMessage">
+                <strong id="urgentPopupTitle"></strong><br>
+                <span id="urgentPopupBody"></span>
+            </div>
+            <button class="popup-close-btn" onclick="closeUrgentPopup()" style="background:#e74c3c;color:#fff;">Dismiss</button>
+        </div>
+    </div>
+
     <div class="portal-card">
+
+        <!-- ─── SCROLLING TICKER ─── -->
+        <div class="ticker-wrapper" id="tickerWrapper">
+            <span class="ticker-icon"><i class="fas fa-bullhorn"></i></span>
+            <div id="tickerTrack" class="ticker-track"></div>
+        </div>
+
         <!-- HEADER -->
         <div class="portal-header">
             <h1>👑 D3 CROWN FIBER</h1>
@@ -1586,1088 +2074,1437 @@
                 </a>
             </div>
 
-                <!-- ─── EASYPAISA IN HEADER ─── -->
-                <div class="easypaisa-header">
-                    <span class="ep-label"><i class="fas fa-credit-card"></i> Easypaisa:</span>
-                    <span class="ep-number" id="headerEpNumber">0340‑3157119</span>
-                    <span class="ep-owner">(SHAHID)</span>
-                    <button class="copy-ep-header" id="copyEpHeaderBtn" title="Copy Easypaisa number">
-                        <i class="fas fa-copy"></i> Copy
-                    </button>
-                </div>
-            </div>
-            <p>📡 Client Portal — Check Your Bill & Package</p>
-        </div>
-
-        <div class="portal-body">
-            <!-- SEARCH -->
-            <div id="loginSection" class="search-wrapper">
-                <input type="tel" id="clientPhone" class="search-input-field" placeholder="Enter registered phone number (e.g., 0333-1234567)" autocomplete="off">
-                <div class="search-btn-container">
-                    <button id="searchBtn" class="search-btn">🔍 SEARCH</button>
-                </div>
-                <div class="loader" id="loader">⏳ Loading your data...</div>
-                <div class="note">💡 Use the same mobile number you provided when getting the internet connection</div>
-            </div>
-
-            <!-- DASHBOARD -->
-            <div id="dashboard" class="client-dashboard animate-fade"></div>
-        </div>
-
-        <!-- ─── RECEIPT TEMPLATES (hidden, used for html2canvas) ─── -->
-        <div id="receipt1Container" class="receipt-hidden" style="width:500px;">
-            <div class="receipt-wrap" id="receipt1Wrap"></div>
-        </div>
-        <div id="receipt2Container" class="receipt-hidden" style="width:500px;">
-            <div class="receipt-wrap" id="receipt2Wrap"></div>
-        </div>
-
-        <!-- ─── ★★★ COMPACT DEVELOPER SHOWCASE — Just Name + Glow + Particles ★★★ ─── -->
-        <div class="dev-showcase" id="devShowcase">
-            <div class="sparkle-dot"></div>
-            <div class="sparkle-dot"></div>
-            <div class="sparkle-dot"></div>
-            <div class="sparkle-dot"></div>
-            <canvas id="devParticles"></canvas>
-            <div class="dev-content">
-                <span class="dev-crown-mini">👑</span>
-                <span class="dev-name-glow-compact">Khalid Ali Pechuho</span>
-                <span style="font-size:0.55rem;color:#5a6a7a;letter-spacing:1px;">⚡</span>
+            <div class="easypaisa-header">
+                <span class="ep-label"><i class="fas fa-credit-card"></i> Easypaisa:</span>
+                <span class="ep-number" id="headerEpNumber">0340‑3157119</span>
+                <span class="ep-owner">(SHAHID)</span>
+                <button class="copy-ep-header" id="copyEpHeaderBtn" title="Copy Easypaisa number">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
             </div>
         </div>
+        <p>📡 Client Portal — Check Your Bill & Package</p>
+    </div>
 
-        <!-- ─── FOOTER ─── -->
-        <div class="footer">
-            <div class="footer-branding">
-                👑 <span>D3 Crown Fiber</span> — Premium Internet Services
-                <small>Connecting You to Excellence</small>
+    <div class="portal-body">
+        <!-- SEARCH -->
+        <div id="loginSection" class="search-wrapper">
+            <input type="tel" id="clientPhone" class="search-input-field" placeholder="Enter registered phone number (e.g., 0333-1234567)" autocomplete="off">
+            <div class="search-btn-container">
+                <button id="searchBtn" class="search-btn">🔍 SEARCH</button>
             </div>
-            <div class="footer-developer">
-                🚀 Developed by <span class="dev-name">Khalid Ali Pechuho</span>
-            </div>
+            <div class="loader" id="loader">⏳ Loading your data...</div>
+            <div class="note">💡 Use the same mobile number you provided when getting the internet connection</div>
         </div>
 
-        <!-- ─── HIGHLIGHTED FOOTER ─── -->
-        <div class="footer-highlight">
-            <div class="highlight-line">⚡ Powered by <span class="brand-highlight">D3 Crown Fiber</span> | Premium Support Portal</div>
-            <div class="highlight-line" style="margin-top:4px;">📞 For billing queries, contact Owner at <span class="phone-highlight">03052848369</span></div>
+        <!-- DASHBOARD -->
+        <div id="dashboard" class="client-dashboard animate-fade"></div>
+    </div>
+
+    <!-- ─── RECEIPT TEMPLATES ─── -->
+    <div id="receipt1Container" class="receipt-hidden" style="width:500px;">
+        <div class="receipt-wrap" id="receipt1Wrap"></div>
+    </div>
+    <div id="receipt2Container" class="receipt-hidden" style="width:500px;">
+        <div class="receipt-wrap" id="receipt2Wrap"></div>
+    </div>
+
+    <!-- ─── DEV SHOWCASE ─── -->
+    <div class="dev-showcase" id="devShowcase">
+        <div class="sparkle-dot"></div>
+        <div class="sparkle-dot"></div>
+        <div class="sparkle-dot"></div>
+        <div class="sparkle-dot"></div>
+        <canvas id="devParticles"></canvas>
+        <div class="dev-content">
+            <span class="dev-crown-mini">👑</span>
+            <span class="dev-name-glow-compact">Khalid Ali Pechuho</span>
+            <span style="font-size:0.5rem;color:#5a6a7a;letter-spacing:1px;">⚡</span>
         </div>
     </div>
 
-    <script>
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // FIREBASE CONFIG
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        const firebaseConfig = {
-            apiKey: "AIzaSyDZHUNdkun0f3cY3JqfzrI86mpxy7zY7x0",
-            authDomain: "d3crown-805ce.firebaseapp.com",
-            databaseURL: "https://d3crown-805ce-default-rtdb.firebaseio.com",
-            projectId: "d3crown-805ce",
-            storageBucket: "d3crown-805ce.firebasestorage.app",
-            messagingSenderId: "1082016126067",
-            appId: "1:1082016126067:web:7d0006e48208555999c606"
+    <!-- ─── FOOTER ─── -->
+    <div class="footer">
+        <div class="footer-branding">
+            👑 <span>D3 Crown Fiber</span> — Premium Internet Services
+            <small>Connecting You to Excellence</small>
+        </div>
+        <div class="footer-developer">
+            🚀 Developed by <span class="dev-name">Khalid Ali Pechuho</span>
+        </div>
+        <div class="footer-bottom-row">
+            <button class="admin-toggle-btn" id="adminToggleBtn"><i class="fas fa-cog"></i> Admin Panel</button>
+        </div>
+    </div>
+
+    <!-- ─── HIGHLIGHTED FOOTER ─── -->
+    <div class="footer-highlight">
+        <div class="highlight-line">⚡ Powered by <span class="brand-highlight">D3 Crown Fiber</span> | Premium Support Portal</div>
+        <div class="highlight-line" style="margin-top:3px;">📞 For billing queries, contact Owner at <span class="phone-highlight">03052848369</span></div>
+    </div>
+
+    <!-- ─── ADMIN PANEL ─── -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-title"><i class="fas fa-bullhorn"></i> Announcement Manager</div>
+
+        <!-- Form -->
+        <div class="form-group">
+            <label>Category</label>
+            <select id="annCategory">
+                <option value="maintenance">🔧 Maintenance</option>
+                <option value="new_packages">📦 New Packages</option>
+                <option value="offers_discounts">🏷️ Offers / Discounts</option>
+                <option value="outage_alert">⚠️ Outage Alert</option>
+                <option value="general_news">📰 General News</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="annTitle" placeholder="Announcement title" maxlength="80">
+        </div>
+        <div class="form-group">
+            <label>Message</label>
+            <textarea id="annMessage" placeholder="Announcement details…" maxlength="500"></textarea>
+        </div>
+        <div class="form-group">
+            <div class="checkbox-group">
+                <input type="checkbox" id="annUrgent">
+                <label for="annUrgent" style="font-size:0.75rem;font-weight:700;color:#e74c3c;">🚨 Mark as Urgent (push notification)</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="checkbox-group">
+                <input type="checkbox" id="annActive" checked>
+                <label for="annActive" style="font-size:0.75rem;font-weight:600;color:#a0a8b4;">Active</label>
+            </div>
+        </div>
+        <div class="admin-actions">
+            <button class="btn-add" id="annSubmitBtn"><i class="fas fa-plus"></i> Add Announcement</button>
+            <button class="btn-cancel" id="annCancelBtn">Cancel</button>
+        </div>
+        <div class="admin-msg" id="adminMsg"></div>
+
+        <!-- List -->
+        <div class="admin-list" id="adminList">
+            <div class="admin-list-title"><i class="fas fa-list"></i> All Announcements</div>
+            <div id="adminListContainer">
+                <div class="no-complaints" style="padding:8px 0;">Loading announcements…</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // FIREBASE CONFIG
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    const firebaseConfig = {
+        apiKey: "AIzaSyDZHUNdkun0f3cY3JqfzrI86mpxy7zY7x0",
+        authDomain: "d3crown-805ce.firebaseapp.com",
+        databaseURL: "https://d3crown-805ce-default-rtdb.firebaseio.com",
+        projectId: "d3crown-805ce",
+        storageBucket: "d3crown-805ce.firebasestorage.app",
+        messagingSenderId: "1082016126067",
+        appId: "1:1082016126067:web:7d0006e48208555999c606"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const ADMIN_UID = "0rulvawKt1d6M3FlxfEariNOukk1";
+    const CLIENTS_PATH = "d3_clients";
+    const COMPLAINTS_PATH = "d3_complaints";
+    const ANNOUNCEMENTS_PATH = "d3_announcements";
+
+    let currentClientData = null;
+    let currentClientPhoneRaw = '';
+    let selectedComplaintType = null;
+    let editingAnnouncementId = null;
+    let announcementsCache = [];
+    let urgentPopupShown = new Set();
+
+    // ─── DOM refs ───
+    const loginSection = document.getElementById('loginSection');
+    const dashboardDiv = document.getElementById('dashboard');
+    const loader = document.getElementById('loader');
+    const searchBtn = document.getElementById('searchBtn');
+    const phoneInput = document.getElementById('clientPhone');
+    const overlay = document.getElementById('receiptOverlay');
+
+    // ─── ────────────────────────────────────────────
+    // ★ ANNOUNCEMENTS — LISTEN & RENDER
+    // ─── ────────────────────────────────────────────
+
+    function getAnnouncementsRef() {
+        return db.ref(`${ANNOUNCEMENTS_PATH}/${ADMIN_UID}/announcements`);
+    }
+
+    function listenAnnouncements() {
+        const ref = getAnnouncementsRef();
+        ref.on('value', (snap) => {
+            const data = snap.val();
+            if (!data) {
+                announcementsCache = [];
+                renderTicker([]);
+                renderAnnouncements([]);
+                renderAdminList([]);
+                return;
+            }
+            const arr = Object.values(data);
+            // sort newest first
+            arr.sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
+            announcementsCache = arr;
+            renderTicker(arr.filter(a => a.isActive !== false));
+            renderAnnouncements(arr.filter(a => a.isActive !== false));
+            renderAdminList(arr);
+            // Check for urgent announcements (push notification)
+            checkUrgentAnnouncements(arr.filter(a => a.isActive !== false && a.isUrgent === true));
+        });
+    }
+
+    function renderTicker(announcements) {
+        const track = document.getElementById('tickerTrack');
+        if (!announcements || announcements.length === 0) {
+            track.innerHTML =
+                `<span class="ticker-empty">📢 No announcements at the moment. Stay tuned!</span>`;
+            track.style.animation = 'none';
+            return;
+        }
+        track.style.animation = 'tickerScroll 25s linear infinite';
+        let html = '';
+        announcements.forEach(a => {
+            const catClass = a.isUrgent ? 'urgent' : (a.category || 'general_news');
+            const label = getCategoryLabel(a.category);
+            html += `<span class="ticker-item">
+                        <span class="tick-cat ${catClass}">${label}</span>
+                        ${escapeHtml(a.title)} ${a.isUrgent ? '🚨' : ''}
+                    </span>`;
+        });
+        // Duplicate for seamless loop
+        track.innerHTML = html + html;
+    }
+
+    function getCategoryLabel(cat) {
+        const map = {
+            'maintenance': '🔧 Maintenance',
+            'new_packages': '📦 New Pkg',
+            'offers_discounts': '🏷️ Offer',
+            'outage_alert': '⚠️ Outage',
+            'general_news': '📰 News'
         };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
+        return map[cat] || '📰 News';
+    }
 
-        const ADMIN_UID = "0rulvawKt1d6M3FlxfEariNOukk1";
-        const CLIENTS_PATH = "d3_clients";
-        const COMPLAINTS_PATH = "d3_complaints";
+    function getCategoryClass(cat) {
+        return cat || 'general_news';
+    }
 
-        let currentClientData = null;
-        let currentClientPhoneRaw = '';
-        const loginSection = document.getElementById('loginSection');
-        const dashboardDiv = document.getElementById('dashboard');
-        const loader = document.getElementById('loader');
-        const searchBtn = document.getElementById('searchBtn');
-        const phoneInput = document.getElementById('clientPhone');
-        const overlay = document.getElementById('receiptOverlay');
+    function getCategoryEmoji(cat) {
+        const map = {
+            'maintenance': '🔧',
+            'new_packages': '📦',
+            'offers_discounts': '🏷️',
+            'outage_alert': '⚠️',
+            'general_news': '📰'
+        };
+        return map[cat] || '📰';
+    }
 
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // ★★★ COMPACT PARTICLES ★★★
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        (function initParticles() {
-            const canvas = document.getElementById('devParticles');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let width, height;
-            let particles = [];
-            const NUM = 35;
+    let currentAnnFilter = 'all';
 
-            function resize() {
-                const rect = canvas.parentElement.getBoundingClientRect();
-                canvas.width = rect.width;
-                canvas.height = rect.height;
-                width = canvas.width;
-                height = canvas.height;
-            }
+    function renderAnnouncements(announcements) {
+        const container = document.getElementById('announcementsContainer');
+        if (!container) return;
+        const filtered = currentAnnFilter === 'all' ?
+            announcements :
+            announcements.filter(a => a.category === currentAnnFilter);
 
-            class Particle {
-                constructor() { this.reset(); }
-                reset() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
-                    this.size = Math.random() * 2 + 1;
-                    this.speedX = (Math.random() - 0.5) * 0.3;
-                    this.speedY = (Math.random() - 0.5) * 0.3;
-                    this.opacity = Math.random() * 0.4 + 0.1;
-                    this.hue = 38 + Math.random() * 20;
-                }
-                update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-                    if (this.x < 0 || this.x > width) { this.speedX *= -1;
-                        this.x = Math.min(Math.max(this.x, 0), width); }
-                    if (this.y < 0 || this.y > height) { this.speedY *= -1;
-                        this.y = Math.min(Math.max(this.y, 0), height); }
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `hsla(${this.hue}, 85%, 65%, ${this.opacity})`;
-                    ctx.fill();
-                    if (this.size > 1.5) {
-                        ctx.shadowColor = `hsla(${this.hue}, 90%, 70%, 0.15)`;
-                        ctx.shadowBlur = 6;
-                        ctx.fill();
-                        ctx.shadowBlur = 0;
-                    }
-                }
-            }
-
-            function init() {
-                resize();
-                particles = [];
-                for (let i = 0; i < NUM; i++) particles.push(new Particle());
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, width, height);
-                particles.forEach(p => { p.update();
-                    p.draw(); });
-                // faint lines
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 60) {
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = `rgba(245, 166, 35, ${0.04 * (1 - dist/60)})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.stroke();
-                        }
-                    }
-                }
-                requestAnimationFrame(animate);
-            }
-
-            window.addEventListener('resize', () => {
-                resize();
-                particles.forEach(p => { p.x = Math.min(p.x, width);
-                    p.y = Math.min(p.y, height); });
-            });
-            if (window.ResizeObserver) {
-                const ro = new ResizeObserver(() => { resize(); });
-                ro.observe(canvas.parentElement);
-            }
-            init();
-            animate();
-        })();
-
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // HELPERS
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        function formatDMY(isoStr) {
-            if (!isoStr) return 'N/A';
-            const d = new Date(isoStr);
-            if (isNaN(d.getTime())) return isoStr;
-            return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+        if (filtered.length === 0) {
+            container.innerHTML = `<div class="ann-empty">📭 No announcements in this category.</div>`;
+            return;
         }
-
-        function formatDateTimeWithTime(isoStr) {
-            if (!isoStr) return 'N/A';
-            const d = new Date(isoStr);
-            if (isNaN(d.getTime())) return isoStr;
-            const datePart = formatDMY(isoStr);
-            let hours = d.getHours();
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12;
-            const minutes = String(d.getMinutes()).padStart(2, '0');
-            return `${datePart} ${hours}:${minutes} ${ampm}`;
-        }
-
-        function getPackageExpiry(startDate) {
-            if (!startDate) return null;
-            const d = new Date(startDate);
-            d.setDate(d.getDate() + 30);
-            return d.toISOString().slice(0, 10);
-        }
-
-        function daysRemaining(expiryDate) {
-            if (!expiryDate) return null;
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            const expiry = new Date(expiryDate);
-            const diff = Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
-            return diff;
-        }
-
-        function extractSpeed(pkgName) {
-            if (!pkgName) return '—';
-            const match = pkgName.match(/(\d+)\s*Mbps/);
-            return match ? match[1] + ' Mbps' : '—';
-        }
-
-        function getPendingMonths(client) {
-            const history = client.paymentHistory || [];
-            const monthMap = new Map();
-            for (const entry of history) {
-                if ((entry.debit || 0) === 0 && (entry.credit || 0) === 0) continue;
-                let mk = entry.monthKey;
-                if (!mk && entry.date) {
-                    const d = new Date(entry.date);
-                    mk = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
-                }
-                if (!mk) continue;
-                if (!monthMap.has(mk)) monthMap.set(mk, { debit: 0, credit: 0 });
-                const rec = monthMap.get(mk);
-                rec.debit += entry.debit || 0;
-                rec.credit += entry.credit || 0;
-            }
-            const pending = [];
-            for (let [mk, { debit, credit }] of monthMap.entries()) {
-                const due = debit - credit;
-                if (due > 0) pending.push({ monthKey: mk, dueAmount: due });
-            }
-            pending.sort((a, b) => a.monthKey.localeCompare(b.monthKey));
-            return pending;
-        }
-
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
-        }
-
-        function normalizePhone(p) {
-            return p.replace(/\D/g, '');
-        }
-
-        function toastError(msg) {
-            const existingError = document.querySelector('.error-msg');
-            if (existingError) existingError.remove();
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'error-msg';
-            errorDiv.innerText = msg;
-            document.querySelector('.portal-body').appendChild(errorDiv);
-            setTimeout(() => errorDiv.remove(), 4000);
-        }
-
-        function toastSuccess(msg) {
-            const existingError = document.querySelector('.error-msg');
-            if (existingError) existingError.remove();
-            const successDiv = document.createElement('div');
-            successDiv.className = 'error-msg';
-            successDiv.style.background = '#1e3d2f';
-            successDiv.style.color = '#2ecc71';
-            successDiv.innerText = msg;
-            document.querySelector('.portal-body').appendChild(successDiv);
-            setTimeout(() => successDiv.remove(), 3000);
-        }
-
-        function generateReceiptNumber() {
-            const now = new Date();
-            const d = String(now.getDate()).padStart(2, '0');
-            const m = String(now.getMonth() + 1).padStart(2, '0');
-            const y = String(now.getFullYear()).slice(2);
-            const h = String(now.getHours()).padStart(2, '0');
-            const min = String(now.getMinutes()).padStart(2, '0');
-            return `D3-${y}${m}${d}-${h}${min}${String(Math.floor(Math.random() * 100)).padStart(2, '0')}`;
-        }
-
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // COMPLAINT FUNCTIONS
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        function getComplaintsRef() {
-            return db.ref(`${COMPLAINTS_PATH}/${ADMIN_UID}/complaints`);
-        }
-
-        async function submitComplaint(phone, clientName, clientId, type, typeLabel) {
-            if (!phone || !clientName || !type) {
-                toastError('Missing required information');
-                return false;
-            }
-            try {
-                const ref = getComplaintsRef();
-                const snap = await ref.once('value');
-                let complaints = snap.val() || [];
-                if (!Array.isArray(complaints)) complaints = [];
-
-                const newComplaint = {
-                    id: 'comp_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 6),
-                    phone: phone,
-                    clientName: clientName,
-                    clientId: clientId || '',
-                    type: type,
-                    typeLabel: typeLabel,
-                    status: 'pending',
-                    resolution: '',
-                    timestamp: new Date().toISOString(),
-                    resolvedAt: '',
-                    updatedAt: new Date().toISOString()
-                };
-                complaints.push(newComplaint);
-                await ref.set(complaints);
-                return true;
-            } catch (e) {
-                console.error('submitComplaint error:', e);
-                toastError('Failed to submit complaint: ' + e.message);
-                return false;
-            }
-        }
-
-        async function getComplaintsForPhone(phone) {
-            if (!phone) return [];
-            const normPhone = normalizePhone(phone);
-            try {
-                const ref = getComplaintsRef();
-                const snap = await ref.once('value');
-                const all = snap.val() || [];
-                if (!Array.isArray(all)) return [];
-                return all.filter(c => normalizePhone(c.phone) === normPhone)
-                    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-            } catch (e) {
-                console.error('getComplaintsForPhone error:', e);
-                return [];
-            }
-        }
-
-        function showComplaintPopup() {
-            document.getElementById('complaintPopup').classList.add('active');
-        }
-
-        function closeComplaintPopup() {
-            document.getElementById('complaintPopup').classList.remove('active');
-        }
-
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // COPY EASYPAISA
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        function copyEasypaisaFromHeader() {
-            const num = '03403157119';
-            navigator.clipboard.writeText(num).then(() => {
-                toastSuccess('✅ Easypaisa number copied to clipboard!');
-            }).catch(() => {
-                const dummy = document.createElement('input');
-                dummy.value = num;
-                document.body.appendChild(dummy);
-                dummy.select();
-                document.execCommand('copy');
-                document.body.removeChild(dummy);
-                toastSuccess('✅ Easypaisa number copied!');
-            });
-        }
-
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // RECEIPT POPULATORS
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        function populateReceipt1(client) {
-            const wrap = document.getElementById('receipt1Wrap');
-            const expiryDate = getPackageExpiry(client.packageStartDate);
-            const daysLeft = daysRemaining(expiryDate);
-            const speed = extractSpeed(client.package);
-            const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
-            const totalDue = (client.packageAmount || 0) + (client.oldBill || 0);
-            const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
-            const pendingMonths = getPendingMonths(client);
-
-            let statusLabel = 'Active',
-                statusClass = '';
-            if (client.status === 'active') { statusLabel = '✅ Active';
-                statusClass = ''; } else if (client.status === 'overdue') { statusLabel = '⚠️ Overdue';
-                statusClass = 'overdue'; } else { statusLabel = '⛔ Inactive';
-                statusClass = 'inactive'; }
-
-            let daysDisplay = '—';
-            if (daysLeft !== null) {
-                if (daysLeft > 0) daysDisplay = daysLeft + ' days';
-                else if (daysLeft === 0) daysDisplay = 'Expires today';
-                else daysDisplay = 'Expired ' + Math.abs(daysLeft) + ' days ago';
-            }
-
-            let pendingHtml = '';
-            if (pendingMonths.length > 0) {
-                pendingHtml = '<div class="r-section-title" style="margin-top:8px;">📌 Unpaid Months</div>';
-                pendingMonths.forEach(pm => {
-                    pendingHtml +=
-                        `<div class="r-pending-item"><span class="r-pm-month">📆 ${pm.monthKey}</span><span class="r-pm-amt">Rs. ${pm.dueAmount.toLocaleString()}</span></div>`;
-                });
-            } else {
-                pendingHtml =
-                    `<div style="font-size:0.7rem; color:#1e8e3e; margin:6px 0;">✅ All clear — no pending installments.</div>`;
-            }
-
-            const receiptNo = generateReceiptNumber();
-            const now = new Date();
-            const genDate = formatDMY(now.toISOString()) + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now
-                .getMinutes()).padStart(2, '0');
-
-            wrap.innerHTML = `
-                    <div class="r-header">
-                        <h2>👑 D3 CROWN FIBER</h2>
-                        <div class="r-sub">⭐ PREMIUM INTERNET SERVICES ⭐</div>
-                        <div class="r-owner">Owner: SHAHID Ali Abro  |  📞 0305-2848369</div>
-                        <div style="font-size:0.55rem; color:#888; margin-top:2px;">📄 BILL & INTERNET DETAILS</div>
-                    </div>
-                    <div class="r-row"><span class="r-label">Receipt #</span><span class="r-value">${receiptNo}</span></div>
-                    <div class="r-row"><span class="r-label">Generated</span><span class="r-value">${genDate}</span></div>
-                    <div class="r-divider"></div>
-                    <div class="r-row"><span class="r-label">👤 Customer</span><span class="r-value">${escapeHtml(client.name)}</span></div>
-                    <div class="r-row"><span class="r-label">📱 Phone</span><span class="r-value">${escapeHtml(client.phone)}</span></div>
-                    <div class="r-row"><span class="r-label">📍 Address</span><span class="r-value">${escapeHtml(client.address || '—')}</span></div>
-                    <div class="r-divider"></div>
-                    <div class="r-section-title">📦 Package & Billing</div>
-                    <div class="r-row"><span class="r-label">Package</span><span class="r-value">${escapeHtml(client.package)}</span></div>
-                    <div class="r-row"><span class="r-label">Speed</span><span class="r-value">${speed}</span></div>
-                    <div class="r-row"><span class="r-label">Monthly Fee</span><span class="r-value gold">Rs. ${(client.packageAmount || 0).toLocaleString()}</span></div>
-                    <div class="r-row"><span class="r-label">Old Balance</span><span class="r-value red">Rs. ${(client.oldBill || 0).toLocaleString()}</span></div>
-                    <div class="r-row"><span class="r-label">Total Due</span><span class="r-value gold" style="font-size:0.9rem;">Rs. ${totalDue.toLocaleString()}</span></div>
-                    <div class="r-row"><span class="r-label">Total Paid</span><span class="r-value green">Rs. ${totalCredit.toLocaleString()}</span></div>
-                    <div class="r-divider"></div>
-                    <div class="r-section-title">📅 Validity</div>
-                    <div class="r-row"><span class="r-label">Start Date</span><span class="r-value">${formatDMY(client.packageStartDate)}</span></div>
-                    <div class="r-row"><span class="r-label">Expiry Date</span><span class="r-value">${expiryDate ? formatDMY(expiryDate) : 'N/A'}</span></div>
-                    <div class="r-row"><span class="r-label">Days Left</span><span class="r-value">${daysDisplay}</span></div>
-                    <div class="r-row" style="margin-top:4px;"><span class="r-label">Status</span><span class="r-value"><span class="r-badge ${statusClass}">${statusLabel}</span></span></div>
-                    ${pendingHtml}
-                    <div class="r-total-box" style="margin-top:10px;">
-                        <div class="r-row"><span class="r-label" style="font-weight:800;">💰 GRAND TOTAL DUE</span><span class="r-value gold" style="font-size:1.1rem;">Rs. ${totalDue.toLocaleString()}</span></div>
-                    </div>
-                    <div class="r-footer">
-                        📞 0305-2848369 &nbsp;|&nbsp; 📧 aliabro104@gmail.com<br>
-                        <span class="r-phone">⚡ D3 Crown Fiber — Connecting You to Excellence ⚡</span>
-                        <div class="r-stamp">🔹 Thank you for choosing D3 Crown Fiber 🔹</div>
+        let html = '';
+        filtered.forEach(a => {
+            const catClass = getCategoryClass(a.category);
+            const catLabel = getCategoryLabel(a.category);
+            const timeStr = a.timestamp ? formatDMY(a.timestamp) : '';
+            const urgentBadge = a.isUrgent ? `<span class="ann-urgent-badge">🚨 URGENT</span>` : '';
+            html += `
+                    <div class="ann-item" style="border-left-color: ${a.isUrgent ? '#e74c3c' : '#f5a623'};">
+                        <div class="ann-header">
+                            <span class="ann-cat-badge ${catClass}">${catLabel}</span>
+                            <span class="ann-time">${timeStr}</span>
+                        </div>
+                        <div class="ann-title-text">${escapeHtml(a.title)} ${urgentBadge}</div>
+                        <div class="ann-body">${escapeHtml(a.message)}</div>
                     </div>
                 `;
+        });
+        container.innerHTML = html;
+    }
+
+    function renderAdminList(announcements) {
+        const container = document.getElementById('adminListContainer');
+        if (!container) return;
+        if (!announcements || announcements.length === 0) {
+            container.innerHTML = `<div class="no-complaints" style="padding:8px 0;">No announcements created yet.</div>`;
+            return;
+        }
+        let html = '';
+        announcements.forEach(a => {
+            const statusClass = a.isActive !== false ? '' : 'inactive';
+            const statusText = a.isActive !== false ? '✅ Active' : '⛔ Inactive';
+            const catLabel = getCategoryLabel(a.category);
+            const urgentTag = a.isUrgent ? '🚨 ' : '';
+            html += `
+                    <div class="admin-item">
+                        <div class="ai-info">
+                            <div class="ai-title">${urgentTag}${escapeHtml(a.title)}</div>
+                            <div class="ai-desc">${catLabel} — ${escapeHtml(a.message.substring(0, 60))}${a.message.length > 60 ? '…' : ''}</div>
+                        </div>
+                        <span class="ai-status ${statusClass}">${statusText}</span>
+                        <div class="ai-actions">
+                            <button class="edit-btn" onclick="editAnnouncement('${a.id}')"><i class="fas fa-edit"></i></button>
+                            <button class="delete-btn" onclick="deleteAnnouncement('${a.id}')"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+        });
+        container.innerHTML = html;
+    }
+
+    // ─── URGENT PUSH NOTIFICATION ───
+    let lastUrgentCheck = '';
+
+    function checkUrgentAnnouncements(urgentList) {
+        if (!urgentList || urgentList.length === 0) return;
+        // Check if we have already shown these
+        const now = Date.now();
+        urgentList.forEach(a => {
+            const key = a.id + '_' + (a.timestamp || '');
+            if (urgentPopupShown.has(key)) return;
+            // Only show if created in last 10 minutes (to avoid showing old ones on reload)
+            const created = new Date(a.timestamp || 0).getTime();
+            if (now - created > 10 * 60 * 1000) {
+                urgentPopupShown.add(key);
+                return;
+            }
+            urgentPopupShown.add(key);
+            // Show popup
+            showUrgentPopup(a.title, a.message);
+            // Also try browser notification
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification('🚨 D3 Crown Fiber — Urgent', {
+                    body: a.title + ' — ' + a.message.substring(0, 120),
+                    icon: '🔔'
+                });
+            }
+        });
+    }
+
+    function showUrgentPopup(title, message) {
+        document.getElementById('urgentPopupTitle').textContent = title;
+        document.getElementById('urgentPopupBody').textContent = message;
+        document.getElementById('urgentPopup').classList.add('active');
+    }
+
+    function closeUrgentPopup() {
+        document.getElementById('urgentPopup').classList.remove('active');
+    }
+
+    // Request notification permission on load
+    if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission();
+    }
+
+    // ─── ANNOUNCEMENT CRUD ───
+
+    function resetAnnouncementForm() {
+        document.getElementById('annCategory').value = 'general_news';
+        document.getElementById('annTitle').value = '';
+        document.getElementById('annMessage').value = '';
+        document.getElementById('annUrgent').checked = false;
+        document.getElementById('annActive').checked = true;
+        editingAnnouncementId = null;
+        document.getElementById('annSubmitBtn').innerHTML = '<i class="fas fa-plus"></i> Add Announcement';
+        document.getElementById('adminMsg').textContent = '';
+        document.getElementById('adminMsg').className = 'admin-msg';
+    }
+
+    async function saveAnnouncement() {
+        const title = document.getElementById('annTitle').value.trim();
+        const message = document.getElementById('annMessage').value.trim();
+        const category = document.getElementById('annCategory').value;
+        const isUrgent = document.getElementById('annUrgent').checked;
+        const isActive = document.getElementById('annActive').checked;
+        const msgEl = document.getElementById('adminMsg');
+
+        if (!title || !message) {
+            msgEl.textContent = '⚠️ Please fill in both Title and Message.';
+            msgEl.className = 'admin-msg error';
+            return;
+        }
+        if (title.length > 80) {
+            msgEl.textContent = '⚠️ Title must be 80 characters or less.';
+            msgEl.className = 'admin-msg error';
+            return;
+        }
+        if (message.length > 500) {
+            msgEl.textContent = '⚠️ Message must be 500 characters or less.';
+            msgEl.className = 'admin-msg error';
+            return;
         }
 
-        function populateReceipt2(client) {
-            const wrap = document.getElementById('receipt2Wrap');
-            const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
-            const transactions = [...filteredHistory];
-            transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
-            const pendingMonths = getPendingMonths(client);
-            const totalDebit = transactions.reduce((s, e) => s + (e.debit || 0), 0);
-            const totalCredit = transactions.reduce((s, e) => s + (e.credit || 0), 0);
-            const balance = totalDebit - totalCredit;
-            const receiptNo = generateReceiptNumber();
-            const now = new Date();
-            const genDate = formatDMY(now.toISOString()) + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now
-                .getMinutes()).padStart(2, '0');
-
-            let txRows = '';
-            if (transactions.length === 0) {
-                txRows = '<tr><td colspan="4" style="text-align:center; color:#888; padding:8px 0;">No transactions found</td></tr>';
+        const ref = getAnnouncementsRef();
+        try {
+            if (editingAnnouncementId) {
+                // Update
+                await ref.child(editingAnnouncementId).update({
+                    title,
+                    message,
+                    category,
+                    isUrgent,
+                    isActive,
+                    updatedAt: new Date().toISOString()
+                });
+                msgEl.textContent = '✅ Announcement updated successfully!';
+                msgEl.className = 'admin-msg';
+                resetAnnouncementForm();
             } else {
-                transactions.slice(0, 20).forEach(t => {
-                    const isCredit = t.credit > 0;
-                    txRows += `<tr>
+                // Add
+                const newRef = ref.push();
+                await newRef.set({
+                    id: newRef.key,
+                    title,
+                    message,
+                    category,
+                    isUrgent,
+                    isActive: isActive !== false,
+                    timestamp: new Date().toISOString(),
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString()
+                });
+                msgEl.textContent = '✅ Announcement added successfully!';
+                msgEl.className = 'admin-msg';
+                resetAnnouncementForm();
+            }
+        } catch (e) {
+            console.error('saveAnnouncement error:', e);
+            msgEl.textContent = '❌ Error: ' + e.message;
+            msgEl.className = 'admin-msg error';
+        }
+    }
+
+    function editAnnouncement(id) {
+        const a = announcementsCache.find(item => item.id === id);
+        if (!a) return;
+        editingAnnouncementId = id;
+        document.getElementById('annCategory').value = a.category || 'general_news';
+        document.getElementById('annTitle').value = a.title || '';
+        document.getElementById('annMessage').value = a.message || '';
+        document.getElementById('annUrgent').checked = !!a.isUrgent;
+        document.getElementById('annActive').checked = a.isActive !== false;
+        document.getElementById('annSubmitBtn').innerHTML = '<i class="fas fa-save"></i> Update';
+        document.getElementById('adminMsg').textContent = '✏️ Editing: ' + a.title;
+        document.getElementById('adminMsg').className = 'admin-msg';
+        // Scroll to form
+        document.getElementById('adminPanel').scrollTop = 0;
+    }
+
+    async function deleteAnnouncement(id) {
+        if (!confirm('Delete this announcement?')) return;
+        try {
+            await getAnnouncementsRef().child(id).remove();
+            document.getElementById('adminMsg').textContent = '🗑️ Announcement deleted.';
+            document.getElementById('adminMsg').className = 'admin-msg';
+            if (editingAnnouncementId === id) resetAnnouncementForm();
+        } catch (e) {
+            console.error('deleteAnnouncement error:', e);
+            document.getElementById('adminMsg').textContent = '❌ Error: ' + e.message;
+            document.getElementById('adminMsg').className = 'admin-msg error';
+        }
+    }
+
+    // ─── ────────────────────────────────────────────
+    // ★ COMPLAINTS (same as before)
+    // ─── ────────────────────────────────────────────
+
+    function getComplaintsRef() {
+        return db.ref(`${COMPLAINTS_PATH}/${ADMIN_UID}/complaints`);
+    }
+
+    async function submitComplaint(phone, clientName, clientId, type, typeLabel) {
+        if (!phone || !clientName || !type) {
+            toastError('Missing required information');
+            return false;
+        }
+        try {
+            const ref = getComplaintsRef();
+            const snap = await ref.once('value');
+            let complaints = snap.val() || [];
+            if (!Array.isArray(complaints)) complaints = [];
+            const newComplaint = {
+                id: 'comp_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 6),
+                phone: phone,
+                clientName: clientName,
+                clientId: clientId || '',
+                type: type,
+                typeLabel: typeLabel,
+                status: 'pending',
+                resolution: '',
+                timestamp: new Date().toISOString(),
+                resolvedAt: '',
+                updatedAt: new Date().toISOString()
+            };
+            complaints.push(newComplaint);
+            await ref.set(complaints);
+            return true;
+        } catch (e) {
+            console.error('submitComplaint error:', e);
+            toastError('Failed to submit complaint: ' + e.message);
+            return false;
+        }
+    }
+
+    async function getComplaintsForPhone(phone) {
+        if (!phone) return [];
+        const normPhone = normalizePhone(phone);
+        try {
+            const ref = getComplaintsRef();
+            const snap = await ref.once('value');
+            const all = snap.val() || [];
+            if (!Array.isArray(all)) return [];
+            return all.filter(c => normalizePhone(c.phone) === normPhone)
+                .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        } catch (e) {
+            console.error('getComplaintsForPhone error:', e);
+            return [];
+        }
+    }
+
+    function showComplaintPopup(type) {
+        const labelEl = document.getElementById('popupTypeLabel');
+        const subEl = document.getElementById('popupSubText');
+        if (type === 'package_end') {
+            if (labelEl) labelEl.textContent = '💵 پیکج ختم';
+            if (subEl) subEl.innerHTML = 'اسلام علیکم شاہد بھائی میرا پیکج ختم ہوگیا ہے براۓ مہربانی فرما کر میرا پیکج دوبارہ ریچارج کر دیں شکریہ';
+        } else {
+            if (labelEl) labelEl.textContent = getTypeLabel(type) || '';
+            if (subEl) subEl.innerHTML = 'آپ کو <span class="highlight">7 گھنٹے</span> کے اندر مسئلہ حل کر دیا جائے گا۔';
+        }
+        document.getElementById('complaintPopup').classList.add('active');
+    }
+
+    function closeComplaintPopup() {
+        document.getElementById('complaintPopup').classList.remove('active');
+    }
+
+    function getTypeLabel(type) {
+        const map = {
+            'red_light': '🔴 Red Light — No Internet',
+            'slow_internet': '🟡 Slow Internet — Buffering',
+            'disconnecting': '🔌 Disconnecting — Frequent Drops',
+            'package_end': '💵 Package End — Recharge Needed'
+        };
+        return map[type] || type;
+    }
+
+    function getTypeIcon(type) {
+        const map = { 'red_light': '🔴', 'slow_internet': '🟡', 'disconnecting': '🔌', 'package_end': '💵' };
+        return map[type] || '📌';
+    }
+
+    // ─── ────────────────────────────────────────────
+    // ★ HELPERS
+    // ─── ────────────────────────────────────────────
+
+    function formatDMY(isoStr) {
+        if (!isoStr) return 'N/A';
+        const d = new Date(isoStr);
+        if (isNaN(d.getTime())) return isoStr;
+        return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+    }
+
+    function formatDateTimeWithTime(isoStr) {
+        if (!isoStr) return 'N/A';
+        const d = new Date(isoStr);
+        if (isNaN(d.getTime())) return isoStr;
+        const datePart = formatDMY(isoStr);
+        let hours = d.getHours();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+        const minutes = String(d.getMinutes()).padStart(2, '0');
+        return `${datePart} ${hours}:${minutes} ${ampm}`;
+    }
+
+    function getPackageExpiry(startDate) {
+        if (!startDate) return null;
+        const d = new Date(startDate);
+        d.setDate(d.getDate() + 30);
+        return d.toISOString().slice(0, 10);
+    }
+
+    function daysRemaining(expiryDate) {
+        if (!expiryDate) return null;
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const expiry = new Date(expiryDate);
+        const diff = Math.ceil((expiry - today) / (1000 * 60 * 60 * 24));
+        return diff;
+    }
+
+    function extractSpeed(pkgName) {
+        if (!pkgName) return '—';
+        const match = pkgName.match(/(\d+)\s*Mbps/);
+        return match ? match[1] + ' Mbps' : '—';
+    }
+
+    function getPendingMonths(client) {
+        const history = client.paymentHistory || [];
+        const monthMap = new Map();
+        for (const entry of history) {
+            if ((entry.debit || 0) === 0 && (entry.credit || 0) === 0) continue;
+            let mk = entry.monthKey;
+            if (!mk && entry.date) {
+                const d = new Date(entry.date);
+                mk = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+            }
+            if (!mk) continue;
+            if (!monthMap.has(mk)) monthMap.set(mk, { debit: 0, credit: 0 });
+            const rec = monthMap.get(mk);
+            rec.debit += entry.debit || 0;
+            rec.credit += entry.credit || 0;
+        }
+        const pending = [];
+        for (let [mk, { debit, credit }] of monthMap.entries()) {
+            const due = debit - credit;
+            if (due > 0) pending.push({ monthKey: mk, dueAmount: due });
+        }
+        pending.sort((a, b) => a.monthKey.localeCompare(b.monthKey));
+        return pending;
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    function normalizePhone(p) {
+        return p.replace(/\D/g, '');
+    }
+
+    function toastError(msg) {
+        const existingError = document.querySelector('.error-msg');
+        if (existingError) existingError.remove();
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-msg';
+        errorDiv.innerText = msg;
+        document.querySelector('.portal-body').appendChild(errorDiv);
+        setTimeout(() => errorDiv.remove(), 4000);
+    }
+
+    function toastSuccess(msg) {
+        const existingError = document.querySelector('.error-msg');
+        if (existingError) existingError.remove();
+        const successDiv = document.createElement('div');
+        successDiv.className = 'error-msg';
+        successDiv.style.background = '#1e3d2f';
+        successDiv.style.color = '#2ecc71';
+        successDiv.innerText = msg;
+        document.querySelector('.portal-body').appendChild(successDiv);
+        setTimeout(() => successDiv.remove(), 3000);
+    }
+
+    function generateReceiptNumber() {
+        const now = new Date();
+        const d = String(now.getDate()).padStart(2, '0');
+        const m = String(now.getMonth() + 1).padStart(2, '0');
+        const y = String(now.getFullYear()).slice(2);
+        const h = String(now.getHours()).padStart(2, '0');
+        const min = String(now.getMinutes()).padStart(2, '0');
+        return `D3-${y}${m}${d}-${h}${min}${String(Math.floor(Math.random() * 100)).padStart(2, '0')}`;
+    }
+
+    // ─── ────────────────────────────────────────────
+    // ★ RECEIPT POPULATORS (same as before)
+    // ─── ────────────────────────────────────────────
+
+    function populateReceipt1(client) {
+        const wrap = document.getElementById('receipt1Wrap');
+        const expiryDate = getPackageExpiry(client.packageStartDate);
+        const daysLeft = daysRemaining(expiryDate);
+        const speed = extractSpeed(client.package);
+        const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
+        const totalDue = (client.packageAmount || 0) + (client.oldBill || 0);
+        const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
+        const pendingMonths = getPendingMonths(client);
+
+        let statusLabel = 'Active',
+            statusClass = '';
+        if (client.status === 'active') { statusLabel = '✅ Active';
+            statusClass = ''; } else if (client.status === 'overdue') { statusLabel = '⚠️ Overdue';
+            statusClass = 'overdue'; } else { statusLabel = '⛔ Inactive';
+            statusClass = 'inactive'; }
+
+        let daysDisplay = '—';
+        if (daysLeft !== null) {
+            if (daysLeft > 0) daysDisplay = daysLeft + ' days';
+            else if (daysLeft === 0) daysDisplay = 'Expires today';
+            else daysDisplay = 'Expired ' + Math.abs(daysLeft) + ' days ago';
+        }
+
+        let pendingHtml = '';
+        if (pendingMonths.length > 0) {
+            pendingHtml = '<div class="r-section-title" style="margin-top:6px;">📌 Unpaid Months</div>';
+            pendingMonths.forEach(pm => {
+                pendingHtml +=
+                    `<div class="r-pending-item"><span class="r-pm-month">📆 ${pm.monthKey}</span><span class="r-pm-amt">Rs. ${pm.dueAmount.toLocaleString()}</span></div>`;
+            });
+        } else {
+            pendingHtml =
+                `<div style="font-size:0.65rem; color:#1e8e3e; margin:4px 0;">✅ All clear — no pending installments.</div>`;
+        }
+
+        const receiptNo = generateReceiptNumber();
+        const now = new Date();
+        const genDate = formatDMY(now.toISOString()) + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now
+            .getMinutes()).padStart(2, '0');
+
+        wrap.innerHTML = `
+                <div class="r-header">
+                    <h2>👑 D3 CROWN FIBER</h2>
+                    <div class="r-sub">⭐ PREMIUM INTERNET SERVICES ⭐</div>
+                    <div class="r-owner">Owner: SHAHID Ali Abro  |  📞 0305-2848369</div>
+                    <div style="font-size:0.5rem; color:#888; margin-top:2px;">📄 BILL & INTERNET DETAILS</div>
+                </div>
+                <div class="r-row"><span class="r-label">Receipt #</span><span class="r-value">${receiptNo}</span></div>
+                <div class="r-row"><span class="r-label">Generated</span><span class="r-value">${genDate}</span></div>
+                <div class="r-divider"></div>
+                <div class="r-row"><span class="r-label">👤 Customer</span><span class="r-value">${escapeHtml(client.name)}</span></div>
+                <div class="r-row"><span class="r-label">📱 Phone</span><span class="r-value">${escapeHtml(client.phone)}</span></div>
+                <div class="r-row"><span class="r-label">📍 Address</span><span class="r-value">${escapeHtml(client.address || '—')}</span></div>
+                <div class="r-divider"></div>
+                <div class="r-section-title">📦 Package & Billing</div>
+                <div class="r-row"><span class="r-label">Package</span><span class="r-value">${escapeHtml(client.package)}</span></div>
+                <div class="r-row"><span class="r-label">Speed</span><span class="r-value">${speed}</span></div>
+                <div class="r-row"><span class="r-label">Monthly Fee</span><span class="r-value gold">Rs. ${(client.packageAmount || 0).toLocaleString()}</span></div>
+                <div class="r-row"><span class="r-label">Old Balance</span><span class="r-value red">Rs. ${(client.oldBill || 0).toLocaleString()}</span></div>
+                <div class="r-row"><span class="r-label">Total Due</span><span class="r-value gold" style="font-size:0.85rem;">Rs. ${totalDue.toLocaleString()}</span></div>
+                <div class="r-row"><span class="r-label">Total Paid</span><span class="r-value green">Rs. ${totalCredit.toLocaleString()}</span></div>
+                <div class="r-divider"></div>
+                <div class="r-section-title">📅 Validity</div>
+                <div class="r-row"><span class="r-label">Start Date</span><span class="r-value">${formatDMY(client.packageStartDate)}</span></div>
+                <div class="r-row"><span class="r-label">Expiry Date</span><span class="r-value">${expiryDate ? formatDMY(expiryDate) : 'N/A'}</span></div>
+                <div class="r-row"><span class="r-label">Days Left</span><span class="r-value">${daysDisplay}</span></div>
+                <div class="r-row" style="margin-top:3px;"><span class="r-label">Status</span><span class="r-value"><span class="r-badge ${statusClass}">${statusLabel}</span></span></div>
+                ${pendingHtml}
+                <div class="r-total-box" style="margin-top:8px;">
+                    <div class="r-row"><span class="r-label" style="font-weight:800;">💰 GRAND TOTAL DUE</span><span class="r-value gold" style="font-size:1rem;">Rs. ${totalDue.toLocaleString()}</span></div>
+                </div>
+                <div class="r-footer">
+                    📞 0305-2848369 &nbsp;|&nbsp; 📧 aliabro104@gmail.com<br>
+                    <span class="r-phone">⚡ D3 Crown Fiber — Connecting You to Excellence ⚡</span>
+                    <div class="r-stamp">🔹 Thank you for choosing D3 Crown Fiber 🔹</div>
+                </div>
+            `;
+    }
+
+    function populateReceipt2(client) {
+        const wrap = document.getElementById('receipt2Wrap');
+        const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
+        const transactions = [...filteredHistory];
+        transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+        const pendingMonths = getPendingMonths(client);
+        const totalDebit = transactions.reduce((s, e) => s + (e.debit || 0), 0);
+        const totalCredit = transactions.reduce((s, e) => s + (e.credit || 0), 0);
+        const balance = totalDebit - totalCredit;
+        const receiptNo = generateReceiptNumber();
+        const now = new Date();
+        const genDate = formatDMY(now.toISOString()) + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now
+            .getMinutes()).padStart(2, '0');
+
+        let txRows = '';
+        if (transactions.length === 0) {
+            txRows = '<tr><td colspan="4" style="text-align:center; color:#888; padding:6px 0;">No transactions found</td></tr>';
+        } else {
+            transactions.slice(0, 20).forEach(t => {
+                const isCredit = t.credit > 0;
+                txRows += `<tr>
+                                <td>${formatDMY(t.date)}</td>
+                                <td>${escapeHtml(t.description || '-')}</td>
+                                <td class="amt-credit">${isCredit ? 'Rs. '+t.credit.toLocaleString() : '-'}</td>
+                                <td class="amt-debit">${!isCredit && t.debit > 0 ? 'Rs. '+t.debit.toLocaleString() : '-'}</td>
+                            </tr>`;
+            });
+        }
+
+        let pendingHtml = '';
+        if (pendingMonths.length > 0) {
+            pendingHtml = '<div class="r-section-title" style="margin-top:6px;">📌 Pending Months</div>';
+            pendingMonths.forEach(pm => {
+                pendingHtml +=
+                    `<div class="r-pending-item"><span class="r-pm-month">📆 ${pm.monthKey}</span><span class="r-pm-amt">Rs. ${pm.dueAmount.toLocaleString()}</span></div>`;
+            });
+        } else {
+            pendingHtml =
+                `<div style="font-size:0.65rem; color:#1e8e3e; margin:4px 0;">✅ No pending months — account is clear.</div>`;
+        }
+
+        wrap.innerHTML = `
+                <div class="r-header">
+                    <h2>👑 D3 CROWN FIBER</h2>
+                    <div class="r-sub">⭐ LEDGER STATEMENT ⭐</div>
+                    <div class="r-owner">Owner: SHAHID Ali Abro  |  📞 0305-2848369</div>
+                    <div style="font-size:0.5rem; color:#888; margin-top:2px;">📊 COMPLETE TRANSACTION HISTORY</div>
+                </div>
+                <div class="r-row"><span class="r-label">Receipt #</span><span class="r-value">${receiptNo}</span></div>
+                <div class="r-row"><span class="r-label">Generated</span><span class="r-value">${genDate}</span></div>
+                <div class="r-divider"></div>
+                <div class="r-row"><span class="r-label">👤 Customer</span><span class="r-value">${escapeHtml(client.name)}</span></div>
+                <div class="r-row"><span class="r-label">📱 Phone</span><span class="r-value">${escapeHtml(client.phone)}</span></div>
+                <div class="r-divider"></div>
+                <div class="r-section-title">📜 Transaction History</div>
+                <table class="r-table">
+                    <thead><tr><th>Date</th><th>Description</th><th style="text-align:right;">Credit</th><th style="text-align:right;">Debit</th></tr></thead>
+                    <tbody>${txRows}</tbody>
+                </table>
+                ${pendingHtml}
+                <div class="r-divider"></div>
+                <div class="r-total-box">
+                    <div class="r-row"><span class="r-label">💰 Total Debit (Billed)</span><span class="r-value red">Rs. ${totalDebit.toLocaleString()}</span></div>
+                    <div class="r-row"><span class="r-label">✅ Total Credit (Paid)</span><span class="r-value green">Rs. ${totalCredit.toLocaleString()}</span></div>
+                    <div class="r-row" style="border-top:2px solid #d4891a; padding-top:5px; margin-top:3px;">
+                        <span class="r-label" style="font-weight:800;">📊 NET BALANCE</span>
+                        <span class="r-value gold" style="font-size:1rem;">Rs. ${balance.toLocaleString()}</span>
+                    </div>
+                    <div style="font-size:0.55rem; color:#888; margin-top:3px; text-align:center;">
+                        ${balance > 0 ? '⚠️ Outstanding balance — please clear pending dues.' : balance < 0 ? '✅ Overpaid — credit balance available.' : '✅ Account balanced.'}
+                    </div>
+                </div>
+                <div class="r-footer">
+                    📞 0305-2848369 &nbsp;|&nbsp; 📧 aliabro104@gmail.com<br>
+                    <span class="r-phone">⚡ D3 Crown Fiber — Transparent & Reliable ⚡</span>
+                    <div class="r-stamp">🔹 This is a system-generated ledger statement 🔹</div>
+                </div>
+            `;
+    }
+
+    // ─── ────────────────────────────────────────────
+    // ★ CAPTURE & DOWNLOAD
+    // ─── ────────────────────────────────────────────
+
+    function showOverlay() { overlay.classList.add('active'); }
+
+    function hideOverlay() { overlay.classList.remove('active'); }
+
+    async function downloadReceipt(elementId, fileNamePrefix, format = 'png') {
+        const container = document.getElementById(elementId);
+        const wrap = container.querySelector('.receipt-wrap');
+        if (!wrap) return;
+        showOverlay();
+        await new Promise(r => setTimeout(r, 300));
+        try {
+            container.style.position = 'fixed';
+            container.style.left = '0';
+            container.style.top = '0';
+            container.style.width = '500px';
+            container.style.zIndex = '99999';
+            container.style.opacity = '1';
+            container.style.pointerEvents = 'none';
+            container.style.transform = 'none';
+            container.style.maxHeight = 'none';
+            container.style.overflow = 'visible';
+            container.style.borderRadius = '0';
+
+            const canvas = await html2canvas(wrap, {
+                scale: 2.5,
+                useCORS: true,
+                allowTaint: false,
+                backgroundColor: '#ffffff',
+                logging: false,
+                width: 500,
+                height: wrap.scrollHeight,
+            });
+
+            container.style.position = 'absolute';
+            container.style.left = '-9999px';
+            container.style.top = '0';
+            container.style.width = '500px';
+            container.style.zIndex = '-1';
+            container.style.opacity = '0';
+            container.style.pointerEvents = 'none';
+            container.style.transform = 'none';
+            container.style.maxHeight = 'none';
+            container.style.overflow = 'visible';
+            container.style.borderRadius = '0';
+
+            const link = document.createElement('a');
+            if (format === 'png') {
+                link.download = `${fileNamePrefix}.png`;
+                link.href = canvas.toDataURL('image/png');
+            } else {
+                link.download = `${fileNamePrefix}.jpg`;
+                link.href = canvas.toDataURL('image/jpeg', 0.95);
+            }
+            link.click();
+        } catch (err) {
+            console.error('Receipt capture error:', err);
+            toastError('Failed to generate receipt. Please try again.');
+            container.style.position = 'absolute';
+            container.style.left = '-9999px';
+            container.style.top = '0';
+            container.style.width = '500px';
+            container.style.zIndex = '-1';
+            container.style.opacity = '0';
+            container.style.pointerEvents = 'none';
+            container.style.transform = 'none';
+            container.style.maxHeight = 'none';
+            container.style.overflow = 'visible';
+            container.style.borderRadius = '0';
+        } finally {
+            hideOverlay();
+        }
+    }
+
+    // ─── ────────────────────────────────────────────
+    // ★ TOGGLE PACKAGE SUMMARY
+    // ─── ────────────────────────────────────────────
+
+    function togglePackageSummary(client) {
+        const existing = document.getElementById('packageSummaryToggle');
+        if (existing) { existing.classList.toggle('open'); return; }
+        const container = document.createElement('div');
+        container.id = 'packageSummaryToggle';
+        container.className = 'summary-toggle open';
+
+        const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
+        const totalDebit = filteredHistory.reduce((s, e) => s + (e.debit || 0), 0);
+        const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
+        const pending = getPendingMonths(client);
+        const pendingTotal = pending.reduce((s, p) => s + p.dueAmount, 0);
+
+        let html = `
+                <div class="summary-title">📋 LIFETIME PACKAGE SUMMARY</div>
+                <div class="summary-item"><span class="label">Package</span><span class="value">${escapeHtml(client.package)}</span></div>
+                <div class="summary-item"><span class="label">Monthly Fee</span><span class="value">Rs. ${(client.packageAmount || 0).toLocaleString()}</span></div>
+                <div class="summary-item"><span class="label">Old Balance</span><span class="value red">Rs. ${(client.oldBill || 0).toLocaleString()}</span></div>
+                <div class="summary-item"><span class="label">Total Billed (all time)</span><span class="value red">Rs. ${totalDebit.toLocaleString()}</span></div>
+                <div class="summary-item"><span class="label">Total Paid (all time)</span><span class="value green">Rs. ${totalCredit.toLocaleString()}</span></div>
+                <div class="summary-item"><span class="label">Pending Months</span><span class="value">${pending.length}</span></div>
+                <div class="summary-item"><span class="label">Pending Amount</span><span class="value red">Rs. ${pendingTotal.toLocaleString()}</span></div>
+                <div class="summary-item" style="border-bottom:2px solid #f39c12; padding-bottom:6px; margin-top:3px;">
+                    <span class="label" style="font-weight:800;">NET BALANCE</span>
+                    <span class="value gold" style="font-size:0.95rem;">Rs. ${(totalDebit - totalCredit).toLocaleString()}</span>
+                </div>
+                <div style="font-size:0.55rem; color:#7e8c8f; text-align:center; margin-top:6px;">
+                    * Based on all recorded transactions (excluding zero-value entries)
+                </div>
+            `;
+        container.innerHTML = html;
+        const parentCard = document.querySelector('.info-card:last-child');
+        if (parentCard) { parentCard.parentNode.insertBefore(container, parentCard.nextSibling); } else { dashboardDiv
+                .appendChild(container); }
+    }
+
+    // ─── ────────────────────────────────────────────
+    // ★ EASYPAISA MODAL
+    // ─── ────────────────────────────────────────────
+
+    function showEasypaisaModal() {
+        document.getElementById('easypaisaModal').classList.add('active');
+    }
+
+    function hideEasypaisaModal() {
+        document.getElementById('easypaisaModal').classList.remove('active');
+    }
+
+    function copyEasypaisaFromHeader() {
+        const num = '03403157119';
+        navigator.clipboard.writeText(num).then(() => {
+            toastSuccess('✅ Easypaisa number copied to clipboard!');
+        }).catch(() => {
+            const dummy = document.createElement('input');
+            dummy.value = num;
+            document.body.appendChild(dummy);
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            toastSuccess('✅ Easypaisa number copied!');
+        });
+    }
+
+    // ─── ────────────────────────────────────────────
+    // ★ DASHBOARD RENDER
+    // ─── ────────────────────────────────────────────
+
+    function renderDashboard(client) {
+        currentClientData = client;
+        currentClientPhoneRaw = client.phone;
+
+        const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
+        const totalDue = (client.packageAmount || 0) + (client.oldBill || 0);
+        const expiryDate = getPackageExpiry(client.packageStartDate);
+        const daysLeft = daysRemaining(expiryDate);
+        const speed = extractSpeed(client.package);
+        const pendingMonths = getPendingMonths(client);
+        const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
+
+        let statusClass = 'status-badge';
+        if (client.status === 'active') statusClass += '';
+        else if (client.status === 'overdue') statusClass += ' overdue';
+        else statusClass += ' inactive';
+        let statusText = client.status === 'active' ? '✅ Active' : (client.status === 'overdue' ? '⚠️ Overdue' :
+            '⛔ Inactive');
+
+        let expiryWarning = '';
+        if (daysLeft !== null && daysLeft <= 3 && daysLeft >= 0) {
+            expiryWarning =
+                `<div style="background:#3d2e1e; border-radius:12px; padding:8px; margin-top:6px; text-align:center; color:#f5a623; font-size:0.65rem;">⏰ Package expires in ${daysLeft} days! Please renew.</div>`;
+        } else if (daysLeft !== null && daysLeft < 0) {
+            expiryWarning =
+                `<div style="background:#3d1e1e; border-radius:12px; padding:8px; margin-top:6px; text-align:center; color:#e74c3c; font-size:0.65rem;">❌ Package expired ${Math.abs(daysLeft)} days ago. Contact ISP for renewal.</div>`;
+        } else if (daysLeft !== null && daysLeft <= 7) {
+            expiryWarning =
+                `<div style="background:#2a2a1a; border-radius:12px; padding:6px; margin-top:5px; text-align:center; color:#ffb347; font-size:0.6rem;">📅 Expires in ${daysLeft} days</div>`;
+        }
+
+        let pendingHtml = '';
+        if (pendingMonths.length > 0) {
+            pendingHtml = `<div class="info-card"><div class="info-title">📌 Unpaid Months</div>`;
+            pendingMonths.forEach(pm => {
+                pendingHtml += `<div class="pending-month">
+                                    <span class="month">📆 ${pm.monthKey}</span>
+                                    <span class="amount">Rs. ${pm.dueAmount.toLocaleString()}</span>
+                                </div>`;
+            });
+            pendingHtml += `</div>`;
+        } else {
+            pendingHtml =
+                `<div class="info-card"><div class="info-title">✨ All Clear</div><div style="font-size:0.65rem; color:#2ecc71;">No pending installments. Well done!</div></div>`;
+        }
+
+        let transactions = [...filteredHistory];
+        transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+        const recentTx = transactions.slice(0, 10);
+        let txHtml = `<div class="info-card"><div class="info-title">📜 Recent Transactions</div>
+                          <div style="overflow-x:auto;"><table class="ledger-table">
+                          <thead><tr><th>Date</th><th>Description</th><th>Credit</th><th>Debit</th></tr></thead><tbody>`;
+        if (recentTx.length === 0) {
+            txHtml += '<tr><td colspan="4" style="text-align:center;">No transactions found</td></tr>';
+        } else {
+            recentTx.forEach(t => {
+                txHtml += `<tr>
                                     <td>${formatDMY(t.date)}</td>
                                     <td>${escapeHtml(t.description || '-')}</td>
-                                    <td class="amt-credit">${isCredit ? 'Rs. '+t.credit.toLocaleString() : '-'}</td>
-                                    <td class="amt-debit">${!isCredit && t.debit > 0 ? 'Rs. '+t.debit.toLocaleString() : '-'}</td>
+                                    <td class="credit-text">${t.credit > 0 ? 'Rs. '+t.credit.toLocaleString() : '-'}</td>
+                                    <td class="debit-text">${t.debit > 0 ? 'Rs. '+t.debit.toLocaleString() : '-'}</td>
                                 </tr>`;
-                });
-            }
-
-            let pendingHtml = '';
-            if (pendingMonths.length > 0) {
-                pendingHtml = '<div class="r-section-title" style="margin-top:8px;">📌 Pending Months</div>';
-                pendingMonths.forEach(pm => {
-                    pendingHtml +=
-                        `<div class="r-pending-item"><span class="r-pm-month">📆 ${pm.monthKey}</span><span class="r-pm-amt">Rs. ${pm.dueAmount.toLocaleString()}</span></div>`;
-                });
-            } else {
-                pendingHtml =
-                    `<div style="font-size:0.7rem; color:#1e8e3e; margin:6px 0;">✅ No pending months — account is clear.</div>`;
-            }
-
-            wrap.innerHTML = `
-                    <div class="r-header">
-                        <h2>👑 D3 CROWN FIBER</h2>
-                        <div class="r-sub">⭐ LEDGER STATEMENT ⭐</div>
-                        <div class="r-owner">Owner: SHAHID Ali Abro  |  📞 0305-2848369</div>
-                        <div style="font-size:0.55rem; color:#888; margin-top:2px;">📊 COMPLETE TRANSACTION HISTORY</div>
-                    </div>
-                    <div class="r-row"><span class="r-label">Receipt #</span><span class="r-value">${receiptNo}</span></div>
-                    <div class="r-row"><span class="r-label">Generated</span><span class="r-value">${genDate}</span></div>
-                    <div class="r-divider"></div>
-                    <div class="r-row"><span class="r-label">👤 Customer</span><span class="r-value">${escapeHtml(client.name)}</span></div>
-                    <div class="r-row"><span class="r-label">📱 Phone</span><span class="r-value">${escapeHtml(client.phone)}</span></div>
-                    <div class="r-divider"></div>
-                    <div class="r-section-title">📜 Transaction History</div>
-                    <table class="r-table">
-                        <thead><tr><th>Date</th><th>Description</th><th style="text-align:right;">Credit</th><th style="text-align:right;">Debit</th></tr></thead>
-                        <tbody>${txRows}</tbody>
-                    </table>
-                    ${pendingHtml}
-                    <div class="r-divider"></div>
-                    <div class="r-total-box">
-                        <div class="r-row"><span class="r-label">💰 Total Debit (Billed)</span><span class="r-value red">Rs. ${totalDebit.toLocaleString()}</span></div>
-                        <div class="r-row"><span class="r-label">✅ Total Credit (Paid)</span><span class="r-value green">Rs. ${totalCredit.toLocaleString()}</span></div>
-                        <div class="r-row" style="border-top:2px solid #d4891a; padding-top:6px; margin-top:4px;">
-                            <span class="r-label" style="font-weight:800;">📊 NET BALANCE</span>
-                            <span class="r-value gold" style="font-size:1.1rem;">Rs. ${balance.toLocaleString()}</span>
-                        </div>
-                        <div style="font-size:0.6rem; color:#888; margin-top:4px; text-align:center;">
-                            ${balance > 0 ? '⚠️ Outstanding balance — please clear pending dues.' : balance < 0 ? '✅ Overpaid — credit balance available.' : '✅ Account balanced.'}
-                        </div>
-                    </div>
-                    <div class="r-footer">
-                        📞 0305-2848369 &nbsp;|&nbsp; 📧 aliabro104@gmail.com<br>
-                        <span class="r-phone">⚡ D3 Crown Fiber — Transparent & Reliable ⚡</span>
-                        <div class="r-stamp">🔹 This is a system-generated ledger statement 🔹</div>
-                    </div>
-                `;
+            });
         }
+        txHtml += `</tbody></table></div></div>`;
 
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // CAPTURE & DOWNLOAD
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        function showOverlay() { overlay.classList.add('active'); }
+        // ─── Announcements Section (inside dashboard) ───
+        const annHtml = `
+                <div class="announcements-section">
+                    <div class="ann-title"><i class="fas fa-bullhorn"></i> Announcements</div>
+                    <div class="ann-category-tabs">
+                        <button class="tab-btn active" data-cat="all" onclick="filterAnnouncements('all', this)">📢 All</button>
+                        <button class="tab-btn" data-cat="maintenance" onclick="filterAnnouncements('maintenance', this)">🔧 Maintenance</button>
+                        <button class="tab-btn" data-cat="new_packages" onclick="filterAnnouncements('new_packages', this)">📦 New Pkgs</button>
+                        <button class="tab-btn" data-cat="offers_discounts" onclick="filterAnnouncements('offers_discounts', this)">🏷️ Offers</button>
+                        <button class="tab-btn" data-cat="outage_alert" onclick="filterAnnouncements('outage_alert', this)">⚠️ Outage</button>
+                        <button class="tab-btn" data-cat="general_news" onclick="filterAnnouncements('general_news', this)">📰 News</button>
+                    </div>
+                    <div class="ann-list" id="announcementsContainer">
+                        <div class="ann-empty">Loading announcements…</div>
+                    </div>
+                </div>
+            `;
 
-        function hideOverlay() { overlay.classList.remove('active'); }
+        const html = `
+                <div class="flex-between" style="margin-bottom:10px;">
+                    <span class="${statusClass}">${statusText}</span>
+                    <button class="logout-btn" id="logoutPortalBtn">🔒 Exit</button>
+                </div>
+                <div class="info-card">
+                    <div class="info-title">👤 Customer Information</div>
+                    <div class="info-grid">
+                        <div class="info-item"><div class="label">Full Name</div><div class="value">${escapeHtml(client.name)}</div></div>
+                        <div class="info-item"><div class="label">Phone</div><div class="value">${escapeHtml(client.phone)}</div></div>
+                        <div class="info-item"><div class="label">Address</div><div class="value">${escapeHtml(client.address || '—')}</div></div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-title">📦 Package & Billing</div>
+                    <div class="info-grid">
+                        <div class="info-item"><div class="label">Package</div><div class="value">${escapeHtml(client.package)}</div></div>
+                        <div class="info-item"><div class="label">Speed</div><div class="value">${speed}</div></div>
+                        <div class="info-item"><div class="label">Monthly Fee</div><div class="value">Rs. ${(client.packageAmount || 0).toLocaleString()}</div></div>
+                        <div class="info-item"><div class="label">Old Balance</div><div class="value" style="color:#e74c3c;">Rs. ${(client.oldBill || 0).toLocaleString()}</div></div>
+                        <div class="info-item"><div class="label">Total Due</div><div class="value" style="color:#f5a623;">Rs. ${totalDue.toLocaleString()}</div></div>
+                        <div class="info-item"><div class="label">Total Paid</div><div class="value" style="color:#2ecc71;">Rs. ${totalCredit.toLocaleString()}</div></div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-title">📅 Package Validity</div>
+                    <div class="info-grid">
+                        <div class="info-item"><div class="label">Start Date</div><div class="value">${formatDMY(client.packageStartDate)}</div></div>
+                        <div class="info-item"><div class="label">Expiry Date</div><div class="value">${expiryDate ? formatDMY(expiryDate) : 'N/A'}</div></div>
+                        <div class="info-item"><div class="label">Days Left</div><div class="value">${daysLeft !== null ? (daysLeft > 0 ? daysLeft + ' days' : (daysLeft === 0 ? 'Expires today' : 'Expired')) : '—'}</div></div>
+                    </div>
+                    ${expiryWarning}
+                </div>
+                ${pendingHtml}
+                ${txHtml}
+                <div class="info-card" style="border-color:#f39c1240;">
+                    <div class="info-title">⚡ Additional Features</div>
+                    <div class="receipt-actions">
+                        <button class="btn-receipt btn-summary" id="summaryToggleBtn"><i class="fas fa-chart-pie"></i> Lifetime Package Summary</button>
+                        <button class="btn-receipt btn-owner" id="ownerBillingBtn"><i class="fas fa-credit-card"></i> Owner Billing Accounts</button>
+                    </div>
+                    <div style="font-size:0.5rem; color:#7e8c8f; margin-top:5px; text-align:center;">
+                        📋 Click to view complete package history &amp; Easypaisa payment details.
+                    </div>
+                </div>
+                <div class="info-card" style="border-color:#f5a62340;">
+                    <div class="info-title">📄 Download Receipts</div>
+                    <div class="receipt-actions">
+                        <button class="btn-receipt primary" id="receipt1Btn"><i class="fas fa-file-invoice"></i> Bill & Internet</button>
+                        <button class="btn-receipt purple" id="receipt2Btn"><i class="fas fa-book"></i> Ledger</button>
+                    </div>
+                    <div class="receipt-actions" style="margin-top:4px;">
+                        <button class="btn-receipt green" id="receipt1JpgBtn"><i class="fas fa-image"></i> Bill as JPG</button>
+                        <button class="btn-receipt" id="receipt2JpgBtn" style="border-color:#9b59b6; color:#9b59b6;"><i class="fas fa-image"></i> Ledger as JPG</button>
+                    </div>
+                    <div style="font-size:0.5rem; color:#7e8c8f; margin-top:5px; text-align:center;">
+                        ⬇️ Click to download as PNG (or JPG) — receipts include all billing details & transaction history.
+                    </div>
+                </div>
+                ${annHtml}
+                <div class="complaint-section" id="complaintSection">
+                    <div class="complaint-title"><i class="fas fa-exclamation-triangle"></i> Shikayat Box — Report an Issue</div>
+                    <div class="complaint-buttons">
+                        <button class="complaint-btn red-light" data-type="red_light" onclick="selectComplaintType('red_light', this)">
+                            <span class="btn-icon">🔴</span> Red Light — No Internet
+                        </button>
+                        <button class="complaint-btn slow-internet" data-type="slow_internet" onclick="selectComplaintType('slow_internet', this)">
+                            <span class="btn-icon">🟡</span> Slow Internet — Buffering
+                        </button>
+                        <button class="complaint-btn disconnecting" data-type="disconnecting" onclick="selectComplaintType('disconnecting', this)">
+                            <span class="btn-icon">🔌</span> Disconnecting — Frequent Drops
+                        </button>
+                        <button class="complaint-btn package-end" data-type="package_end" onclick="selectComplaintType('package_end', this)">
+                            <span class="btn-icon">💵</span> Package End — Recharge Needed
+                        </button>
+                    </div>
+                    <div class="complaint-submit-row">
+                        <button class="complaint-submit-btn" id="submitComplaintBtn" onclick="handleSubmitComplaint()">
+                            <i class="fas fa-paper-plane"></i> Submit Complaint
+                        </button>
+                        <button class="complaint-clear-btn" onclick="clearComplaintSelection()">✕ Clear</button>
+                    </div>
+                    <div class="complaint-submit-feedback" id="complaintFeedback"></div>
+                    <div class="complaint-status-box" id="complaintStatusBox">
+                        <div class="status-title"><i class="fas fa-history"></i> Your Complaint Status</div>
+                        <div id="complaintListContainer">
+                            <div class="no-complaints">🔄 Loading your complaints...</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="note" style="margin-top:6px;">
+                    💡 For payment or support, contact your ISP representative.
+                </div>
+            `;
 
-        async function downloadReceipt(elementId, fileNamePrefix, format = 'png') {
-            const container = document.getElementById(elementId);
-            const wrap = container.querySelector('.receipt-wrap');
-            if (!wrap) return;
-            showOverlay();
-            await new Promise(r => setTimeout(r, 300));
-            try {
-                container.style.position = 'fixed';
-                container.style.left = '0';
-                container.style.top = '0';
-                container.style.width = '500px';
-                container.style.zIndex = '99999';
-                container.style.opacity = '1';
-                container.style.pointerEvents = 'none';
-                container.style.transform = 'none';
-                container.style.maxHeight = 'none';
-                container.style.overflow = 'visible';
-                container.style.borderRadius = '0';
+        dashboardDiv.innerHTML = html;
 
-                const canvas = await html2canvas(wrap, {
-                    scale: 2.5,
-                    useCORS: true,
-                    allowTaint: false,
-                    backgroundColor: '#ffffff',
-                    logging: false,
-                    width: 500,
-                    height: wrap.scrollHeight,
-                });
+        // ─── Events ───
+        document.getElementById('logoutPortalBtn')?.addEventListener('click', () => {
+            dashboardDiv.style.display = 'none';
+            loginSection.style.display = 'block';
+            dashboardDiv.innerHTML = '';
+            currentClientData = null;
+            currentClientPhoneRaw = '';
+            phoneInput.value = '';
+            selectedComplaintType = null;
+            const existingErr = document.querySelector('.error-msg');
+            if (existingErr) existingErr.remove();
+            // Re-render announcements in the global section (if any)
+            renderAnnouncements(announcementsCache.filter(a => a.isActive !== false));
+        });
 
-                container.style.position = 'absolute';
-                container.style.left = '-9999px';
-                container.style.top = '0';
-                container.style.width = '500px';
-                container.style.zIndex = '-1';
-                container.style.opacity = '0';
-                container.style.pointerEvents = 'none';
-                container.style.transform = 'none';
-                container.style.maxHeight = 'none';
-                container.style.overflow = 'visible';
-                container.style.borderRadius = '0';
+        document.getElementById('receipt1Btn')?.addEventListener('click', () => {
+            populateReceipt1(client);
+            downloadReceipt('receipt1Container', `D3_Bill_${client.phone || 'client'}`, 'png');
+        });
+        document.getElementById('receipt2Btn')?.addEventListener('click', () => {
+            populateReceipt2(client);
+            downloadReceipt('receipt2Container', `D3_Ledger_${client.phone || 'client'}`, 'png');
+        });
+        document.getElementById('receipt1JpgBtn')?.addEventListener('click', () => {
+            populateReceipt1(client);
+            downloadReceipt('receipt1Container', `D3_Bill_${client.phone || 'client'}`, 'jpg');
+        });
+        document.getElementById('receipt2JpgBtn')?.addEventListener('click', () => {
+            populateReceipt2(client);
+            downloadReceipt('receipt2Container', `D3_Ledger_${client.phone || 'client'}`, 'jpg');
+        });
 
-                const link = document.createElement('a');
-                if (format === 'png') {
-                    link.download = `${fileNamePrefix}.png`;
-                    link.href = canvas.toDataURL('image/png');
-                } else {
-                    link.download = `${fileNamePrefix}.jpg`;
-                    link.href = canvas.toDataURL('image/jpeg', 0.95);
-                }
-                link.click();
-            } catch (err) {
-                console.error('Receipt capture error:', err);
-                toastError('Failed to generate receipt. Please try again.');
-                container.style.position = 'absolute';
-                container.style.left = '-9999px';
-                container.style.top = '0';
-                container.style.width = '500px';
-                container.style.zIndex = '-1';
-                container.style.opacity = '0';
-                container.style.pointerEvents = 'none';
-                container.style.transform = 'none';
-                container.style.maxHeight = 'none';
-                container.style.overflow = 'visible';
-                container.style.borderRadius = '0';
-            } finally {
-                hideOverlay();
-            }
-        }
-
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // TOGGLE PACKAGE SUMMARY
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        function togglePackageSummary(client) {
+        document.getElementById('summaryToggleBtn')?.addEventListener('click', () => {
             const existing = document.getElementById('packageSummaryToggle');
-            if (existing) { existing.classList.toggle('open'); return; }
-            const container = document.createElement('div');
-            container.id = 'packageSummaryToggle';
-            container.className = 'summary-toggle open';
+            if (existing) { existing.classList.toggle('open'); } else { togglePackageSummary(client); }
+        });
 
-            const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
-            const totalDebit = filteredHistory.reduce((s, e) => s + (e.debit || 0), 0);
-            const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
-            const pending = getPendingMonths(client);
-            const pendingTotal = pending.reduce((s, p) => s + p.dueAmount, 0);
+        document.getElementById('ownerBillingBtn')?.addEventListener('click', showEasypaisaModal);
 
-            let html = `
-                    <div class="summary-title">📋 LIFETIME PACKAGE SUMMARY</div>
-                    <div class="summary-item"><span class="label">Package</span><span class="value">${escapeHtml(client.package)}</span></div>
-                    <div class="summary-item"><span class="label">Monthly Fee</span><span class="value">Rs. ${(client.packageAmount || 0).toLocaleString()}</span></div>
-                    <div class="summary-item"><span class="label">Old Balance</span><span class="value red">Rs. ${(client.oldBill || 0).toLocaleString()}</span></div>
-                    <div class="summary-item"><span class="label">Total Billed (all time)</span><span class="value red">Rs. ${totalDebit.toLocaleString()}</span></div>
-                    <div class="summary-item"><span class="label">Total Paid (all time)</span><span class="value green">Rs. ${totalCredit.toLocaleString()}</span></div>
-                    <div class="summary-item"><span class="label">Pending Months</span><span class="value">${pending.length}</span></div>
-                    <div class="summary-item"><span class="label">Pending Amount</span><span class="value red">Rs. ${pendingTotal.toLocaleString()}</span></div>
-                    <div class="summary-item" style="border-bottom:2px solid #f39c12; padding-bottom:8px; margin-top:4px;">
-                        <span class="label" style="font-weight:800;">NET BALANCE</span>
-                        <span class="value gold" style="font-size:1rem;">Rs. ${(totalDebit - totalCredit).toLocaleString()}</span>
-                    </div>
-                    <div style="font-size:0.6rem; color:#7e8c8f; text-align:center; margin-top:8px;">
-                        * Based on all recorded transactions (excluding zero-value entries)
-                    </div>
-                `;
+        // Render announcements inside dashboard
+        const activeAnn = announcementsCache.filter(a => a.isActive !== false);
+        renderAnnouncements(activeAnn);
+        // Load complaints
+        loadComplaintsForClient(client.phone);
+    }
+
+    // ─── ────────────────────────────────────────────
+    // ★ COMPLAINT UI FUNCTIONS
+    // ─── ────────────────────────────────────────────
+
+    function selectComplaintType(type, btnEl) {
+        document.querySelectorAll('.complaint-btn').forEach(b => b.classList.remove('selected'));
+        if (btnEl) btnEl.classList.add('selected');
+        selectedComplaintType = type;
+        document.getElementById('complaintFeedback').textContent = '';
+        document.getElementById('complaintFeedback').className = 'complaint-submit-feedback';
+    }
+
+    function clearComplaintSelection() {
+        document.querySelectorAll('.complaint-btn').forEach(b => b.classList.remove('selected'));
+        selectedComplaintType = null;
+        document.getElementById('complaintFeedback').textContent = '';
+        document.getElementById('complaintFeedback').className = 'complaint-submit-feedback';
+    }
+
+    async function handleSubmitComplaint() {
+        const feedback = document.getElementById('complaintFeedback');
+        if (!currentClientData) {
+            feedback.textContent = '❌ Please search your account first.';
+            feedback.className = 'complaint-submit-feedback error';
+            return;
+        }
+        if (!selectedComplaintType) {
+            feedback.textContent = '⚠️ Please select a complaint type first.';
+            feedback.className = 'complaint-submit-feedback error';
+            return;
+        }
+        const btn = document.getElementById('submitComplaintBtn');
+        btn.disabled = true;
+        btn.textContent = '⏳ Submitting...';
+        feedback.textContent = '';
+        feedback.className = 'complaint-submit-feedback';
+
+        const client = currentClientData;
+        const typeLabel = getTypeLabel(selectedComplaintType);
+
+        try {
+            const success = await submitComplaint(
+                client.phone,
+                client.name,
+                client.id || '',
+                selectedComplaintType,
+                typeLabel
+            );
+            if (success) {
+                showComplaintPopup(selectedComplaintType);
+                clearComplaintSelection();
+                await loadComplaintsForClient(client.phone);
+                feedback.textContent = '';
+            } else {
+                feedback.textContent = '❌ Failed to submit complaint. Please try again.';
+                feedback.className = 'complaint-submit-feedback error';
+            }
+        } catch (e) {
+            console.error(e);
+            feedback.textContent = '❌ Error: ' + e.message;
+            feedback.className = 'complaint-submit-feedback error';
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Complaint';
+        }
+    }
+
+    async function loadComplaintsForClient(phone) {
+        const container = document.getElementById('complaintListContainer');
+        if (!container) return;
+        try {
+            const complaints = await getComplaintsForPhone(phone);
+            if (!complaints || complaints.length === 0) {
+                container.innerHTML =
+                    `<div class="no-complaints">📭 No complaints filed yet. Use the buttons above to report an issue.</div>`;
+                return;
+            }
+            let html = '';
+            complaints.forEach(c => {
+                const isResolved = c.status === 'resolved';
+                const statusText = isResolved ? '✅ Resolved' : '⏳ Pending';
+                const statusClass = isResolved ? 'resolved' : '';
+                const submitTime = c.timestamp ? formatDateTimeWithTime(c.timestamp) : 'N/A';
+                let resolveTimeHtml = '';
+                if (isResolved && c.resolvedAt) {
+                    const resolvedTime = formatDateTimeWithTime(c.resolvedAt);
+                    resolveTimeHtml =
+                        `<div class="ci-time"><span class="label">🕒 Resolved:</span> ${resolvedTime}</div>`;
+                }
+                const resolutionHtml = isResolved && c.resolution ?
+                    `<div class="ci-resolution">💬 <strong>Resolution:</strong> ${escapeHtml(c.resolution)}</div>` :
+                    '';
+                html += `
+                        <div class="complaint-item">
+                            <div class="ci-type"><span>${getTypeIcon(c.type)}</span><span>${escapeHtml(c.typeLabel || c.type)}</span></div>
+                            <div class="ci-status ${statusClass}">${statusText}</div>
+                            <div class="ci-time"><span class="label">📅 Submitted:</span><span>${submitTime}</span>${resolveTimeHtml}</div>
+                            ${resolutionHtml}
+                        </div>
+                    `;
+            });
             container.innerHTML = html;
-            const parentCard = document.querySelector('.info-card:last-child');
-            if (parentCard) { parentCard.parentNode.insertBefore(container, parentCard.nextSibling); } else { dashboardDiv
-                    .appendChild(container); }
+        } catch (e) {
+            console.error('loadComplaintsForClient error:', e);
+            container.innerHTML =
+                `<div class="no-complaints" style="color:#e74c3c;">❌ Could not load complaints. Please try again.</div>`;
         }
+    }
 
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // EASYPAISA MODAL
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        function showEasypaisaModal() {
-            document.getElementById('easypaisaModal').classList.add('active');
+    // ─── ────────────────────────────────────────────
+    // ★ ANNOUNCEMENT FILTER
+    // ─── ────────────────────────────────────────────
+
+    function filterAnnouncements(category, btnEl) {
+        currentAnnFilter = category;
+        document.querySelectorAll('.ann-category-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+        if (btnEl) btnEl.classList.add('active');
+        const activeAnn = announcementsCache.filter(a => a.isActive !== false);
+        renderAnnouncements(activeAnn);
+    }
+
+    // ─── ────────────────────────────────────────────
+    // ★ FETCH CLIENT
+    // ─── ────────────────────────────────────────────
+
+    async function fetchClientByPhone(phoneRaw) {
+        const phoneNorm = normalizePhone(phoneRaw);
+        if (!phoneNorm || phoneNorm.length < 10) {
+            toastError('Please enter a valid phone number (at least 10 digits)');
+            return null;
         }
-
-        function hideEasypaisaModal() {
-            document.getElementById('easypaisaModal').classList.remove('active');
+        loader.style.display = 'block';
+        try {
+            const snapshot = await db.ref(`${CLIENTS_PATH}/${ADMIN_UID}/clients`).once('value');
+            const allClients = snapshot.val();
+            if (!allClients) throw new Error('No client data found. Please contact your ISP.');
+            const clientsArray = Object.values(allClients);
+            const matched = clientsArray.find(c => normalizePhone(c.phone) === phoneNorm);
+            if (!matched) throw new Error('No client found with this phone number. Please check and try again.');
+            return matched;
+        } catch (err) {
+            console.error(err);
+            toastError(err.message || 'Something went wrong. Please try again later.');
+            return null;
+        } finally {
+            loader.style.display = 'none';
         }
+    }
 
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // DASHBOARD RENDER
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        let selectedComplaintType = null;
+    // ─── ────────────────────────────────────────────
+    // ★ SEARCH
+    // ─── ────────────────────────────────────────────
 
-        function renderDashboard(client) {
+    searchBtn.addEventListener('click', async () => {
+        const phone = phoneInput.value.trim();
+        if (!phone) { toastError('Please enter your registered phone number'); return; }
+        const client = await fetchClientByPhone(phone);
+        if (client) {
             currentClientData = client;
             currentClientPhoneRaw = client.phone;
-
-            const filteredHistory = (client.paymentHistory || []).filter(t => (t.debit || 0) !== 0 || (t.credit || 0) !== 0);
-            const totalDue = (client.packageAmount || 0) + (client.oldBill || 0);
-            const expiryDate = getPackageExpiry(client.packageStartDate);
-            const daysLeft = daysRemaining(expiryDate);
-            const speed = extractSpeed(client.package);
-            const pendingMonths = getPendingMonths(client);
-            const totalCredit = filteredHistory.reduce((s, e) => s + (e.credit || 0), 0);
-
-            let statusClass = 'status-badge';
-            if (client.status === 'active') statusClass += '';
-            else if (client.status === 'overdue') statusClass += ' overdue';
-            else statusClass += ' inactive';
-            let statusText = client.status === 'active' ? '✅ Active' : (client.status === 'overdue' ? '⚠️ Overdue' :
-                '⛔ Inactive');
-
-            let expiryWarning = '';
-            if (daysLeft !== null && daysLeft <= 3 && daysLeft >= 0) {
-                expiryWarning =
-                    `<div style="background:#3d2e1e; border-radius:12px; padding:10px; margin-top:8px; text-align:center; color:#f5a623; font-size:0.7rem;">⏰ Package expires in ${daysLeft} days! Please renew.</div>`;
-            } else if (daysLeft !== null && daysLeft < 0) {
-                expiryWarning =
-                    `<div style="background:#3d1e1e; border-radius:12px; padding:10px; margin-top:8px; text-align:center; color:#e74c3c; font-size:0.7rem;">❌ Package expired ${Math.abs(daysLeft)} days ago. Contact ISP for renewal.</div>`;
-            } else if (daysLeft !== null && daysLeft <= 7) {
-                expiryWarning =
-                    `<div style="background:#2a2a1a; border-radius:12px; padding:8px; margin-top:6px; text-align:center; color:#ffb347; font-size:0.65rem;">📅 Expires in ${daysLeft} days</div>`;
-            }
-
-            let pendingHtml = '';
-            if (pendingMonths.length > 0) {
-                pendingHtml = `<div class="info-card"><div class="info-title">📌 Unpaid Months</div>`;
-                pendingMonths.forEach(pm => {
-                    pendingHtml += `<div class="pending-month">
-                                        <span class="month">📆 ${pm.monthKey}</span>
-                                        <span class="amount">Rs. ${pm.dueAmount.toLocaleString()}</span>
-                                    </div>`;
-                });
-                pendingHtml += `</div>`;
-            } else {
-                pendingHtml =
-                    `<div class="info-card"><div class="info-title">✨ All Clear</div><div style="font-size:0.7rem; color:#2ecc71;">No pending installments. Well done!</div></div>`;
-            }
-
-            let transactions = [...filteredHistory];
-            transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
-            const recentTx = transactions.slice(0, 10);
-            let txHtml = `<div class="info-card"><div class="info-title">📜 Recent Transactions</div>
-                              <div style="overflow-x:auto;"><table class="ledger-table">
-                              <thead><tr><th>Date</th><th>Description</th><th>Credit</th><th>Debit</th></tr></thead><tbody>`;
-            if (recentTx.length === 0) {
-                txHtml += '<tr><td colspan="4" style="text-align:center;">No transactions found</td></tr>';
-            } else {
-                recentTx.forEach(t => {
-                    txHtml += `<tr>
-                                        <td>${formatDMY(t.date)}</td>
-                                        <td>${escapeHtml(t.description || '-')}</td>
-                                        <td class="credit-text">${t.credit > 0 ? 'Rs. '+t.credit.toLocaleString() : '-'}</td>
-                                        <td class="debit-text">${t.debit > 0 ? 'Rs. '+t.debit.toLocaleString() : '-'}</td>
-                                    </tr>`;
-                });
-            }
-            txHtml += `</tbody></table></div></div>`;
-
-            const html = `
-                    <div class="flex-between" style="margin-bottom:12px;">
-                        <span class="${statusClass}">${statusText}</span>
-                        <button class="logout-btn" id="logoutPortalBtn">🔒 Exit</button>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-title">👤 Customer Information</div>
-                        <div class="info-grid">
-                            <div class="info-item"><div class="label">Full Name</div><div class="value">${escapeHtml(client.name)}</div></div>
-                            <div class="info-item"><div class="label">Phone</div><div class="value">${escapeHtml(client.phone)}</div></div>
-                            <div class="info-item"><div class="label">Address</div><div class="value">${escapeHtml(client.address || '—')}</div></div>
-                        </div>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-title">📦 Package & Billing</div>
-                        <div class="info-grid">
-                            <div class="info-item"><div class="label">Package</div><div class="value">${escapeHtml(client.package)}</div></div>
-                            <div class="info-item"><div class="label">Speed</div><div class="value">${speed}</div></div>
-                            <div class="info-item"><div class="label">Monthly Fee</div><div class="value">Rs. ${(client.packageAmount || 0).toLocaleString()}</div></div>
-                            <div class="info-item"><div class="label">Old Balance</div><div class="value" style="color:#e74c3c;">Rs. ${(client.oldBill || 0).toLocaleString()}</div></div>
-                            <div class="info-item"><div class="label">Total Due</div><div class="value" style="color:#f5a623;">Rs. ${totalDue.toLocaleString()}</div></div>
-                            <div class="info-item"><div class="label">Total Paid</div><div class="value" style="color:#2ecc71;">Rs. ${totalCredit.toLocaleString()}</div></div>
-                        </div>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-title">📅 Package Validity</div>
-                        <div class="info-grid">
-                            <div class="info-item"><div class="label">Start Date</div><div class="value">${formatDMY(client.packageStartDate)}</div></div>
-                            <div class="info-item"><div class="label">Expiry Date</div><div class="value">${expiryDate ? formatDMY(expiryDate) : 'N/A'}</div></div>
-                            <div class="info-item"><div class="label">Days Left</div><div class="value">${daysLeft !== null ? (daysLeft > 0 ? daysLeft + ' days' : (daysLeft === 0 ? 'Expires today' : 'Expired')) : '—'}</div></div>
-                        </div>
-                        ${expiryWarning}
-                    </div>
-                    ${pendingHtml}
-                    ${txHtml}
-                    <div class="info-card" style="border-color:#f39c1240;">
-                        <div class="info-title">⚡ Additional Features</div>
-                        <div class="receipt-actions">
-                            <button class="btn-receipt btn-summary" id="summaryToggleBtn"><i class="fas fa-chart-pie"></i> Lifetime Package Summary</button>
-                            <button class="btn-receipt btn-owner" id="ownerBillingBtn"><i class="fas fa-credit-card"></i> Owner Billing Accounts</button>
-                        </div>
-                        <div style="font-size:0.55rem; color:#7e8c8f; margin-top:6px; text-align:center;">
-                            📋 Click to view complete package history &amp; Easypaisa payment details.
-                        </div>
-                    </div>
-                    <div class="info-card" style="border-color:#f5a62340;">
-                        <div class="info-title">📄 Download Receipts</div>
-                        <div class="receipt-actions">
-                            <button class="btn-receipt primary" id="receipt1Btn"><i class="fas fa-file-invoice"></i> Bill & Internet</button>
-                            <button class="btn-receipt purple" id="receipt2Btn"><i class="fas fa-book"></i> Ledger</button>
-                        </div>
-                        <div class="receipt-actions" style="margin-top:6px;">
-                            <button class="btn-receipt green" id="receipt1JpgBtn"><i class="fas fa-image"></i> Bill as JPG</button>
-                            <button class="btn-receipt" id="receipt2JpgBtn" style="border-color:#9b59b6; color:#9b59b6;"><i class="fas fa-image"></i> Ledger as JPG</button>
-                        </div>
-                        <div style="font-size:0.55rem; color:#7e8c8f; margin-top:6px; text-align:center;">
-                            ⬇️ Click to download as PNG (or JPG) — receipts include all billing details & transaction history.
-                        </div>
-                    </div>
-                    <div class="complaint-section" id="complaintSection">
-                        <div class="complaint-title"><i class="fas fa-exclamation-triangle"></i> Shikayat Box — Report an Issue</div>
-                        <div class="complaint-buttons">
-                            <button class="complaint-btn red-light" data-type="red_light" onclick="selectComplaintType('red_light', this)">
-                                <span class="btn-icon">🔴</span> Red Light — No Internet
-                            </button>
-                            <button class="complaint-btn slow-internet" data-type="slow_internet" onclick="selectComplaintType('slow_internet', this)">
-                                <span class="btn-icon">🟡</span> Slow Internet — Buffering
-                            </button>
-                            <button class="complaint-btn disconnecting" data-type="disconnecting" onclick="selectComplaintType('disconnecting', this)">
-                                <span class="btn-icon">🔌</span> Disconnecting — Frequent Drops
-                            </button>
-                            <button class="complaint-btn package-end" data-type="package_end" onclick="selectComplaintType('package_end', this)">
-                                <span class="btn-icon">📦</span> Package End — Recharge Needed
-                            </button>
-                        </div>
-                        <div class="complaint-submit-row">
-                            <button class="complaint-submit-btn" id="submitComplaintBtn" onclick="handleSubmitComplaint()">
-                                <i class="fas fa-paper-plane"></i> Submit Complaint
-                            </button>
-                            <button class="complaint-clear-btn" onclick="clearComplaintSelection()">✕ Clear</button>
-                        </div>
-                        <div class="complaint-submit-feedback" id="complaintFeedback"></div>
-                        <div class="complaint-status-box" id="complaintStatusBox">
-                            <div class="status-title"><i class="fas fa-history"></i> Your Complaint Status</div>
-                            <div id="complaintListContainer">
-                                <div class="no-complaints">🔄 Loading your complaints...</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="note" style="margin-top:8px;">
-                        💡 For payment or support, contact your ISP representative.
-                    </div>
-                `;
-
-            dashboardDiv.innerHTML = html;
-
-            // Events
-            document.getElementById('logoutPortalBtn')?.addEventListener('click', () => {
-                dashboardDiv.style.display = 'none';
-                loginSection.style.display = 'block';
-                dashboardDiv.innerHTML = '';
-                currentClientData = null;
-                currentClientPhoneRaw = '';
-                phoneInput.value = '';
-                selectedComplaintType = null;
-                const existingErr = document.querySelector('.error-msg');
-                if (existingErr) existingErr.remove();
-            });
-
-            document.getElementById('receipt1Btn')?.addEventListener('click', () => {
-                populateReceipt1(client);
-                downloadReceipt('receipt1Container', `D3_Bill_${client.phone || 'client'}`, 'png');
-            });
-            document.getElementById('receipt2Btn')?.addEventListener('click', () => {
-                populateReceipt2(client);
-                downloadReceipt('receipt2Container', `D3_Ledger_${client.phone || 'client'}`, 'png');
-            });
-            document.getElementById('receipt1JpgBtn')?.addEventListener('click', () => {
-                populateReceipt1(client);
-                downloadReceipt('receipt1Container', `D3_Bill_${client.phone || 'client'}`, 'jpg');
-            });
-            document.getElementById('receipt2JpgBtn')?.addEventListener('click', () => {
-                populateReceipt2(client);
-                downloadReceipt('receipt2Container', `D3_Ledger_${client.phone || 'client'}`, 'jpg');
-            });
-
-            document.getElementById('summaryToggleBtn')?.addEventListener('click', () => {
-                const existing = document.getElementById('packageSummaryToggle');
-                if (existing) { existing.classList.toggle('open'); } else { togglePackageSummary(client); }
-            });
-
-            document.getElementById('ownerBillingBtn')?.addEventListener('click', showEasypaisaModal);
-
-            loadComplaintsForClient(client.phone);
+            loginSection.style.display = 'none';
+            dashboardDiv.style.display = 'block';
+            renderDashboard(client);
         }
+    });
 
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // COMPLAINT UI
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        function selectComplaintType(type, btnEl) {
-            document.querySelectorAll('.complaint-btn').forEach(b => b.classList.remove('selected'));
-            if (btnEl) btnEl.classList.add('selected');
-            selectedComplaintType = type;
-            document.getElementById('complaintFeedback').textContent = '';
-            document.getElementById('complaintFeedback').className = 'complaint-submit-feedback';
-        }
+    phoneInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') searchBtn.click(); });
+    phoneInput.addEventListener('focus', () => {
+        const errBox = document.querySelector('.error-msg');
+        if (errBox) errBox.remove();
+    });
 
-        function clearComplaintSelection() {
-            document.querySelectorAll('.complaint-btn').forEach(b => b.classList.remove('selected'));
-            selectedComplaintType = null;
-            document.getElementById('complaintFeedback').textContent = '';
-            document.getElementById('complaintFeedback').className = 'complaint-submit-feedback';
-        }
+    // ─── ────────────────────────────────────────────
+    // ★ EASYPAISA COPY
+    // ─── ────────────────────────────────────────────
 
-        function getTypeLabel(type) {
-            const map = {
-                'red_light': '🔴 Red Light — No Internet',
-                'slow_internet': '🟡 Slow Internet — Buffering',
-                'disconnecting': '🔌 Disconnecting — Frequent Drops',
-                'package_end': '📦 Package End — Recharge Needed'
-            };
-            return map[type] || type;
-        }
-
-        function getTypeIcon(type) {
-            const map = { 'red_light': '🔴', 'slow_internet': '🟡', 'disconnecting': '🔌', 'package_end': '📦' };
-            return map[type] || '📌';
-        }
-
-        async function handleSubmitComplaint() {
-            const feedback = document.getElementById('complaintFeedback');
-            if (!currentClientData) {
-                feedback.textContent = '❌ Please search your account first.';
-                feedback.className = 'complaint-submit-feedback error';
-                return;
-            }
-            if (!selectedComplaintType) {
-                feedback.textContent = '⚠️ Please select a complaint type first.';
-                feedback.className = 'complaint-submit-feedback error';
-                return;
-            }
-            const btn = document.getElementById('submitComplaintBtn');
-            btn.disabled = true;
-            btn.textContent = '⏳ Submitting...';
-            feedback.textContent = '';
-            feedback.className = 'complaint-submit-feedback';
-
-            const client = currentClientData;
-            const typeLabel = getTypeLabel(selectedComplaintType);
-
-            try {
-                const success = await submitComplaint(
-                    client.phone,
-                    client.name,
-                    client.id || '',
-                    selectedComplaintType,
-                    typeLabel
-                );
-                if (success) {
-                    showComplaintPopup();
-                    clearComplaintSelection();
-                    await loadComplaintsForClient(client.phone);
-                    feedback.textContent = '';
-                } else {
-                    feedback.textContent = '❌ Failed to submit complaint. Please try again.';
-                    feedback.className = 'complaint-submit-feedback error';
-                }
-            } catch (e) {
-                console.error(e);
-                feedback.textContent = '❌ Error: ' + e.message;
-                feedback.className = 'complaint-submit-feedback error';
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Complaint';
-            }
-        }
-
-        async function loadComplaintsForClient(phone) {
-            const container = document.getElementById('complaintListContainer');
-            if (!container) return;
-            try {
-                const complaints = await getComplaintsForPhone(phone);
-                if (!complaints || complaints.length === 0) {
-                    container.innerHTML =
-                        `<div class="no-complaints">📭 No complaints filed yet. Use the buttons above to report an issue.</div>`;
-                    return;
-                }
-                let html = '';
-                complaints.forEach(c => {
-                    const isResolved = c.status === 'resolved';
-                    const statusText = isResolved ? '✅ Resolved' : '⏳ Pending';
-                    const statusClass = isResolved ? 'resolved' : '';
-                    const submitTime = c.timestamp ? formatDateTimeWithTime(c.timestamp) : 'N/A';
-                    let resolveTimeHtml = '';
-                    if (isResolved && c.resolvedAt) {
-                        const resolvedTime = formatDateTimeWithTime(c.resolvedAt);
-                        resolveTimeHtml =
-                            `<div class="ci-time"><span class="label">🕒 Resolved:</span> ${resolvedTime}</div>`;
-                    }
-                    const resolutionHtml = isResolved && c.resolution ?
-                        `<div class="ci-resolution">💬 <strong>Resolution:</strong> ${escapeHtml(c.resolution)}</div>` :
-                        '';
-                    html += `
-                            <div class="complaint-item">
-                                <div class="ci-type"><span>${getTypeIcon(c.type)}</span><span>${escapeHtml(c.typeLabel || c.type)}</span></div>
-                                <div class="ci-status ${statusClass}">${statusText}</div>
-                                <div class="ci-time"><span class="label">📅 Submitted:</span><span>${submitTime}</span>${resolveTimeHtml}</div>
-                                ${resolutionHtml}
-                            </div>
-                        `;
-                });
-                container.innerHTML = html;
-            } catch (e) {
-                console.error('loadComplaintsForClient error:', e);
-                container.innerHTML =
-                    `<div class="no-complaints" style="color:#e74c3c;">❌ Could not load complaints. Please try again.</div>`;
-            }
-        }
-
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // FETCH CLIENT
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        async function fetchClientByPhone(phoneRaw) {
-            const phoneNorm = normalizePhone(phoneRaw);
-            if (!phoneNorm || phoneNorm.length < 10) {
-                toastError('Please enter a valid phone number (at least 10 digits)');
-                return null;
-            }
-            loader.style.display = 'block';
-            try {
-                const snapshot = await db.ref(`${CLIENTS_PATH}/${ADMIN_UID}/clients`).once('value');
-                const allClients = snapshot.val();
-                if (!allClients) throw new Error('No client data found. Please contact your ISP.');
-                const clientsArray = Object.values(allClients);
-                const matched = clientsArray.find(c => normalizePhone(c.phone) === phoneNorm);
-                if (!matched) throw new Error('No client found with this phone number. Please check and try again.');
-                return matched;
-            } catch (err) {
-                console.error(err);
-                toastError(err.message || 'Something went wrong. Please try again later.');
-                return null;
-            } finally {
-                loader.style.display = 'none';
-            }
-        }
-
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        // SEARCH
-        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-        searchBtn.addEventListener('click', async () => {
-            const phone = phoneInput.value.trim();
-            if (!phone) { toastError('Please enter your registered phone number'); return; }
-            const client = await fetchClientByPhone(phone);
-            if (client) {
-                currentClientData = client;
-                currentClientPhoneRaw = client.phone;
-                loginSection.style.display = 'none';
-                dashboardDiv.style.display = 'block';
-                renderDashboard(client);
-            }
+    document.getElementById('copyEpHeaderBtn')?.addEventListener('click', copyEasypaisaFromHeader);
+    document.getElementById('copyEasypaisaBtn')?.addEventListener('click', () => {
+        const num = '03403157119';
+        navigator.clipboard.writeText(num).then(() => {
+            toastSuccess('✅ Number copied to clipboard!');
+        }).catch(() => {
+            const dummy = document.createElement('input');
+            dummy.value = num;
+            document.body.appendChild(dummy);
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            toastSuccess('✅ Number copied!');
         });
+    });
+    document.getElementById('closeEasypaisaBtn')?.addEventListener('click', hideEasypaisaModal);
+    document.getElementById('easypaisaModal')?.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) hideEasypaisaModal();
+    });
 
-        phoneInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') searchBtn.click(); });
-        phoneInput.addEventListener('focus', () => {
-            const errBox = document.querySelector('.error-msg');
-            if (errBox) errBox.remove();
-        });
+    // ─── ────────────────────────────────────────────
+    // ★ ADMIN PANEL TOGGLE
+    // ─── ────────────────────────────────────────────
 
-        document.getElementById('copyEpHeaderBtn')?.addEventListener('click', copyEasypaisaFromHeader);
+    const adminPanel = document.getElementById('adminPanel');
+    const adminToggleBtn = document.getElementById('adminToggleBtn');
+    let adminOpen = false;
 
-        document.getElementById('copyEasypaisaBtn')?.addEventListener('click', () => {
-            const num = '03403157119';
-            navigator.clipboard.writeText(num).then(() => {
-                toastSuccess('✅ Number copied to clipboard!');
-            }).catch(() => {
-                const dummy = document.createElement('input');
-                dummy.value = num;
-                document.body.appendChild(dummy);
-                dummy.select();
-                document.execCommand('copy');
-                document.body.removeChild(dummy);
-                toastSuccess('✅ Number copied!');
-            });
-        });
+    adminToggleBtn.addEventListener('click', () => {
+        adminOpen = !adminOpen;
+        adminPanel.classList.toggle('open', adminOpen);
+        adminToggleBtn.innerHTML = adminOpen ?
+            '<i class="fas fa-times"></i> Close Admin' :
+            '<i class="fas fa-cog"></i> Admin Panel';
+        if (adminOpen) {
+            // Refresh admin list
+            renderAdminList(announcementsCache);
+        }
+    });
 
-        document.getElementById('closeEasypaisaBtn')?.addEventListener('click', hideEasypaisaModal);
-        document.getElementById('easypaisaModal')?.addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) hideEasypaisaModal();
-        });
+    // ─── ────────────────────────────────────────────
+    // ★ ADMIN FORM EVENTS
+    // ─── ────────────────────────────────────────────
 
-        console.log('👑 D3 Crown Fiber Client Portal');
-        console.log('🚀 Developed by Khalid Ali Pechuho');
-        console.log('✨ Compact showcase — no suggested features card.');
-    </script>
+    document.getElementById('annSubmitBtn').addEventListener('click', saveAnnouncement);
+    document.getElementById('annCancelBtn').addEventListener('click', resetAnnouncementForm);
+
+    // ─── ────────────────────────────────────────────
+    // ★ INIT
+    // ─── ────────────────────────────────────────────
+
+    // Start listening to announcements
+    listenAnnouncements();
+
+    // Initial render of announcements in the global section (if dashboard not yet shown)
+    // The dashboard will render its own announcements section when a client is loaded.
+
+    console.log('👑 D3 Crown Fiber Client Portal');
+    console.log('🚀 Developed by Khalid Ali Pechuho');
+    console.log('📢 Announcement System Active — with ticker, categories, and push notifications');
+</script>
 </body>
 </html>
