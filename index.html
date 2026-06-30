@@ -297,6 +297,172 @@
             font-weight: 600;
         }
 
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        /* ★ PERMANENT INSTALL APP BUTTON ★        */
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        .install-app-row {
+            margin-top: 10px;
+            padding: 0 6px;
+            display: flex;
+            justify-content: center;
+        }
+        .install-app-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #0a0e14, #1a2330);
+            border: 2px solid #f5a623;
+            border-radius: 60px;
+            padding: 10px 22px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #ffd966;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(245, 166, 35, 0.15), inset 0 0 30px rgba(245, 166, 35, 0.03);
+            letter-spacing: 0.5px;
+            width: 100%;
+            max-width: 340px;
+            text-shadow: 0 0 10px rgba(245, 166, 35, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .install-app-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(245, 166, 35, 0.06), transparent 70%);
+            animation: btnGlowRotate 12s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes btnGlowRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .install-app-btn:hover {
+            transform: scale(1.02);
+            border-color: #ffd966;
+            box-shadow: 0 0 40px rgba(245, 166, 35, 0.25), inset 0 0 40px rgba(245, 166, 35, 0.05);
+            color: #fff;
+        }
+        .install-app-btn:active {
+            transform: scale(0.96);
+        }
+        .install-app-btn .btn-icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #f5a623;
+            animation: downloadBounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 12px rgba(245, 166, 35, 0.3));
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes downloadBounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(4px);
+            }
+        }
+        .install-app-btn .btn-text {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+        }
+        .install-app-btn .btn-text .main-label {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #ffd966;
+        }
+        .install-app-btn .btn-text .sub-label {
+            font-size: 0.5rem;
+            font-weight: 600;
+            color: #7e8c8f;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+        .install-app-btn .btn-badge {
+            position: relative;
+            z-index: 1;
+            background: #2ecc71;
+            color: #000;
+            font-size: 0.45rem;
+            font-weight: 800;
+            padding: 2px 10px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 4px;
+            animation: pulseBadge 2s ease-in-out infinite;
+        }
+        @keyframes pulseBadge {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(0.95);
+            }
+        }
+        .install-app-btn .download-arrow {
+            font-size: 1.4rem;
+            color: #f5a623;
+            position: relative;
+            z-index: 1;
+            animation: arrowPulse 1.8s ease-in-out infinite;
+            filter: drop-shadow(0 0 16px rgba(245, 166, 35, 0.25));
+        }
+        @keyframes arrowPulse {
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.9;
+            }
+            50% {
+                transform: translateY(6px) scale(1.1);
+                opacity: 1;
+            }
+        }
+        /* small screens */
+        @media (max-width: 420px) {
+            .install-app-btn {
+                padding: 8px 14px;
+                font-size: 0.7rem;
+                gap: 8px;
+                max-width: 100%;
+            }
+            .install-app-btn .btn-text .main-label {
+                font-size: 0.7rem;
+            }
+            .install-app-btn .download-arrow {
+                font-size: 1.1rem;
+            }
+            .install-app-btn .btn-icon-wrapper {
+                font-size: 1rem;
+            }
+            .install-app-btn .btn-badge {
+                font-size: 0.4rem;
+                padding: 1px 7px;
+            }
+        }
+
         /* ─── BODY ─── */
         .portal-body {
             padding: 20px 16px;
@@ -1829,89 +1995,6 @@
             }
         }
 
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        /* ★ PWA — INSTALL BANNER / BUTTON ★        */
-        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-        .install-banner {
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            background: linear-gradient(135deg, #1a2a1a, #0f1a0f);
-            padding: 10px 14px;
-            margin: 8px 12px 2px 12px;
-            border-radius: 18px;
-            border: 2px solid #2ecc71;
-            box-shadow: 0 0 30px rgba(46, 204, 113, 0.15);
-            animation: fadeIn 0.5s ease;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .install-banner.show {
-            display: flex;
-        }
-        .install-banner .ib-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-            min-width: 140px;
-        }
-        .install-banner .ib-left .ib-icon {
-            font-size: 1.8rem;
-            line-height: 1;
-            filter: drop-shadow(0 0 12px rgba(245, 166, 35, 0.3));
-        }
-        .install-banner .ib-left .ib-text {
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #e0e8f0;
-            line-height: 1.4;
-        }
-        .install-banner .ib-left .ib-text strong {
-            color: #f5a623;
-            font-weight: 800;
-        }
-        .install-banner .ib-left .ib-text .ib-sub {
-            display: block;
-            font-size: 0.55rem;
-            color: #7e8c8f;
-            font-weight: 400;
-        }
-        .install-banner .ib-actions {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .install-banner .ib-actions .ib-btn {
-            padding: 6px 16px;
-            border-radius: 40px;
-            border: none;
-            font-weight: 700;
-            font-size: 0.65rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .install-banner .ib-actions .ib-btn.primary {
-            background: #2ecc71;
-            color: #000;
-        }
-        .install-banner .ib-actions .ib-btn.primary:hover {
-            background: #27ae60;
-            transform: scale(0.97);
-        }
-        .install-banner .ib-actions .ib-btn.secondary {
-            background: transparent;
-            border: 1px solid #5a6a7a;
-            color: #a0a8b4;
-        }
-        .install-banner .ib-actions .ib-btn.secondary:hover {
-            border-color: #f5a623;
-            color: #f5a623;
-        }
-
         /* ─── RESPONSIVE ─── */
         @media (max-width: 540px) {
             .receipt-wrap {
@@ -2041,22 +2124,27 @@
             .dev-crown-mini {
                 font-size: 0.85rem;
             }
-            .install-banner {
-                padding: 8px 12px;
-                margin: 4px 8px 0 8px;
-                flex-direction: column;
-                align-items: stretch;
+            .install-app-row {
+                padding: 0 2px;
             }
-            .install-banner .ib-left {
-                min-width: unset;
+            .install-app-btn {
+                padding: 8px 14px;
+                font-size: 0.7rem;
+                gap: 8px;
+                max-width: 100%;
             }
-            .install-banner .ib-actions {
-                justify-content: center;
-                margin-top: 4px;
+            .install-app-btn .btn-text .main-label {
+                font-size: 0.7rem;
             }
-            .install-banner .ib-actions .ib-btn {
-                padding: 5px 14px;
-                font-size: 0.6rem;
+            .install-app-btn .download-arrow {
+                font-size: 1.1rem;
+            }
+            .install-app-btn .btn-icon-wrapper {
+                font-size: 1rem;
+            }
+            .install-app-btn .btn-badge {
+                font-size: 0.4rem;
+                padding: 1px 7px;
             }
         }
         @media (max-width: 400px) {
@@ -2112,6 +2200,24 @@
             .dev-crown-mini {
                 font-size: 0.75rem;
             }
+            .install-app-btn {
+                padding: 6px 10px;
+                font-size: 0.6rem;
+                gap: 5px;
+            }
+            .install-app-btn .btn-text .main-label {
+                font-size: 0.6rem;
+            }
+            .install-app-btn .download-arrow {
+                font-size: 0.9rem;
+            }
+            .install-app-btn .btn-icon-wrapper {
+                font-size: 0.85rem;
+            }
+            .install-app-btn .btn-badge {
+                font-size: 0.35rem;
+                padding: 1px 5px;
+            }
         }
     </style>
 </head>
@@ -2162,23 +2268,6 @@
         </div>
     </div>
 
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <!-- ★ INSTALL BANNER (PWA Add to Home) ★    -->
-    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-    <div class="install-banner" id="installBanner">
-        <div class="ib-left">
-            <span class="ib-icon">👑</span>
-            <div class="ib-text">
-                <strong>D3 Crown Fiber</strong>
-                <span class="ib-sub">📲 Add to Home Screen for quick access</span>
-            </div>
-        </div>
-        <div class="ib-actions">
-            <button class="ib-btn primary" id="installNowBtn"><i class="fas fa-download"></i> Install</button>
-            <button class="ib-btn secondary" id="installLaterBtn">Later</button>
-        </div>
-    </div>
-
     <div class="portal-card">
 
         <!-- ─── SCROLLING TICKER ─── -->
@@ -2214,6 +2303,22 @@
                     <i class="fas fa-copy"></i> Copy
                 </button>
             </div>
+
+            <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+            <!-- ★ PERMANENT INSTALL APP BUTTON ★          -->
+            <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+            <div class="install-app-row">
+                <button class="install-app-btn" id="installAppBtn">
+                    <span class="download-arrow"><i class="fas fa-download"></i></span>
+                    <span class="btn-text">
+                        <span class="main-label">📲 Install D3 App</span>
+                        <span class="sub-label">Add to Home Screen — PWA Install</span>
+                    </span>
+                    <span class="btn-badge">FREE</span>
+                    <span class="btn-icon-wrapper"><i class="fas fa-arrow-down"></i></span>
+                </button>
+            </div>
+
         </div>
         <p>📡 Client Portal — Check Your Bill & Package</p>
     </div>
@@ -2396,58 +2501,109 @@
             }
         } catch (_) { /* ignore if SW fails */ }
 
-        // ─── 3. Install Banner Logic ───
+        // ─── 3. Enhanced Install Button Logic ───
         let deferredPrompt = null;
-        const banner = document.getElementById('installBanner');
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            banner.classList.add('show');
+            console.log('✅ Install prompt available');
         });
 
         window.addEventListener('appinstalled', () => {
-            banner.classList.remove('show');
             deferredPrompt = null;
             console.log('✅ App installed successfully!');
+            // Update button to show installed state
+            const btn = document.getElementById('installAppBtn');
+            if (btn) {
+                btn.innerHTML = `
+                            <span class="download-arrow"><i class="fas fa-check-circle" style="color:#2ecc71;"></i></span>
+                            <span class="btn-text">
+                                <span class="main-label">✅ App Installed</span>
+                                <span class="sub-label">D3 Crown Fiber is on your home screen</span>
+                            </span>
+                            <span class="btn-badge" style="background:#2ecc71;">✓</span>
+                            <span class="btn-icon-wrapper"><i class="fas fa-check"></i></span>
+                        `;
+                btn.style.borderColor = '#2ecc71';
+                btn.style.opacity = '0.85';
+                btn.style.cursor = 'default';
+                btn.onclick = null; // disable further clicks
+            }
         });
 
-        document.getElementById('installNowBtn').addEventListener('click', async () => {
+        // Handle the permanent install button click
+        document.getElementById('installAppBtn').addEventListener('click', async function(e) {
+            // If already installed (standalone mode)
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                toastSuccess('✅ App is already installed on your device!');
+                return;
+            }
+
+            // If we have a deferred prompt (Chrome/Edge/Android)
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 const result = await deferredPrompt.userChoice;
                 if (result.outcome === 'accepted') {
-                    banner.classList.remove('show');
+                    toastSuccess('✅ App installation started!');
+                    // The 'appinstalled' event will handle the UI update later.
+                } else {
+                    toastError('❌ Installation was declined.');
                 }
                 deferredPrompt = null;
-            } else {
-                // Fallback: show instructions
-                alert('👑 To add to Home Screen:\n\n📱 Android: Tap the menu (⋮) → "Add to Home Screen"\n🍎 iOS: Tap Share (⎔) → "Add to Home Screen"');
+                return;
             }
+
+            // ─── Fallback: Show device‑specific instructions ───
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            const isAndroid = /Android/.test(navigator.userAgent);
+
+            let instructions = '';
+            if (isIOS) {
+                instructions = '📱 iOS: Tap the Share button (⎔) → "Add to Home Screen" → Confirm.';
+            } else if (isAndroid) {
+                instructions = '📱 Android: Tap the menu (⋮) → "Install App" or "Add to Home Screen" → Confirm.';
+            } else {
+                instructions = '💻 Desktop: Click the install icon (🔽) in the address bar, or use your browser\'s "Install App" option.';
+            }
+
+            // Show a friendly modal with clear steps
+            const popup = document.createElement('div');
+            popup.className = 'popup-modal-overlay active';
+            popup.style.zIndex = '999999';
+            popup.innerHTML = `
+                        <div class="popup-modal" style="border-color:#f5a623;">
+                            <span class="popup-icon">📲</span>
+                            <div class="popup-title" style="color:#f5a623;">Install D3 Crown Fiber App</div>
+                            <div class="popup-message" style="font-size:0.8rem;text-align:left;padding:0 6px;">
+                                <p style="margin-bottom:8px;font-weight:600;color:#ffd966;">Install the PWA for quick access:</p>
+                                <ul style="list-style:none;padding:0;margin:0;font-size:0.75rem;color:#cbd5e1;">
+                                    <li style="padding:6px 0;border-bottom:1px solid #1e293b;">${instructions}</li>
+                                </ul>
+                                <p style="margin-top:12px;font-size:0.7rem;color:#7e8c8f;">
+                                    This will add the portal to your home screen as a standalone app.<br>
+                                    👑 <strong style="color:#f5a623;">D3 Crown Fiber</strong> — always one tap away.
+                                </p>
+                            </div>
+                            <button class="popup-close-btn" onclick="this.closest('.popup-modal-overlay').remove()" style="margin-top:8px;">
+                                Got it
+                            </button>
+                        </div>
+                    `;
+            document.body.appendChild(popup);
+            // Auto‑remove after 20 seconds
+            setTimeout(() => {
+                if (popup.parentNode) popup.remove();
+            }, 20000);
         });
-
-        document.getElementById('installLaterBtn').addEventListener('click', () => {
-            banner.classList.remove('show');
-            // Remember dismissal for this session
-            sessionStorage.setItem('d3-install-banner-dismissed', 'true');
-        });
-
-        // If user dismissed earlier in this session, hide banner
-        if (sessionStorage.getItem('d3-install-banner-dismissed') === 'true') {
-            banner.classList.remove('show');
-        }
-
-        // Also hide if already installed (check via media query)
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            banner.classList.remove('show');
-        }
 
         console.log('👑 D3 Crown Fiber PWA setup complete.');
+        console.log('📲 Permanent "Install D3 App" button with true PWA install support.');
     })();
 
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // FIREBASE CONFIG (unchanged)
+    // FIREBASE & ALL OTHER LOGIC (unchanged)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     const firebaseConfig = {
         apiKey: "AIzaSyDZHUNdkun0f3cY3JqfzrI86mpxy7zY7x0",
@@ -2546,17 +2702,6 @@
         return cat || 'general_news';
     }
 
-    function getCategoryEmoji(cat) {
-        const map = {
-            'maintenance': '🔧',
-            'new_packages': '📦',
-            'offers_discounts': '🏷️',
-            'outage_alert': '⚠️',
-            'general_news': '📰'
-        };
-        return map[cat] || '📰';
-    }
-
     let currentAnnFilter = 'all';
 
     function renderAnnouncements(announcements) {
@@ -2621,8 +2766,6 @@
     }
 
     // ─── URGENT PUSH NOTIFICATION ───
-    let lastUrgentCheck = '';
-
     function checkUrgentAnnouncements(urgentList) {
         if (!urgentList || urgentList.length === 0) return;
         const now = Date.now();
@@ -3736,7 +3879,7 @@
     console.log('👑 D3 Crown Fiber Client Portal');
     console.log('🚀 Developed by Khalid Ali Pechuho');
     console.log('📢 Announcement System Active — with ticker, categories, and push notifications');
-    console.log('📱 PWA — Add to Home Screen ready!');
+    console.log('📲 Permanent "Install D3 App" button — with true PWA install support!');
 </script>
 </body>
 </html>
