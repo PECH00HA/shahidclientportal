@@ -4,6 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>D3 Crown Fiber — Client Portal</title>
+
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+    <!-- ★ PWA / ADD TO HOMESCREEN META TAGS ★   -->
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="D3 Crown Fiber" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#f5a623" />
+    <link rel="manifest" id="manifestLink" href="#" />
+
+    <!-- ★ FAVICON: Crown 👑 (SVG data URI) ★ -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M8,48 L12,20 L22,32 L32,14 L42,32 L52,20 L56,48 Z' fill='%23f5a623' stroke='%23d4891a' stroke-width='2'/><circle cx='16' cy='24' r='4' fill='%23ffd966'/><circle cx='32' cy='16' r='4' fill='%23ffd966'/><circle cx='48' cy='24' r='4' fill='%23ffd966'/><rect x='10' y='44' width='44' height='6' fill='%23d4891a' rx='2'/></svg>" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M8,48 L12,20 L22,32 L32,14 L42,32 L52,20 L56,48 Z' fill='%23f5a623' stroke='%23d4891a' stroke-width='2'/><circle cx='16' cy='24' r='4' fill='%23ffd966'/><circle cx='32' cy='16' r='4' fill='%23ffd966'/><circle cx='48' cy='24' r='4' fill='%23ffd966'/><rect x='10' y='44' width='44' height='6' fill='%23d4891a' rx='2'/></svg>" />
+
     <!-- Font Awesome 6 (Free) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <!-- Firebase SDKs -->
@@ -1814,6 +1829,89 @@
             }
         }
 
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        /* ★ PWA — INSTALL BANNER / BUTTON ★        */
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        .install-banner {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #1a2a1a, #0f1a0f);
+            padding: 10px 14px;
+            margin: 8px 12px 2px 12px;
+            border-radius: 18px;
+            border: 2px solid #2ecc71;
+            box-shadow: 0 0 30px rgba(46, 204, 113, 0.15);
+            animation: fadeIn 0.5s ease;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .install-banner.show {
+            display: flex;
+        }
+        .install-banner .ib-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 140px;
+        }
+        .install-banner .ib-left .ib-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+            filter: drop-shadow(0 0 12px rgba(245, 166, 35, 0.3));
+        }
+        .install-banner .ib-left .ib-text {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #e0e8f0;
+            line-height: 1.4;
+        }
+        .install-banner .ib-left .ib-text strong {
+            color: #f5a623;
+            font-weight: 800;
+        }
+        .install-banner .ib-left .ib-text .ib-sub {
+            display: block;
+            font-size: 0.55rem;
+            color: #7e8c8f;
+            font-weight: 400;
+        }
+        .install-banner .ib-actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .install-banner .ib-actions .ib-btn {
+            padding: 6px 16px;
+            border-radius: 40px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.65rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .install-banner .ib-actions .ib-btn.primary {
+            background: #2ecc71;
+            color: #000;
+        }
+        .install-banner .ib-actions .ib-btn.primary:hover {
+            background: #27ae60;
+            transform: scale(0.97);
+        }
+        .install-banner .ib-actions .ib-btn.secondary {
+            background: transparent;
+            border: 1px solid #5a6a7a;
+            color: #a0a8b4;
+        }
+        .install-banner .ib-actions .ib-btn.secondary:hover {
+            border-color: #f5a623;
+            color: #f5a623;
+        }
+
         /* ─── RESPONSIVE ─── */
         @media (max-width: 540px) {
             .receipt-wrap {
@@ -1943,6 +2041,23 @@
             .dev-crown-mini {
                 font-size: 0.85rem;
             }
+            .install-banner {
+                padding: 8px 12px;
+                margin: 4px 8px 0 8px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .install-banner .ib-left {
+                min-width: unset;
+            }
+            .install-banner .ib-actions {
+                justify-content: center;
+                margin-top: 4px;
+            }
+            .install-banner .ib-actions .ib-btn {
+                padding: 5px 14px;
+                font-size: 0.6rem;
+            }
         }
         @media (max-width: 400px) {
             .receipt-actions .btn-receipt {
@@ -2044,6 +2159,23 @@
                 <span id="urgentPopupBody"></span>
             </div>
             <button class="popup-close-btn" onclick="closeUrgentPopup()" style="background:#e74c3c;color:#fff;">Dismiss</button>
+        </div>
+    </div>
+
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+    <!-- ★ INSTALL BANNER (PWA Add to Home) ★    -->
+    <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+    <div class="install-banner" id="installBanner">
+        <div class="ib-left">
+            <span class="ib-icon">👑</span>
+            <div class="ib-text">
+                <strong>D3 Crown Fiber</strong>
+                <span class="ib-sub">📲 Add to Home Screen for quick access</span>
+            </div>
+        </div>
+        <div class="ib-actions">
+            <button class="ib-btn primary" id="installNowBtn"><i class="fas fa-download"></i> Install</button>
+            <button class="ib-btn secondary" id="installLaterBtn">Later</button>
         </div>
     </div>
 
@@ -2197,7 +2329,125 @@
 
 <script>
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // FIREBASE CONFIG
+    // ★ PWA — MANIFEST & SERVICE WORKER ★
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    (function setupPWA() {
+        // ─── 1. Manifest (as blob URL) ───
+        const manifest = {
+            name: "D3 Crown Fiber Client Portal",
+            short_name: "D3 Crown Fiber",
+            description: "Client portal for D3 Crown Fiber — check bills, package, and support.",
+            start_url: window.location.href.split('?')[0],
+            display: "standalone",
+            orientation: "portrait",
+            theme_color: "#f5a623",
+            background_color: "#0b0f15",
+            icons: [{
+                src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M8,48 L12,20 L22,32 L32,14 L42,32 L52,20 L56,48 Z' fill='%23f5a623' stroke='%23d4891a' stroke-width='2'/%3E%3Ccircle cx='16' cy='24' r='4' fill='%23ffd966'/%3E%3Ccircle cx='32' cy='16' r='4' fill='%23ffd966'/%3E%3Ccircle cx='48' cy='24' r='4' fill='%23ffd966'/%3E%3Crect x='10' y='44' width='44' height='6' fill='%23d4891a' rx='2'/%3E%3C/svg%3E",
+                sizes: "512x512",
+                type: "image/svg+xml",
+                purpose: "any maskable"
+            }, {
+                src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M8,48 L12,20 L22,32 L32,14 L42,32 L52,20 L56,48 Z' fill='%23f5a623' stroke='%23d4891a' stroke-width='2'/%3E%3Ccircle cx='16' cy='24' r='4' fill='%23ffd966'/%3E%3Ccircle cx='32' cy='16' r='4' fill='%23ffd966'/%3E%3Ccircle cx='48' cy='24' r='4' fill='%23ffd966'/%3E%3Crect x='10' y='44' width='44' height='6' fill='%23d4891a' rx='2'/%3E%3C/svg%3E",
+                sizes: "192x192",
+                type: "image/svg+xml",
+                purpose: "any maskable"
+            }]
+        };
+
+        const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+        const manifestURL = URL.createObjectURL(manifestBlob);
+        document.getElementById('manifestLink').href = manifestURL;
+
+        // ─── 2. Service Worker (as blob URL) ───
+        const swCode = `
+                self.addEventListener('install', (e) => {
+                    e.waitUntil(
+                        caches.open('d3-crown-v1').then((cache) => {
+                            return cache.addAll([
+                                '${window.location.href.split('?')[0]}',
+                                '${window.location.href.split('?')[0]}?v=1'
+                            ]);
+                        })
+                    );
+                });
+                self.addEventListener('fetch', (e) => {
+                    e.respondWith(
+                        caches.match(e.request).then((r) => {
+                            return r || fetch(e.request).catch(() => {
+                                return new Response('Offline — please connect to the internet.', {
+                                    status: 503,
+                                    statusText: 'Service Unavailable'
+                                });
+                            });
+                        })
+                    );
+                });
+            `;
+
+        try {
+            const swBlob = new Blob([swCode], { type: 'application/javascript' });
+            const swURL = URL.createObjectURL(swBlob);
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register(swURL, { scope: '/' })
+                    .then(() => console.log('✅ Service Worker registered.'))
+                    .catch((err) => console.warn('SW registration skipped:', err));
+            }
+        } catch (_) { /* ignore if SW fails */ }
+
+        // ─── 3. Install Banner Logic ───
+        let deferredPrompt = null;
+        const banner = document.getElementById('installBanner');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            banner.classList.add('show');
+        });
+
+        window.addEventListener('appinstalled', () => {
+            banner.classList.remove('show');
+            deferredPrompt = null;
+            console.log('✅ App installed successfully!');
+        });
+
+        document.getElementById('installNowBtn').addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const result = await deferredPrompt.userChoice;
+                if (result.outcome === 'accepted') {
+                    banner.classList.remove('show');
+                }
+                deferredPrompt = null;
+            } else {
+                // Fallback: show instructions
+                alert('👑 To add to Home Screen:\n\n📱 Android: Tap the menu (⋮) → "Add to Home Screen"\n🍎 iOS: Tap Share (⎔) → "Add to Home Screen"');
+            }
+        });
+
+        document.getElementById('installLaterBtn').addEventListener('click', () => {
+            banner.classList.remove('show');
+            // Remember dismissal for this session
+            sessionStorage.setItem('d3-install-banner-dismissed', 'true');
+        });
+
+        // If user dismissed earlier in this session, hide banner
+        if (sessionStorage.getItem('d3-install-banner-dismissed') === 'true') {
+            banner.classList.remove('show');
+        }
+
+        // Also hide if already installed (check via media query)
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            banner.classList.remove('show');
+        }
+
+        console.log('👑 D3 Crown Fiber PWA setup complete.');
+    })();
+
+
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // FIREBASE CONFIG (unchanged)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     const firebaseConfig = {
         apiKey: "AIzaSyDZHUNdkun0f3cY3JqfzrI86mpxy7zY7x0",
@@ -2251,13 +2501,11 @@
                 return;
             }
             const arr = Object.values(data);
-            // sort newest first
             arr.sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
             announcementsCache = arr;
             renderTicker(arr.filter(a => a.isActive !== false));
             renderAnnouncements(arr.filter(a => a.isActive !== false));
             renderAdminList(arr);
-            // Check for urgent announcements (push notification)
             checkUrgentAnnouncements(arr.filter(a => a.isActive !== false && a.isUrgent === true));
         });
     }
@@ -2280,7 +2528,6 @@
                         ${escapeHtml(a.title)} ${a.isUrgent ? '🚨' : ''}
                     </span>`;
         });
-        // Duplicate for seamless loop
         track.innerHTML = html + html;
     }
 
@@ -2378,21 +2625,17 @@
 
     function checkUrgentAnnouncements(urgentList) {
         if (!urgentList || urgentList.length === 0) return;
-        // Check if we have already shown these
         const now = Date.now();
         urgentList.forEach(a => {
             const key = a.id + '_' + (a.timestamp || '');
             if (urgentPopupShown.has(key)) return;
-            // Only show if created in last 10 minutes (to avoid showing old ones on reload)
             const created = new Date(a.timestamp || 0).getTime();
             if (now - created > 10 * 60 * 1000) {
                 urgentPopupShown.add(key);
                 return;
             }
             urgentPopupShown.add(key);
-            // Show popup
             showUrgentPopup(a.title, a.message);
-            // Also try browser notification
             if ('Notification' in window && Notification.permission === 'granted') {
                 new Notification('🚨 D3 Crown Fiber — Urgent', {
                     body: a.title + ' — ' + a.message.substring(0, 120),
@@ -2412,7 +2655,6 @@
         document.getElementById('urgentPopup').classList.remove('active');
     }
 
-    // Request notification permission on load
     if ('Notification' in window && Notification.permission === 'default') {
         Notification.requestPermission();
     }
@@ -2458,7 +2700,6 @@
         const ref = getAnnouncementsRef();
         try {
             if (editingAnnouncementId) {
-                // Update
                 await ref.child(editingAnnouncementId).update({
                     title,
                     message,
@@ -2471,7 +2712,6 @@
                 msgEl.className = 'admin-msg';
                 resetAnnouncementForm();
             } else {
-                // Add
                 const newRef = ref.push();
                 await newRef.set({
                     id: newRef.key,
@@ -2507,7 +2747,6 @@
         document.getElementById('annSubmitBtn').innerHTML = '<i class="fas fa-save"></i> Update';
         document.getElementById('adminMsg').textContent = '✏️ Editing: ' + a.title;
         document.getElementById('adminMsg').className = 'admin-msg';
-        // Scroll to form
         document.getElementById('adminPanel').scrollTop = 0;
     }
 
@@ -2526,7 +2765,7 @@
     }
 
     // ─── ────────────────────────────────────────────
-    // ★ COMPLAINTS (same as before)
+    // ★ COMPLAINTS
     // ─── ────────────────────────────────────────────
 
     function getComplaintsRef() {
@@ -2731,7 +2970,7 @@
     }
 
     // ─── ────────────────────────────────────────────
-    // ★ RECEIPT POPULATORS (same as before)
+    // ★ RECEIPT POPULATORS
     // ─── ────────────────────────────────────────────
 
     function populateReceipt1(client) {
@@ -3234,7 +3473,6 @@
             selectedComplaintType = null;
             const existingErr = document.querySelector('.error-msg');
             if (existingErr) existingErr.remove();
-            // Re-render announcements in the global section (if any)
             renderAnnouncements(announcementsCache.filter(a => a.isActive !== false));
         });
 
@@ -3262,10 +3500,8 @@
 
         document.getElementById('ownerBillingBtn')?.addEventListener('click', showEasypaisaModal);
 
-        // Render announcements inside dashboard
         const activeAnn = announcementsCache.filter(a => a.isActive !== false);
         renderAnnouncements(activeAnn);
-        // Load complaints
         loadComplaintsForClient(client.phone);
     }
 
@@ -3480,7 +3716,6 @@
             '<i class="fas fa-times"></i> Close Admin' :
             '<i class="fas fa-cog"></i> Admin Panel';
         if (adminOpen) {
-            // Refresh admin list
             renderAdminList(announcementsCache);
         }
     });
@@ -3496,15 +3731,12 @@
     // ★ INIT
     // ─── ────────────────────────────────────────────
 
-    // Start listening to announcements
     listenAnnouncements();
-
-    // Initial render of announcements in the global section (if dashboard not yet shown)
-    // The dashboard will render its own announcements section when a client is loaded.
 
     console.log('👑 D3 Crown Fiber Client Portal');
     console.log('🚀 Developed by Khalid Ali Pechuho');
     console.log('📢 Announcement System Active — with ticker, categories, and push notifications');
+    console.log('📱 PWA — Add to Home Screen ready!');
 </script>
 </body>
 </html>
