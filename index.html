@@ -2179,6 +2179,16 @@
         </div>
     </div>
 
+    <!-- ─── ADDITIONAL INSTALL BUTTON IN HEADER ─── -->
+    <div style="text-align:center; padding: 6px 12px; background: #0a0e14; border-bottom: 1px solid #f5a62340;">
+        <button id="headerInstallBtn" style="background: #2ecc71; border: none; color: #000; padding: 6px 18px; border-radius: 40px; font-weight: 800; font-size: 0.75rem; cursor: pointer; transition:0.2s; display:inline-flex; align-items:center; gap:8px;">
+            <i class="fas fa-download"></i> Install D3 Crown Fiber App
+        </button>
+        <button id="shareAppBtn" style="background: #1c2330; border: 1px solid #5dade2; color: #5dade2; padding: 6px 14px; border-radius: 40px; font-weight: 700; font-size: 0.65rem; cursor: pointer; transition:0.2s; margin-left:6px; display:inline-flex; align-items:center; gap:6px;">
+            <i class="fas fa-share-alt"></i> Share
+        </button>
+    </div>
+
     <div class="portal-card">
 
         <!-- ─── SCROLLING TICKER ─── -->
@@ -2404,26 +2414,30 @@
             e.preventDefault();
             deferredPrompt = e;
             banner.classList.add('show');
+            // Also enable header button
+            document.getElementById('headerInstallBtn').style.display = 'inline-flex';
         });
 
         window.addEventListener('appinstalled', () => {
             banner.classList.remove('show');
+            document.getElementById('headerInstallBtn').style.display = 'none';
             deferredPrompt = null;
             console.log('✅ App installed successfully!');
-            // Show success message
             toastSuccess('🎉 D3 Crown Fiber installed as an app on your device!');
         });
 
-        document.getElementById('installNowBtn').addEventListener('click', async () => {
+        // ─── Install button handler ───
+        async function triggerInstall() {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 const result = await deferredPrompt.userChoice;
                 if (result.outcome === 'accepted') {
                     banner.classList.remove('show');
+                    document.getElementById('headerInstallBtn').style.display = 'none';
                 }
                 deferredPrompt = null;
             } else {
-                // Fallback: show instructions with a more helpful message
+                // Fallback: show instructions
                 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
                 if (isIOS) {
                     alert('👑 To install D3 Crown Fiber on iOS:\n\n1. Tap the Share button (⎔)\n2. Scroll down and tap "Add to Home Screen"\n3. Tap "Add"');
@@ -2433,7 +2447,10 @@
                     alert('👑 To install this app:\n\n• On Android: Use Chrome browser → menu → "Add to Home Screen"\n• On iOS: Use Safari → Share → "Add to Home Screen"\n• On Desktop: This feature works best on mobile devices.');
                 }
             }
-        });
+        }
+
+        document.getElementById('installNowBtn').addEventListener('click', triggerInstall);
+        document.getElementById('headerInstallBtn').addEventListener('click', triggerInstall);
 
         document.getElementById('installLaterBtn').addEventListener('click', () => {
             banner.classList.remove('show');
@@ -2446,20 +2463,38 @@
 
         if (window.matchMedia('(display-mode: standalone)').matches) {
             banner.classList.remove('show');
+            document.getElementById('headerInstallBtn').style.display = 'none';
         }
 
-        // Also check if the app is already installed via the beforeinstallprompt event
-        // If the user has already installed, the event won't fire and banner won't show
+        // ─── Share button ───
+        document.getElementById('shareAppBtn').addEventListener('click', () => {
+            const url = window.location.href;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'D3 Crown Fiber Client Portal',
+                    text: 'Check your internet bills and package with D3 Crown Fiber! 👑',
+                    url: url
+                }).catch(() => {});
+            } else {
+                // Fallback: copy link
+                navigator.clipboard.writeText(url).then(() => {
+                    toastSuccess('✅ Link copied to clipboard! Share it with others.');
+                }).catch(() => {
+                    // Fallback prompt
+                    prompt('Share this link:', url);
+                });
+            }
+        });
 
         console.log('👑 D3 Crown Fiber PWA setup complete.');
-        console.log('📱 On Android Chrome, clicking "Install" will create a WebAPK (real APK).');
-        console.log('📱 On iOS Safari, it will add a shortcut to the home screen.');
-        console.log('📱 On other browsers, it will show installation instructions.');
+        console.log('📱 On Android Chrome, "Install" creates a WebAPK (real APK) – not just a shortcut.');
+        console.log('📱 On iOS Safari, it adds a shortcut to the home screen (as per Apple guidelines).');
+        console.log('📱 Use the "Share" button to send the app link to friends.');
     })();
 
 
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // FIREBASE CONFIG
+    // FIREBASE CONFIG (unchanged)
     // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     const firebaseConfig = {
         apiKey: "AIzaSyDZHUNdkun0f3cY3JqfzrI86mpxy7zY7x0",
